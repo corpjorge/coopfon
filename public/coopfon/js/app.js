@@ -19335,8 +19335,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\coopfon-template-material-modificado\resources\js\app.jsx */"./resources/js/app.jsx");
-module.exports = __webpack_require__(/*! C:\laragon\www\coopfon-template-material-modificado\resources\sass\coopfon.scss */"./resources/sass/coopfon.scss");
+__webpack_require__(/*! C:\laragon\www\coopfon\resources\js\app.jsx */"./resources/js/app.jsx");
+module.exports = __webpack_require__(/*! C:\laragon\www\coopfon\resources\sass\coopfon.scss */"./resources/sass/coopfon.scss");
 
 
 /***/ })

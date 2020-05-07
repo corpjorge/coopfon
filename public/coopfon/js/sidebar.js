@@ -28955,7 +28955,7 @@ _serviceWorker__WEBPACK_IMPORTED_MODULE_3__["unregister"]();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\coopfon-template-material-modificado\resources\js\sidebar.jsx */"./resources/js/sidebar.jsx");
+module.exports = __webpack_require__(/*! C:\laragon\www\coopfon\resources\js\sidebar.jsx */"./resources/js/sidebar.jsx");
 
 
 /***/ })
