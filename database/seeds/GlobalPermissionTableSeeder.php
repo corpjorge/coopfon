@@ -1,0 +1,22 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class GlobalPermissionTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('permissions')->insert([
+            'id' => 1,
+            'module_id' => 1,
+            'admin_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+    }
+}

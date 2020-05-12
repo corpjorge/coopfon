@@ -20,8 +20,10 @@ class DatabaseSeeder extends Seeder
         DB::table('categories')->truncate();
         DB::table('items')->truncate();
 
-        $this->call([RolesTableSeeder::class, UsersTableSeeder::class]);
-        $this->call([TagsTableSeeder::class, CategoriesTableSeeder::class, ItemsTableSeeder::class]);
+        $this->call([GlobalRolesTableSeeder::class, GlobalStatesTableSeeder::class, GlobalDepartmentsTableSeeder::class, GlobalCityTableSeeder::class]);
+        $this->call([GlobalDocumentTypesTableSeeder::class, GlobalGendersTableSeeder::class, GlobalUsersTableSeeder::class]);
+        $this->call([GlobalTagsTableSeeder::class, GlobalCategoriesTableSeeder::class, GlobalItemsTableSeeder::class]);
+        $this->call([GlobalAdminTableSeeder::class, GlobalModuleTableSeeder::class, GlobalSubmoduleTableSeeder::class, GlobalSubmodulesClientTableSeeder::class, GlobalPermissionTableSeeder::class]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }

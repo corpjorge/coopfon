@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TagsTableSeeder extends Seeder
+class GlobalTagsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
         DB::table('tags')->insert([
             'id' => 1,
             'name' => 'Hot',
