@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class GlobalCreateSubmodulesclientTable extends Migration
+class GlobalCreateSubmodulesClientTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class GlobalCreateSubmodulesclientTable extends Migration
      */
     public function up()
     {
-        Schema::create('submodulesclient', function (Blueprint $table) {
+        Schema::create('submodules_clients', function (Blueprint $table) {
             $table->id();
             $table->foreignId('state_id')->constrained();
             $table->foreignId('module_id')->constrained();

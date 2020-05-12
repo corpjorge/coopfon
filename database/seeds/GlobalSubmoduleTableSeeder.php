@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class GlobalModuleTableSeeder extends Seeder
+class GlobalSubmoduleTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,9 +11,10 @@ class GlobalModuleTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('modules')->insert([
+        DB::table('submodules')->insert([
             'id' => 1,
             'state_id' => 2,
+            'module_id' => 1,
             'name' => 'Boletería',
             'title' => 'Boletería',
             'route' => 'tickets',
@@ -24,17 +25,17 @@ class GlobalModuleTableSeeder extends Seeder
         ]);
 
 
-        DB::table('modules')->insert([
+        DB::table('submodules')->insert([
             'id' => 2,
             'state_id' => 2,
-            'name' => 'Votaciones',
-            'title' => 'Votaciones',
-            'route' => 'votes',
-            'icon' => 'votes',
-            'order' => 2,
+            'module_id' => 2,
+            'name' => 'voto',
+            'title' => 'voto',
+            'route' => 'tickets',
+            'icon' =>'Boletería',
+            'order' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
     }
 }

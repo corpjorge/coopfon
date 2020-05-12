@@ -11,6 +11,12 @@ class GlobalPermissionTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('permissions')->insert([
+            'id' => 1,
+            'module_id' => 1,
+            'admin_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

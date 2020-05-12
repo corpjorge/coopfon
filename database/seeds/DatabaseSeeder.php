@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([GlobalRolesTableSeeder::class, GlobalStatesTableSeeder::class, GlobalDepartmentsTableSeeder::class, GlobalCityTableSeeder::class]);
         $this->call([GlobalDocumentTypesTableSeeder::class, GlobalGendersTableSeeder::class, GlobalUsersTableSeeder::class]);
         $this->call([GlobalTagsTableSeeder::class, GlobalCategoriesTableSeeder::class, GlobalItemsTableSeeder::class]);
-        $this->call([GlobalAdminTableSeeder::class, GlobalModuleTableSeeder::class, GlobalPermissionTableSeeder::class]);
+        $this->call([GlobalAdminTableSeeder::class, GlobalModuleTableSeeder::class, GlobalSubmoduleTableSeeder::class, GlobalSubmodulesClientTableSeeder::class, GlobalPermissionTableSeeder::class]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
