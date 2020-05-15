@@ -30,7 +30,7 @@ Route::get('pricing', 'ExamplePagesController@pricing')->name('page.pricing');
 Route::group(['middleware' => 'auth'], function () {
 
 
-
+    //rutas rol y usuarios
     Route::resource('role', 'RoleController', ['except' => ['show', 'destroy']]);
     Route::resource('user', 'UserController', ['except' => ['show']]);
 
