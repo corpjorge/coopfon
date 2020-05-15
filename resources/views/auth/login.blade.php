@@ -2,7 +2,7 @@
   'class' => 'off-canvas-sidebar',
   'classPage' => 'login-page',
   'activePage' => 'login',
-  'title' => __('Material Dashboard'),
+  'title' => env('APP_NAME'),
   'pageBackground' => asset("coopfon").'/img/login.jpg'
 ])
 
@@ -10,21 +10,13 @@
 <div class="container">
     <div class="row">
       <div class="col-md-9 ml-auto mr-auto mb-1 text-center">
-        <h3>{{ __('Welcome to Material Dashboard Pro Laravel Live Preview.') }} </h3>
+        <h3>{{ __('Bienvenido a ').env('APP_NAME')}} </h3>
 
         <p class="text-lead text-light mt-3 mb-0">
-            {{ __('Log in and see how you can save more than 90 hours of work with CRUDs for managing: #users, #roles, #items, #categories, #tags and more.') }}
+            {{ __('Inicie sesión y realice sus trámites') }}
         </p>
       </div>
       <div class="col-lg-5 col-md-8 col-sm-10 ml-auto mr-auto mb-3 text-center">
-          <h5 class="text-lead text-white mt-2 mb-0">
-              <strong>{{ __('You can log in with 3 user types:') }}</strong>
-          </h5>
-          <ol class="text-lead text-light mt-3 mb-3">
-              <li>{!! __('Username <b>admin@material.com</b> Password <b>secret</b>') !!}</li>
-              <li>{!! __('Username <b>creator@material.com</b> Password <b>secret</b>') !!}</li>
-              <li>{!! __('Username <b>member@material.com</b> Password <b>secret</b>') !!}</li>
-          </ol>
       </div>
     </div>
     <div class="row">
@@ -34,7 +26,7 @@
 
           <div class="card card-login card-hidden">
             <div class="card-header card-header-rose text-center">
-              <h4 class="card-title">{{ __('Login') }}</h4>
+              <h4 class="card-title">{{ __('Iniciar sesión') }}</h4>
               <div class="social-line">
                 <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
                   <i class="fa fa-facebook-square"></i>
@@ -55,7 +47,7 @@
                       <i class="material-icons">email</i>
                     </span>
                   </div>
-                  <input type="email" class="form-control" id="exampleEmails" name="email" placeholder="{{ __('Email...') }}" value="{{ old('email', 'admin@material.com') }}" required>
+                  <input type="email" class="form-control" id="exampleEmails" name="email" placeholder="{{ __('Correo...') }}" value="{{ old('email', 'corpjorge@hotmail.com') }}" required>
                   @include('alerts.feedback', ['field' => 'email'])
                 </div>
               </span>
@@ -66,13 +58,13 @@
                       <i class="material-icons">lock_outline</i>
                     </span>
                   </div>
-                  <input type="password" class="form-control" id="examplePassword" name="password" placeholder="{{ __('Password...') }}" value="secret" required>
+                  <input type="password" class="form-control" id="examplePassword" name="password" placeholder="{{ __('Contraseña...') }}" value="admin" required>
                   @include('alerts.feedback', ['field' => 'password'])
                 </div>
               </span>
               <div class="form-check mr-auto ml-3 mt-3">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember me') }}
+                    <input class="form-check-input" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Recuérdame') }}
                     <span class="form-check-sign">
                       <span class="check"></span>
                     </span>
@@ -80,7 +72,7 @@
                 </div>
             </div>
             <div class="card-footer justify-content-center">
-              <button type="submit" class="btn btn-rose btn-link btn-lg">{{ __('Lets Go') }}</button>
+              <button type="submit" class="btn btn-rose btn-link btn-lg">{{ __('Ingresar') }}</button>
             </div>
           </div>
         </form>
@@ -88,15 +80,11 @@
           <div class="col-6">
               @if (Route::has('password.request'))
                   <a href="{{ route('password.request') }}" class="text-light">
-                      <small>{{ __('Forgot password?') }}</small>
+                      <small>{{ __(' ¿olvidó su contraseña?') }}</small>
                   </a>
               @endif
           </div>
-          <div class="col-6 text-right">
-              <a href="{{ route('register') }}" class="text-light">
-                  <small>{{ __('Create new account') }}</small>
-              </a>
-          </div>
+
         </div>
       </div>
     </div>

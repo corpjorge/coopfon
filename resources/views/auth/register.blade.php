@@ -2,7 +2,7 @@
   'class' => 'off-canvas-sidebar',
   'classPage' => 'register-page',
   'activePage' => 'register',
-  'title' => __('Material Dashboard'),
+  'title' => env('APP_NAME'),
   'pageBackground' => asset("coopfon").'/img/register.jpg'
 ])
 

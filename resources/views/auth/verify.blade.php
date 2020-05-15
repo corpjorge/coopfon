@@ -2,7 +2,7 @@
   'class' => 'off-canvas-sidebar',
   'classPage' => 'login-page',
   'activePage' => '',
-  'title' => __('Material Dashboard'),
+  'title' => env('APP_NAME'),
   'pageBackground' => asset("coopfon").'/img/login.jpg'
 ])
 
@@ -12,15 +12,15 @@
       <div class="col-lg-7 col-md-8">
           <div class="card card-login card-hidden mb-3">
             <div class="card-header card-header-rose text-center">
-              <p class="card-title"><strong>{{ __('Verify Your Email Address') }}</strong></p>
+              <p class="card-title"><strong>{{ __('Verifique correo') }}</strong></p>
             </div>
             <div class="card-body">
               <p class="card-description text-center"></p>
               <p>
-                {{ __('Before proceeding, please check your email for a verification link.') }}
+                {{ __('Antes de continuar, revise su correo para obtener, enlace de verificación.') }}
 
                 @if (Route::has('verification.resend'))
-                    {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>
+                    {{ __('Si no recibiste el correo electrónico') }}, <a href="{{ route('verification.resend') }}">{{ __('Clic aquí para solicitar otro') }}</a>
                 @endif
               </p>
             </div>
@@ -36,7 +36,7 @@
     @if (session('resent'))
       $.notify({
         icon: "done",
-        message: "{{ __('A fresh verification link has been sent to your email address.') }}"
+        message: "{{ __('Se ha enviado un nuevo enlace de verificación a su correo.') }}"
       }, {
         type: 'success',
         timer: 3000,

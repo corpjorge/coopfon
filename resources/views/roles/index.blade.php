@@ -16,7 +16,7 @@
                 @can('create', App\Role::class)
                   <div class="row">
                     <div class="col-12 text-right">
-                      <a href="{{ route('role.create') }}" class="btn btn-sm btn-rose">{{ __('Add role') }}</a>
+                      <a href="{{ route('role.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar rol') }}</a>
                     </div>
                   </div>
                 @endcan
@@ -24,17 +24,17 @@
                   <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
                     <thead class="text-primary">
                       <th>
-                          {{ __('Name') }}
+                          {{ __('Nombre') }}
                       </th>
                       <th>
-                        {{ __('Description') }}
+                        {{ __('Descripción') }}
                       </th>
                       <th>
-                        {{ __('Creation date') }}
+                        {{ __('Fecha de creación') }}
                       </th>
                       @can('manage-users', App\User::class)
                         <th class="text-right">
-                          {{ __('Actions') }}
+                          {{ __('Acción') }}
                         </th>
                       @endcan
                     </thead>
@@ -86,7 +86,7 @@
       responsive: true,
       language: {
         search: "_INPUT_",
-        searchPlaceholder: "Search roles",
+        searchPlaceholder: "Buscar roles",
       },
       "columnDefs": [
         { "orderable": false, "targets": 3 },
