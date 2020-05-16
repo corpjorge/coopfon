@@ -25,17 +25,15 @@ Route::get('error', ['as' => 'page.error', 'uses' => 'ExamplePagesController@err
 Route::get('pricing', 'ExamplePagesController@pricing')->name('page.pricing');
 
 Route::group(['middleware' => 'auth'], function () {
-    /*
+
     Route::resource('category', 'CategoryController', ['except' => ['show']]);
     Route::resource('tag', 'TagController', ['except' => ['show']]);
     Route::resource('item', 'ItemController', ['except' => ['show']]);
-    */
+
     Route::resource('role', 'RoleController', ['except' => ['show', 'destroy']]);
     Route::resource('user', 'UserController', ['except' => ['show']]);
 
-
     /*
-
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
