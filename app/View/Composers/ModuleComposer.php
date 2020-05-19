@@ -5,10 +5,10 @@ namespace App\Http\View\Composers;
 use App\Repositories\ModuleRepository;
 use Illuminate\View\View;
 
-class ProfileComposer
+class ModuleComposer
 {
     /**
-     * The user repository implementation.
+     * The modulo repository implementation.
      *
      * @var ModuleRepository
      */

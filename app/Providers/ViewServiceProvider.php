@@ -26,7 +26,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         // Using class based composers...
         View::composer(
-            '*', 'App\Http\View\Composers\ProfileComposer'
+            '*', 'App\Http\View\Composers\ModuleComposer'
         );
     }
 }
