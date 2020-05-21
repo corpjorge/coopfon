@@ -2,28 +2,28 @@
 
 namespace App\Http\View\Composers;
 
-use App\Repositories\ModuleRepository;
+use App\Model\Config\Module;
 use Illuminate\View\View;
 
 class ModuleComposer
 {
     /**
-     * The modulo repository implementation.
+     * The modulo Model implementation.
      *
-     * @var ModuleRepository
+     * @var Module
      */
     protected $modules;
 
     /**
      * Create a new profile composer.
      *
-     * @param  ModuleRepository  $modules
+     * @param  Module  $modules
      * @return void
      */
-    public function __construct(ModuleRepository $modules)
+    public function __construct(Module $modules)
     {
         // Dependencies automatically resolved by service container...
-        $this->modules = $modules;
+        $this->modules = $modules->all();
     }
 
     /**
@@ -34,6 +34,6 @@ class ModuleComposer
      */
     public function compose(View $view)
     {
-        $view->with('count', $this->modules->count());
+        $view->with('modules', $this->modules);
     }
 }

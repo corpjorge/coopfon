@@ -104,6 +104,20 @@
               </li>
             @endcan
             @can('manage-items', App\User::class)
+              @can('viewAny', App\Model\Config\Module::class)
+
+              <li class="nav-item{{ $activePage == 'category-management' ? ' active' : '' }}">
+                  <a class="nav-link" href="{{ route('module.index') }}">
+                      <span class="sidebar-mini"> M </span>
+                      <span class="sidebar-normal"> {{ __('Modulos') }} </span>
+                  </a>
+              </li>
+              @endcan
+
+
+
+
+
               <li class="nav-item{{ $activePage == 'category-management' ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('category.index') }}">
                   <span class="sidebar-mini"> CM </span>

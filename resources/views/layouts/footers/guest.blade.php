@@ -3,8 +3,8 @@
     <nav class="float-left">
     <ul>
         <li>
-        <a href="https://www.fyclsingenieria.com">
-            {{ __('Fycls Ingenieria') }}
+        <a href="https://www.coopfon.com">
+            {{ __('CoopFon') }}
         </a>
         </li>
         <li>
