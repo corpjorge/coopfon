@@ -15,14 +15,9 @@ class DatabaseSeeder extends Seeder
 
         DB::table('roles')->truncate();
         DB::table('users')->truncate();
-        DB::table('tags')->truncate();
-        DB::table('item_tag')->truncate();
-        DB::table('categories')->truncate();
-        DB::table('items')->truncate();
 
         $this->call([GlobalRolesTableSeeder::class, GlobalStatesTableSeeder::class, GlobalDepartmentsTableSeeder::class, GlobalCityTableSeeder::class]);
         $this->call([GlobalDocumentTypesTableSeeder::class, GlobalGendersTableSeeder::class, GlobalUsersTableSeeder::class]);
-        $this->call([GlobalTagsTableSeeder::class, GlobalCategoriesTableSeeder::class, GlobalItemsTableSeeder::class]);
         $this->call([GlobalAdminTableSeeder::class, GlobalModuleTableSeeder::class, GlobalSubmoduleTableSeeder::class, GlobalSubmodulesClientTableSeeder::class, GlobalPermissionTableSeeder::class]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');

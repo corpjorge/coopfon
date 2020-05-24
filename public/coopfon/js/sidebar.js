@@ -1,28 +1,28 @@
 /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
+/******/ 	// The modules cache
 /******/ 	var installedModules = {};
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
-/******/ 		// Check if module is in cache
+/******/ 		// Check if modules is in cache
 /******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
 /******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
+/******/ 		// Create a new modules (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
 /******/ 			exports: {}
 /******/ 		};
 /******/
-/******/ 		// Execute the module function
+/******/ 		// Execute the modules function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/
-/******/ 		// Flag the module as loaded
+/******/ 		// Flag the modules as loaded
 /******/ 		module.l = true;
 /******/
-/******/ 		// Return the exports of the module
+/******/ 		// Return the exports of the modules
 /******/ 		return module.exports;
 /******/ 	}
 /******/
@@ -30,7 +30,7 @@
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
 /******/
-/******/ 	// expose the module cache
+/******/ 	// expose the modules cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// define getter function for harmony exports
@@ -49,7 +49,7 @@
 /******/ 	};
 /******/
 /******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 1: value is a modules id, require it
 /******/ 	// mode & 2: merge all properties of value into the ns
 /******/ 	// mode & 4: return value when already ns object
 /******/ 	// mode & 8|1: behave like require
@@ -80,7 +80,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/
-/******/ 	// Load entry module and return exports
+/******/ 	// Load entry modules and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
@@ -691,7 +691,7 @@ function setComponentTree(getFiberCurrentPropsFromNodeImpl, getInstanceFromNodeI
 
   {
     if (!getNodeFromInstance || !getInstanceFromNode) {
-      error('EventPluginUtils.setComponentTree(...): Injected ' + 'module is missing getNodeFromInstance or getInstanceFromNode.');
+      error('EventPluginUtils.setComponentTree(...): Injected ' + 'modules is missing getNodeFromInstance or getInstanceFromNode.');
     }
   }
 }
@@ -914,7 +914,7 @@ var plugins = [];
 
 var eventNameDispatchConfigs = {};
 /**
- * Mapping from registration name to plugin module
+ * Mapping from registration name to plugin modules
  */
 
 var registrationNameModules = {};
@@ -1324,7 +1324,7 @@ function PropertyInfoRecord(name, type, mustUseProperty, attributeName, attribut
   this.type = type;
   this.sanitizeURL = sanitizeURL;
 } // When adding attributes to this list, be sure to also add them to
-// the `possibleStandardNames` module to ensure casing and incorrect
+// the `possibleStandardNames` modules to ensure casing and incorrect
 // name warnings.
 
 
@@ -2911,7 +2911,7 @@ var setTextContent = function (node, text) {
 
 // Do not use the below two methods directly!
 // Instead use constants exported from DOMTopLevelEventTypes in ReactDOM.
-// (It is the only module that is allowed to access these methods.)
+// (It is the only modules that is allowed to access these methods.)
 function unsafeCastStringToDOMTopLevelType(topLevelType) {
   return topLevelType;
 }
@@ -3004,7 +3004,7 @@ function getVendorPrefixedEventName(eventName) {
 
 /**
  * To identify top level events in ReactDOM, we use constants defined by this
- * module. This is the only module that uses the unsafe* methods to express
+ * modules. This is the only modules that uses the unsafe* methods to express
  * that the constants actually correspond to the browser event names. This lets
  * us save some bundle size by avoiding a top level type -> event name map.
  * The rest of ReactDOM code should import top level types from this file.
@@ -3118,7 +3118,7 @@ function getListenerMapForElement(element) {
  * methods to accept the user facing instance as an argument and map them back
  * to internal methods.
  *
- * Note that this module is currently shared and assumed to be stateless.
+ * Note that this modules is currently shared and assumed to be stateless.
  * If this becomes an actual Map, that will break.
  */
 function get(key) {
@@ -3581,7 +3581,7 @@ function accumulateInto(current, next) {
 
 /**
  * @param {array} arr an "accumulation" of items which is either an Array or
- * a single item. Useful when paired with the `accumulate` module. This is a
+ * a single item. Useful when paired with the `accumulate` modules. This is a
  * simple utility that allows us to reason about a collection of items, but
  * handling the case when there is exactly one item (and we do not need to
  * allocate an array).
@@ -4374,7 +4374,7 @@ function addEventCaptureListener(element, eventType, listener) {
 
 var simpleEventPluginEventTypes = {};
 var topLevelEventsToDispatchConfig = new Map();
-var eventPriorities = new Map(); // We store most of the events in this module in pairs of two strings so we can re-use
+var eventPriorities = new Map(); // We store most of the events in this modules in pairs of two strings so we can re-use
 // the code required to apply the same logic for event prioritization and that of the
 // SimpleEventPlugin. This complicates things slightly, but the aim is to reduce code
 // duplication (for which there would be quite a bit). For the events that are not needed
@@ -5124,7 +5124,7 @@ function isCustomComponent(tagName, props) {
 }
 
 // When adding attributes to the HTML or SVG whitelist, be sure to
-// also add them to this module to ensure casing and incorrect name
+// also add them to this modules to ensure casing and incorrect name
 // warnings.
 var possibleStandardNames = {
   // HTML
@@ -7287,10 +7287,10 @@ function getActiveElementDeep() {
   return element;
 }
 /**
- * @ReactInputSelection: React input selection module. Based on Selection.js,
+ * @ReactInputSelection: React input selection modules. Based on Selection.js,
  * but modified to be suitable for react and has a couple of bug fixes (doesn't
  * assume buttons have range selections allowed).
- * Input selection module for React.
+ * Input selection modules for React.
  */
 
 /**
@@ -10378,7 +10378,7 @@ var SyntheticWheelEvent = SyntheticMouseEvent.extend({
 var knownHTMLTopLevelTypes = [TOP_ABORT, TOP_CANCEL, TOP_CAN_PLAY, TOP_CAN_PLAY_THROUGH, TOP_CLOSE, TOP_DURATION_CHANGE, TOP_EMPTIED, TOP_ENCRYPTED, TOP_ENDED, TOP_ERROR, TOP_INPUT, TOP_INVALID, TOP_LOAD, TOP_LOADED_DATA, TOP_LOADED_METADATA, TOP_LOAD_START, TOP_PAUSE, TOP_PLAY, TOP_PLAYING, TOP_PROGRESS, TOP_RATE_CHANGE, TOP_RESET, TOP_SEEKED, TOP_SEEKING, TOP_STALLED, TOP_SUBMIT, TOP_SUSPEND, TOP_TIME_UPDATE, TOP_TOGGLE, TOP_VOLUME_CHANGE, TOP_WAITING];
 var SimpleEventPlugin = {
   // simpleEventPluginEventTypes gets populated from
-  // the DOMEventProperties module.
+  // the DOMEventProperties modules.
   eventTypes: simpleEventPluginEventTypes,
   extractEvents: function (topLevelType, targetInst, nativeEvent, nativeEventTarget, eventSystemFlags) {
     var dispatchConfig = topLevelEventsToDispatchConfig.get(topLevelType);
@@ -11283,7 +11283,7 @@ var Scheduler_runWithPriority = Scheduler.unstable_runWithPriority,
   // scheduler/tracing
   if (!(tracing.__interactionsRef != null && tracing.__interactionsRef.current != null)) {
     {
-      throw Error( "It is not supported to run the profiling version of a renderer (for example, `react-dom/profiling`) without also replacing the `scheduler/tracing` module with `scheduler/tracing-profiling`. Your bundler might have a setting for aliasing both modules. Learn more at http://fb.me/react-profiling" );
+      throw Error( "It is not supported to run the profiling version of a renderer (for example, `react-dom/profiling`) without also replacing the `scheduler/tracing` modules with `scheduler/tracing-profiling`. Your bundler might have a setting for aliasing both modules. Learn more at http://fb.me/react-profiling" );
     }
   }
 }
@@ -11308,7 +11308,7 @@ var isFlushingSyncQueue = false;
 var initialTimeMs = Scheduler_now(); // If the initial timestamp is reasonably small, use Scheduler's `now` directly.
 // This will be the case for modern browsers that support `performance.now`. In
 // older browsers, Scheduler falls back to `Date.now`, which returns a Unix
-// timestamp. In that case, subtract the module initialization time to simulate
+// timestamp. In that case, subtract the modules initialization time to simulate
 // the behavior of performance.now and keep our times small enough to fit
 // within 32 bits.
 // TODO: Consider lifting this into Scheduler.
@@ -22314,7 +22314,7 @@ function prepareFreshStack(root, expirationTime) {
 function handleError(root, thrownValue) {
   do {
     try {
-      // Reset module-level state that was set during the render phase.
+      // Reset modules-level state that was set during the render phase.
       resetContextDependencies();
       resetHooksAfterThrow();
       resetCurrentFiber();
@@ -23635,7 +23635,7 @@ function warnIfUnmockedScheduler(fiber) {
       if (fiber.mode & BlockingMode || fiber.mode & ConcurrentMode) {
         didWarnAboutUnmockedScheduler = true;
 
-        error('In Concurrent or Sync modes, the "scheduler" module needs to be mocked ' + 'to guarantee consistent behaviour across tests and browsers. ' + 'For example, with jest: \n' + "jest.mock('scheduler', () => require('scheduler/unstable_mock'));\n\n" + 'For more info, visit https://fb.me/react-mock-scheduler');
+        error('In Concurrent or Sync modes, the "scheduler" modules needs to be mocked ' + 'to guarantee consistent behaviour across tests and browsers. ' + 'For example, with jest: \n' + "jest.mock('scheduler', () => require('scheduler/unstable_mock'));\n\n" + 'For more info, visit https://fb.me/react-mock-scheduler');
       }
     }
   }
@@ -24904,7 +24904,7 @@ function injectIntoDevTools(devToolsConfig) {
     // Enables DevTools to append owner stacks to error messages in DEV mode.
     getCurrentFiber:  function () {
       return current;
-    } 
+    }
   }));
 }
 var IsSomeRendererActing$1 = ReactSharedInternals.IsSomeRendererActing;

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Model\Config\Module;
+use App\Policies\Config\ModulePolicy;
 use App\Tag;
 use App\Item;
 use App\Role;
@@ -28,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         Item::class => ItemPolicy::class,
         Role::class => RolePolicy::class,
         Tag::class => TagPolicy::class,
+        Module::class => ModulePolicy::class,
     ];
 
     /**

@@ -42,7 +42,7 @@ Página del producto: https://www.coopfon.com/
             @include('layouts.page_templates.guest')
         @endif
 
-        <div id="sidebar" ></div>
+{{--        <div id="sidebar" ></div>--}}
 
         <!--   Core JS Files   -->
         <script src="{{ asset('coopfon') }}/js/core/jquery.min.js"></script>

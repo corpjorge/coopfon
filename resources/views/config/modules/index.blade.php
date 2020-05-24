@@ -10,13 +10,13 @@
                 <div class="card-icon">
                   <i class="material-icons">recent_actors</i>
                 </div>
-                <h4 class="card-title">{{ __('Roles') }}</h4>
+                <h4 class="card-title">{{ __('Modulos') }}</h4>
               </div>
               <div class="card-body">
                 @can('create', App\Role::class)
                   <div class="row">
                     <div class="col-12 text-right">
-                      <a href="{{ route('role.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar rol') }}</a>
+                      <a href="{{ route('module.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar Modulo') }}</a>
                     </div>
                   </div>
                 @endcan
@@ -39,21 +39,21 @@
                       @endcan
                     </thead>
                     <tbody>
-                      @foreach($roles as $role)
+                      @foreach($modules as $module)
                         <tr>
                           <td>
-                            {{ $role->name }}
+                            {{ $module->name }}
                           </td>
                           <td>
-                            {{ $role->description }}
+                            {{ $module->route }}
                           </td>
                           <td>
-                            {{ $role->created_at->format('Y-m-d') }}
+                            {{ $module->created_at->format('Y-m-d') }}
                           </td>
                           @can('manage-users', App\User::class)
                             <td class="td-actions text-right">
-                              @can('update', $role)
-                                <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('role.edit', $role) }}" data-original-title="" title="">
+                              @can('update', $module)
+                                <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('module.edit', $module) }}" data-original-title="" title="">
                                   <i class="material-icons">edit</i>
                                   <div class="ripple-container"></div>
                                 </a>
@@ -86,7 +86,7 @@
       responsive: true,
       language: {
         search: "_INPUT_",
-        searchPlaceholder: "Buscar roles",
+        searchPlaceholder: "Buscar modulo",
       },
       "columnDefs": [
         { "orderable": false, "targets": 3 },

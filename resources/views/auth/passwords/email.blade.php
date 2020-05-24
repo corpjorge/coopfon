@@ -2,7 +2,7 @@
   'class' => 'off-canvas-sidebar',
   'classPage' => 'login-page',
   'activePage' => '',
-  'title' => __('Material Dashboard'),
+  'title' => env('APP_NAME'),
   'pageBackground' => asset("coopfon").'/img/login.jpg'
 ])
 
@@ -15,7 +15,7 @@
 
         <div class="card card-login card-hidden mb-3">
           <div class="card-header card-header-rose text-center">
-            <h4 class="card-title"><strong>{{ __('Forgot Password') }}</strong></h4>
+            <h4 class="card-title"><strong>{{ __('Olvidó su contraseña') }}</strong></h4>
           </div>
           <div class="card-body">
             <div class="bmd-form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
@@ -25,7 +25,7 @@
                     <i class="material-icons">email</i>
                   </span>
                 </div>
-                <input type="email" name="email" class="form-control" placeholder="{{ __('Email...') }}" value="{{ old('email') }}" required>
+                <input type="email" name="email" class="form-control" placeholder="{{ __('Correo...') }}" value="{{ old('email') }}" required>
               </div>
               @if ($errors->has('email'))
                 <div id="email-error" class="error text-danger pl-3" for="email" style="display: block;">
@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="card-footer justify-content-center">
-            <button type="submit" class="btn btn-rose btn-link btn-lg">{{ __('Send Password Reset Link') }}</button>
+            <button type="submit" class="btn btn-rose btn-link btn-lg">{{ __('Enviar enlace') }}</button>
           </div>
         </div>
       </form>

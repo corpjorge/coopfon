@@ -1170,12 +1170,12 @@
   }(_Symbol('WeakMap'), Object.defineProperty, {}.hasOwnProperty);
 
   /**
-   * This module containts `WeakMap`s for each effectively-"private  property" that a `swal` has.
+   * This modules containts `WeakMap`s for each effectively-"private  property" that a `swal` has.
    * For example, to set the private property "foo" of `this` to "bar", you can `privateProps.foo.set(this, 'bar')`
    * This is the approach that Babel will probably take to implement private methods/fields
    *   https://github.com/tc39/proposal-private-methods
    *   https://github.com/babel/babel/pull/7555
-   * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one module*
+   * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one modules*
    *   then we can use that language feature.
    */
 
@@ -2322,7 +2322,7 @@
     privateProps.promise.set(this, promise);
   }
 
-  // `catch` cannot be the name of a module export, so we define our thenable methods here instead
+  // `catch` cannot be the name of a modules export, so we define our thenable methods here instead
   SweetAlert.prototype.then = function(onFulfilled, onRejected) {
     var promise = privateProps.promise.get(this);
     return promise.then(onFulfilled, onRejected);
