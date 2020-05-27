@@ -66,6 +66,17 @@ class UserPolicy
     }
 
     /**
+     * Determine whether the authenticate user can manage modules.
+     *
+     * @param  \App\User  $user
+     * @return boolean
+     */
+    public function manageModules(User $user)
+    {
+        return $user->isUltraAdmin();
+    }
+
+    /**
      * Determine whether the authenticate user can manage items and other related entities(tags, categories).
      *
      * @param  \App\User  $user

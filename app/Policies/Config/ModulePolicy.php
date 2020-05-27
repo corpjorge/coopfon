@@ -18,7 +18,7 @@ class ModulePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isAdmin();
+        return $user->isUltraAdmin();
     }
 
     /**
@@ -30,7 +30,7 @@ class ModulePolicy
      */
     public function view(User $user, Module $module)
     {
-        //
+        return $user->isUltraAdmin();
     }
 
     /**

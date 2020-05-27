@@ -2,7 +2,7 @@
   'class' => 'off-canvas-sidebar',
   'classPage' => 'login-page',
   'activePage' => '',
-  'title' => env('APP_NAME'),
+  'title' => __('Material Dashboard'),
   'pageBackground' => asset("coopfon").'/img/login.jpg'
 ])
 
@@ -10,7 +10,7 @@
 <div class="container" style="height: auto;">
   <div class="row justify-content-center">
       <div class="col-lg-7 col-md-8">
-          <h1 class="text-white text-center">{{ __('Bienvenido') }}</h1>
+          <h1 class="text-white text-center">{{ __('Welcome to Material Dashboard Pro Laravel Live Preview.') }}</h1>
       </div>
   </div>
 </div>

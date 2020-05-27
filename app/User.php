@@ -68,13 +68,33 @@ class User extends Authenticatable
     }
 
     /**
+     * Check if the user has UltraAdmin role
+     *
+     * @return boolean
+     */
+    public function isUltraAdmin()
+    {
+        return $this->role_id == 1;
+    }
+
+    /**
+     * Check if the user has SuperAdmin role
+     *
+     * @return boolean
+     */
+    public function isSuperAdmin()
+    {
+        return $this->role_id <= 2;
+    }
+
+    /**
      * Check if the user has admin role
      *
      * @return boolean
      */
     public function isAdmin()
     {
-        return $this->role_id == 1;
+        return $this->role_id <= 3;
     }
 
     /**

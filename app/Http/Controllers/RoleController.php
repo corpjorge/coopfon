@@ -38,7 +38,7 @@ class RoleController extends Controller
     {
         $this->authorize('manage-users', User::class);
 
-        return view('roles.index', ['roles' => $model->all()]);
+        return view('config.roles.index', ['roles' => $model->all()]);
     }
 
     /**
@@ -48,7 +48,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('roles.create');
+        return view('config.roles.create');
     }
 
     /**
@@ -73,7 +73,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('roles.edit', compact('role'));
+        return view('config.roles.edit', compact('role'));
     }
 
     /**

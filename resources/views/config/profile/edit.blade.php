@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'profile', 'menuParent' => 'laravel', 'titlePage' => __('Perfil')])
+@extends('layouts.app', ['activePage' => 'profile', 'menuParent' => 'config', 'titlePage' => __('Perfil')])
 
 @section('content')
 <div class="content">

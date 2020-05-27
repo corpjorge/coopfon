@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'role-management', 'menuParent' => 'laravel', 'titlePage' => __('Role Management')])
+@extends('layouts.app', ['activePage' => 'role-management', 'menuParent' => 'config', 'titlePage' => __('Administrador de roles')])
 
 @section('content')
   <div class="content">

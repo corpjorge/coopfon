@@ -13,14 +13,6 @@
               </div>
               <h4 class="card-title">Global Sales by Top Locations</h4>
             </div>
-
-              <?php
-
-              foreach ($modules as $module){
-                  echo $module->icon;
-              }
-
-              ?>
             <div class="card-body ">
               <div class="row">
                 <div class="col-md-6">

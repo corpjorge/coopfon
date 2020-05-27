@@ -50,36 +50,14 @@
         </a>
       </li>
 
-
-        <li class="nav-item {{ $menuParent == 'tables' ? 'active' : '' }}">
-            <a class="nav-link" data-toggle="collapse" href="#tablesExamples" {{ $menuParent == 'tables' ? 'aria-expanded="true"' : '' }}>
-                <i class="material-icons">grid_on</i>
-                <p> {{ __('Tables') }}
-                    <b class="caret"></b>
-                </p>
-            </a>
-            <div class="collapse {{ $menuParent == 'tables' ? 'show' : '' }}" id="tablesExamples">
-                <ul class="nav">
-                    <li class="nav-item{{ $activePage == 'regular' ? ' active' : '' }}  ">
-                        <a class="nav-link" href="{{ route('page.regular_tables') }}">
-                            <span class="sidebar-mini"> RT </span>
-                            <span class="sidebar-normal"> {{ __('Regular Tables') }} </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-
-
-
-      <li class="nav-item {{ $menuParent == 'tables' ? 'active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#conf" {{ $menuParent == 'tables' ? 'aria-expanded="true"' : '' }}>
+      <li class="nav-item {{ $menuParent == 'config' ? 'active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#config" {{ $menuParent == 'config' ? 'aria-expanded="true"' : '' }}>
             <i class="fa fa-cog fa-2x"></i>
           <p>{{ __('Configuración') }}
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse {{ $menuParent == 'tables' ? 'show' : '' }}" id="conf">
+        <div class="collapse {{ $menuParent == 'config' ? 'show' : '' }}" id="config">
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('profile.edit') }}">
@@ -87,6 +65,7 @@
                 <span class="sidebar-normal">{{ __('Perfil') }} </span>
               </a>
             </li>
+
             @can('manage-users', App\User::class)
               <li class="nav-item{{ $activePage == 'role-management' ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('role.index') }}">
@@ -94,8 +73,7 @@
                   <span class="sidebar-normal"> {{ __('Roles') }} </span>
                 </a>
               </li>
-            @endcan
-            @can('manage-users', App\User::class)
+
               <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('user.index') }}">
                   <span class="sidebar-mini"> UM </span>
@@ -103,30 +81,18 @@
                 </a>
               </li>
             @endcan
+{{--              manageModules--}}
             @can('manage-items', App\User::class)
               @can('viewAny', App\Model\Config\Module::class)
 
-              <li class="nav-item{{ $activePage == 'category-management' ? ' active' : '' }}">
+              <li class="nav-item{{ $activePage == 'module' ? ' active' : '' }}">
                   <a class="nav-link" href="{{ route('module.index') }}">
                       <span class="sidebar-mini"> M </span>
                       <span class="sidebar-normal"> {{ __('Modulos') }} </span>
                   </a>
               </li>
               @endcan
-
-
-
-
-
-              <li class="nav-item{{ $activePage == 'category-management' ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('category.index') }}">
-                  <span class="sidebar-mini"> CM </span>
-                  <span class="sidebar-normal"> {{ __('Category Management') }} </span>
-                </a>
-              </li>
             @endcan
-
-
           </ul>
         </div>
       </li>

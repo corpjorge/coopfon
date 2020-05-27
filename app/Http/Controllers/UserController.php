@@ -39,7 +39,7 @@ class UserController extends Controller
     {
         $this->authorize('manage-users', User::class);
 
-        return view('users.index', ['users' => $model->with('role')->get()]);
+        return view('config.users.index', ['users' => $model->with('role')->get()]);
     }
 
     /**
@@ -50,7 +50,7 @@ class UserController extends Controller
      */
     public function create(Role $model)
     {
-        return view('users.create', ['roles' => $model->get(['id', 'name'])]);
+        return view('config.users.create', ['roles' => $model->get(['id', 'name'])]);
     }
 
     /**
@@ -79,7 +79,7 @@ class UserController extends Controller
      */
     public function edit(User $user, Role $model)
     {
-        return view('users.edit', ['user' => $user->load('role'), 'roles' => $model->get(['id', 'name'])]);
+        return view('config.users.edit', ['user' => $user->load('role'), 'roles' => $model->get(['id', 'name'])]);
     }
 
     /**

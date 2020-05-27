@@ -86,7 +86,7 @@ Página del producto: https://www.coopfon.com/
 
         <script src="{{ asset('coopfon') }}/js/application.js"></script>
         <script src="{{ asset('coopfon') }}/demo/demo.js "></script>
-        <script src="{{ asset('coopfon') }}/js/sidebar.js"></script>
+{{--        <script src="{{ asset('coopfon') }}/js/sidebar.js"></script>--}}
 
         <script>
           $(document).ready(function () {
