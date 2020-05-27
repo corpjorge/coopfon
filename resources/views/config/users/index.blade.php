@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'laravel', 'titlePage' => __('User Management')])
+@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de usuarios')])
 
 @section('content')
   <div class="content">
@@ -10,13 +10,13 @@
                 <div class="card-icon">
                   <i class="material-icons">group</i>
                 </div>
-                <h4 class="card-title">{{ __('Users') }}</h4>
+                <h4 class="card-title">{{ __('Usuarios') }}</h4>
               </div>
               <div class="card-body">
                 @can('create', App\User::class)
                   <div class="row">
                     <div class="col-12 text-right">
-                      <a href="{{ route('user.create') }}" class="btn btn-sm btn-rose">{{ __('Add user') }}</a>
+                      <a href="{{ route('user.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar usuario') }}</a>
                     </div>
                   </div>
                 @endcan
@@ -24,23 +24,23 @@
                   <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
                     <thead class="text-primary">
                       <th>
-                          {{ __('Photo') }}
+                          {{ __('Foto') }}
                       </th>
                       <th>
-                          {{ __('Name') }}
+                          {{ __('Nombre') }}
                       </th>
                       <th>
                         {{ __('Email') }}
                       </th>
                       <th>
-                        {{ __('Role') }}
+                        {{ __('Rol') }}
                       </th>
                       <th>
-                        {{ __('Creation date') }}
+                        {{ __('Fecha de creación') }}
                       </th>
                       @can('manage-users', App\User::class)
                         <th class="text-right">
-                          {{ __('Actions') }}
+                          {{ __('Acción') }}
                         </th>
                       @endcan
                     </thead>
@@ -71,7 +71,7 @@
                                     <form action="{{ route('user.destroy', $user) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        
+
                                         @can('update', $user)
                                           <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="">
                                             <i class="material-icons">edit</i>
@@ -79,7 +79,7 @@
                                           </a>
                                         @endcan
                                         @can('delete', $user)
-                                          <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
+                                          <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas eliminar a este usuario?") }}') ? this.parentElement.submit() : ''">
                                               <i class="material-icons">close</i>
                                               <div class="ripple-container"></div>
                                           </button>
@@ -122,7 +122,7 @@
         responsive: true,
         language: {
           search: "_INPUT_",
-          searchPlaceholder: "Search users",
+          searchPlaceholder: "Buscar usuarios",
         },
         "columnDefs": [
           { "orderable": false, "targets": 5 },
