@@ -1,20 +1,5 @@
 <?php
-/*
 
-=========================================================
-* Argon Dashboard PRO - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-laravel
-* Copyright 2018 Creative Tim (https://www.creative-tim.com) & UPDIVISION (https://www.updivision.com)
-
-* Coded by www.creative-tim.com & www.updivision.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 namespace App\Http\Controllers;
 
 use Gate;
@@ -48,7 +33,7 @@ class ProfileController extends Controller
                 ->except([$request->hasFile('photo') ? '' : 'picture'])
         );
 
-        return back()->withStatus(__('Profile successfully updated.'));
+        return back()->withStatus(__('Perfil actualizado con éxito.'));
     }
 
     /**
@@ -61,6 +46,22 @@ class ProfileController extends Controller
     {
         auth()->user()->update(['password' => Hash::make($request->get('password'))]);
 
-        return back()->withStatus(__('Password successfully updated.'));
+        return back()->withStatus(__('Contraseña actualizada correctamente.'));
+    }
+
+    /**
+     * Update the profile
+     *
+     * @param  \App\Http\Requests\ProfileRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function data(ProfileRequest $request)
+    {
+        auth()->user()->update(
+            $request->merge(['picture' => $request->photo ? $request->photo->store('profile', 'public') : null])
+                ->except([$request->hasFile('photo') ? '' : 'picture'])
+        );
+
+        return back()->withStatus(__('Perfil actualizado con éxito.'));
     }
 }

@@ -118,10 +118,54 @@
             </a>
           </div>
           <div class="card-body">
-{{--            <h6 class="card-category text-gray">CEO / Co-Founder</h6>--}}
             <h4 class="card-title">{{ auth()->user()->name }}</h4>
           </div>
         </div>
+
+          <div class="card">
+              <div class="card-header card-header-icon card-header-rose">
+                  <div class="card-icon">
+                      <i class="material-icons">contacts</i>
+                  </div>
+                  <h4 class="card-title">{{ __('Cambia la contraseña') }}</h4>
+              </div>
+              <div class="card-body">
+                  <form method="post" action="{{ route('profile.data') }}" class="form-horizontal">
+                      @csrf
+                      @method('put')
+
+                      <div class="row">
+                          <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Contraseña actual') }}</label>
+                          <div class="col-sm-7">
+                              <div class="form-group{{ $errors->has('old_password') ? ' has-danger' : '' }}">
+                                  <input class="form-control{{ $errors->has('old_password') ? ' is-invalid' : '' }}" input type="password" name="old_password" id="input-current-password" placeholder="{{ __('Contraseña actual') }}" value="" required />
+                                  @include('alerts.feedback', ['field' => 'old_password'])
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <label class="col-sm-2 col-form-label" for="input-password">{{ __('Nueva contraseña') }}</label>
+                          <div class="col-sm-7">
+                              <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
+                                  <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="input-password" type="password" placeholder="{{ __('Nueva contraseña') }}" value="" required />
+                                  @include('alerts.feedback', ['field' => 'password'])
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <label class="col-sm-2 col-form-label" for="input-password-confirmation">{{ __('Confirmar nueva contraseña') }}</label>
+                          <div class="col-sm-7">
+                              <div class="form-group">
+                                  <input class="form-control" name="password_confirmation" id="input-password-confirmation" type="password" placeholder="{{ __('Confirmar nueva contraseña') }}" value="" required />
+                              </div>
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-rose pull-right">{{ __('Cambiar contraseña') }}</button>
+                      <div class="clearfix"></div>
+                  </form>
+              </div>
+          </div>
+
       </div>
     </div>
   </div>

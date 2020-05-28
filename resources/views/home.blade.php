@@ -2,7 +2,7 @@
   'class' => 'off-canvas-sidebar',
   'classPage' => 'login-page',
   'activePage' => '',
-  'title' => __('Material Dashboard'),
+  'title' => __('CoopFon'),
   'pageBackground' => asset("coopfon").'/img/login.jpg'
 ])
 

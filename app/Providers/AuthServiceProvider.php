@@ -33,9 +33,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('manage-items', 'App\Policies\UserPolicy@manageItems');
         Gate::define('manage-users', 'App\Policies\UserPolicy@manageUsers');
-        Gate::define('manage-modules', 'App\Policies\UserPolicy@manageModules');
+        Gate::define('manage-roles', 'App\Policies\RolePolicy@manageRoles');
+        Gate::define('manage-modules', 'App\Policies\Config\ModulePolicy@manageModules');
 
 
     }

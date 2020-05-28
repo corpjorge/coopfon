@@ -2,8 +2,8 @@
 
 namespace App\Policies\Config;
 
-use App\Model\Config\Module;
 use App\User;
+use App\Model\Config\Module;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ModulePolicy
@@ -53,7 +53,7 @@ class ModulePolicy
      */
     public function update(User $user, Module $module)
     {
-        return $user->isAdmin();
+        return $user->isUltraAdmin();
     }
 
     /**
@@ -90,5 +90,16 @@ class ModulePolicy
     public function forceDelete(User $user, Module $module)
     {
         //
+    }
+
+    /**
+     * Determine whether the authenticate user can manage modules.
+     *
+     * @param  \App\User  $user
+     * @return boolean
+     */
+    public function manageModules(User $user)
+    {
+        return $user->isUltraAdmin();
     }
 }

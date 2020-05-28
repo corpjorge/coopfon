@@ -90,20 +90,20 @@ class Sidebar extends React.Component {
                             </a>
                         </li>
                         <li className="button-container">
-                            <a href="https://www.creative-tim.com/product/material-dashboard-pro-laravel"
+                            <a href="https://www.coopfon.com/"
                                target="_blank" className="btn btn-rose btn-block btn-fill">Buy Now</a>
-                            <a href="https://material-dashboard-pro-laravel.creative-tim.com/docs/getting-started/laravel-setup.html"
+                            <a href="https://coopfon.com/docs/"
                                target="_blank" className="btn btn-default btn-block">
                                 Documentation
                             </a>
-                            <a href="https://www.creative-tim.com/product/material-dashboard-laravel" target="_blank"
+                            <a href="https://www.coopfon.com/product/" target="_blank"
                                className="btn btn-info btn-block">
                                 Get Free Demo!
                             </a>
                         </li>
                         <li className="button-container github-star">
                             <a className="github-button"
-                               href="https://github.com/creativetimofficial/ct-material-dashboard-pro-laravel"
+                               href="https://github.com/coopfon/"
                                data-icon="octicon-star" data-size="large" data-show-count="true"
                                aria-label="Star ntkme/github-buttons on GitHub">Star</a>
                         </li>

@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="{{ asset('coopfon') }}/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Dashboard PRO by Creative Tim
+    CoopFon
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -105,16 +105,16 @@
                 </a>
               </li>
               <li class="button-container">
-                <a href="https://www.creative-tim.com/product/material-dashboard-pro" target="_blank" class="btn btn-rose btn-block btn-fill">Buy Now</a>
-                <a href="https://demos.creative-tim.com/material-dashboard-pro/docs/2.1/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block">
+                <a href="https://www.coopfon.com/" target="_blank" class="btn btn-rose btn-block btn-fill">Buy Now</a>
+                <a href="https://demos.coopfon.com/" target="_blank" class="btn btn-default btn-block">
                   Documentation
                 </a>
-                <a href="https://www.creative-tim.com/product/material-dashboard" target="_blank" class="btn btn-info btn-block">
+                <a href="https://www.coopfon.com" target="_blank" class="btn btn-info btn-block">
                   Get Free Demo!
                 </a>
               </li>
               <li class="button-container github-star">
-                <a class="github-button" href="https://github.com/creativetimofficial/ct-material-dashboard-pro" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
+                <a class="github-button" href="https://github.com/coopfon/" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
               </li>
               <li class="header-title">Thank you for 95 shares!</li>
               <li class="button-container text-center">

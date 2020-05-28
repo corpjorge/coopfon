@@ -32,12 +32,6 @@
                 <span class="sidebar-normal"> Mi perfil </span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span class="sidebar-mini"> C </span>
-                <span class="sidebar-normal"> Configuración </span>
-              </a>
-            </li>
           </ul>
         </div>
       </div>
@@ -67,24 +61,25 @@
             </li>
 
             @can('manage-users', App\User::class)
+              <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
+                  <a class="nav-link" href="{{ route('user.index') }}">
+                      <span class="sidebar-mini"> UM </span>
+                      <span class="sidebar-normal"> {{ __('Usuarios') }} </span>
+                  </a>
+              </li>
+            @endcan
+
+            @can('manage-roles', App\Role::class)
               <li class="nav-item{{ $activePage == 'role-management' ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('role.index') }}">
                   <span class="sidebar-mini"> RM </span>
                   <span class="sidebar-normal"> {{ __('Roles') }} </span>
                 </a>
               </li>
-
-              <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('user.index') }}">
-                  <span class="sidebar-mini"> UM </span>
-                  <span class="sidebar-normal"> {{ __('Usuarios') }} </span>
-                </a>
-              </li>
             @endcan
-{{--              manageModules--}}
-            @can('manage-items', App\User::class)
-              @can('viewAny', App\Model\Config\Module::class)
 
+            @can('manage-modules', App\Model\Config\Module::class)
+              @can('viewAny', App\Model\Config\Module::class)
               <li class="nav-item{{ $activePage == 'module' ? ' active' : '' }}">
                   <a class="nav-link" href="{{ route('module.index') }}">
                       <span class="sidebar-mini"> M </span>
@@ -93,6 +88,7 @@
               </li>
               @endcan
             @endcan
+
           </ul>
         </div>
       </li>
