@@ -1,23 +1,35 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Config;
 
 use Gate;
-use App\User;
+use Carbon\Carbon;
+use App\Model\Config\City;
+use App\Model\Config\Gender;
+use App\Model\Config\DocumentType;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\ProfileRequest;
-use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\Config\ProfileRequest;
+use App\Http\Requests\Config\PasswordRequest;
+use App\Http\Requests\Config\DataRequest;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
     /**
      * Show the form for editing the profile.
      *
+     * @param DocumentType $documentType
+     * @param City $city
+     * @param Gender $gender
      * @return \Illuminate\View\View
      */
-    public function edit()
+    public function edit(DocumentType $documentTypes, City $cities, Gender $genders)
     {
-        return view('config.profile.edit');
+        return view('config.profile.edit', [
+            'documentTypes' => $documentTypes->all(),
+            'cities' => $cities->all(),
+            'genders' => $genders->all()
+        ]);
     }
 
     /**
@@ -52,16 +64,17 @@ class ProfileController extends Controller
     /**
      * Update the profile
      *
-     * @param  \App\Http\Requests\ProfileRequest  $request
+     * @param  \App\Http\Requests\DataRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function data(ProfileRequest $request)
+    public function data(DataRequest $request)
     {
         auth()->user()->update(
-            $request->merge(['picture' => $request->photo ? $request->photo->store('profile', 'public') : null])
-                ->except([$request->hasFile('photo') ? '' : 'picture'])
+            $request->merge(
+                ['birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null]
+            )->all()
         );
+        return back()->withStatus(__('Datos actualizados con éxito.'));
 
-        return back()->withStatus(__('Perfil actualizado con éxito.'));
     }
 }

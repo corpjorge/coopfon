@@ -21,7 +21,7 @@ class GlobalGendersTableSeeder extends Seeder
 
         DB::table('genders')->insert([
             'id' => 2,
-            'abbreviation' => 'm',
+            'abbreviation' => 'M',
             'type' => 'Masculino',
             'created_at' => now(),
             'updated_at' => now()

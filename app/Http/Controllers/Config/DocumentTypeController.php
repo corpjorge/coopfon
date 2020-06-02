@@ -3,25 +3,19 @@
 namespace App\Http\Controllers\Config;
 
 use App\Http\Controllers\Controller;
-use App\Model\Config\Module;
+use App\Model\Config\DocumentType;
 use Illuminate\Http\Request;
 
-class ModuleController extends Controller
+class DocumentTypeController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Module::class);
-    }
     /**
      * Display a listing of the resource.
      *
-     * @param Module $model
      * @return \Illuminate\Http\Response
      */
-    public function index(Module $model)
+    public function index()
     {
-        $this->authorize('manage-users', User::class);
-        return view('config.modules.index', ['modules' => $model->all()]);
+        //
     }
 
     /**
@@ -48,10 +42,10 @@ class ModuleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Config\Module  $module
+     * @param  \App\Model\Config\DocumentType  $documentType
      * @return \Illuminate\Http\Response
      */
-    public function show(Module $module)
+    public function show(DocumentType $documentType)
     {
         //
     }
@@ -59,10 +53,10 @@ class ModuleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Config\Module  $module
+     * @param  \App\Model\Config\DocumentType  $documentType
      * @return \Illuminate\Http\Response
      */
-    public function edit(Module $module)
+    public function edit(DocumentType $documentType)
     {
         //
     }
@@ -71,10 +65,10 @@ class ModuleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Config\Module  $module
+     * @param  \App\Model\Config\DocumentType  $documentType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Module $module)
+    public function update(Request $request, DocumentType $documentType)
     {
         //
     }
@@ -82,10 +76,10 @@ class ModuleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Config\Module  $module
+     * @param  \App\Model\Config\DocumentType  $documentType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Module $module)
+    public function destroy(DocumentType $documentType)
     {
         //
     }

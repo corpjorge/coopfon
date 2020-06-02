@@ -20,8 +20,8 @@ Auth::routes();
 Route::get('register', 'HomeController@index')->name('register');
 
 
-Route::get('home', 'HomeController@index')->name('home');
-Route::get('dashboard', 'HomeController@index')->name('home');
+Route::get('home', 'Config\HomeController@index')->name('home');
+Route::get('dashboard', 'Config\HomeController@index')->name('home');
 Route::get('lock', 'ExamplePagesController@lock')->name('page.lock');
 Route::get('error', ['as' => 'page.error', 'uses' => 'ExamplePagesController@error']);
 
@@ -31,10 +31,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
     Route::resource('module', 'Config\ModuleController', ['except' => ['show']]);
 
-    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-    Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
-    Route::put('profile/data', ['as' => 'profile.data', 'uses' => 'ProfileController@data']);
+    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'Config\ProfileController@edit']);
+    Route::put('profile', ['as' => 'profile.update', 'uses' => 'Config\ProfileController@update']);
+    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'Config\ProfileController@password']);
+    Route::put('profile/data', ['as' => 'profile.data', 'uses' => 'Config\ProfileController@data']);
 
 });
 
