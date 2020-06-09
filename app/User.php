@@ -1,25 +1,13 @@
 <?php
-/*
 
-=========================================================
-* Argon Dashboard PRO - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-laravel
-* Copyright 2018 Creative Tim (https://www.creative-tim.com) & UPDIVISION (https://www.updivision.com)
-
-* Coded by www.creative-tim.com & www.updivision.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Model\Config\DocumentType;
+use App\Model\Config\Gender;
+use App\Model\Config\City;
 
 class User extends Authenticatable
 {
@@ -31,7 +19,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'picture' ,'role_id'
+        'name', 'email', 'password', 'picture' ,'role_id',
+        'birth_date', 'state_id', 'document_type_id', 'document',
+        'phone', 'code', 'gender_id', 'address', 'area', 'city_id',
     ];
 
     /**
@@ -54,6 +44,37 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the document type of the user
+     *
+     * @return \App\Model\Config\DocumentType
+     */
+    public function documentType()
+    {
+        return $this->belongsTo(DocumentType::class);
+    }
+
+    /**
+     * Get the gender of the user
+     *
+     * @return \App\Model\Config\Gender
+     */
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class);
+    }
+
+    /**
+     * Get the city of the user
+     *
+     * @return \App\Model\Config\City
+     */
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
+
+    /**
      * Get the path to the profile picture
      *
      * @return string
@@ -68,13 +89,33 @@ class User extends Authenticatable
     }
 
     /**
+     * Check if the user has UltraAdmin role
+     *
+     * @return boolean
+     */
+    public function isUltraAdmin()
+    {
+        return $this->role_id == 1;
+    }
+
+    /**
+     * Check if the user has SuperAdmin role
+     *
+     * @return boolean
+     */
+    public function isSuperAdmin()
+    {
+        return $this->role_id <= 2;
+    }
+
+    /**
      * Check if the user has admin role
      *
      * @return boolean
      */
     public function isAdmin()
     {
-        return $this->role_id == 1;
+        return $this->role_id <= 3;
     }
 
     /**
@@ -92,8 +133,10 @@ class User extends Authenticatable
      *
      * @return boolean
      */
-    public function isMember()
+    public function isUser()
     {
-        return $this->role_id == 3;
+        return $this->role_id == 9;
     }
+
+
 }

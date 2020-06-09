@@ -30,7 +30,7 @@ class GlobalCreateUsersTable extends Migration
                 $table->foreignId('document_type_id')->unsigned()->nullable();
                 $table->foreign('document_type_id')->references('id')->on('document_types');
                 $table->string('document')->unique()->nullable();
-                $table->integer('phone')->nullable();
+                $table->biginteger('phone')->nullable();
                 $table->string('code')->unique()->nullable();
                 $table->foreignId('gender_id')->unsigned()->nullable();
                 $table->foreign('gender_id')->references('id')->on('genders');

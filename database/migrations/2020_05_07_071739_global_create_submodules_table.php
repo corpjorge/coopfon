@@ -17,6 +17,7 @@ class GlobalCreateSubmodulesTable extends Migration
             $table->id();
             $table->foreignId('state_id')->constrained();
             $table->foreignId('module_id')->constrained();
+            $table->foreignId('role_id')->constrained();
             $table->string('name');
             $table->string('title');
             $table->string('route');
