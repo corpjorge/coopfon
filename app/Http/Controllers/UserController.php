@@ -141,4 +141,6 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
     }
+
+
 }

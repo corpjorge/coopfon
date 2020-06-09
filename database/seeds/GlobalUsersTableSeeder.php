@@ -38,7 +38,7 @@ class GlobalUsersTableSeeder extends Seeder
 
         factory(App\User::class)->create([
             'id' => 3,
-            'role_id' => 3,
+            'role_id' => 9,
             'state_id' => 1,
             'name' => 'Material',
             'email' => 'admin@material.com',

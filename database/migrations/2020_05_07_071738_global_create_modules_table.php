@@ -21,6 +21,7 @@ class GlobalCreateModulesTable extends Migration
             $table->string('route');
             $table->string('icon');
             $table->string('order');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

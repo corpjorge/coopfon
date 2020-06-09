@@ -40,6 +40,7 @@ class GlobalCreateUsersTable extends Migration
                 $table->foreign('city_id')->references('code')->on('city');
                 $table->string('picture')->nullable();
                 $table->date('birth_date')->nullable();
+                $table->softDeletes();
                 $table->timestamps();
             });
     }
