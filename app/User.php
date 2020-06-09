@@ -19,7 +19,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'picture' ,'role_id', 'birth_date'
+        'name', 'email', 'password', 'picture' ,'role_id',
+        'birth_date', 'state_id', 'document_type_id', 'document',
+        'phone', 'code', 'gender_id', 'address', 'area', 'city_id',
     ];
 
     /**
@@ -131,8 +133,10 @@ class User extends Authenticatable
      *
      * @return boolean
      */
-    public function isMember()
+    public function isUser()
     {
-        return $this->role_id == 3;
+        return $this->role_id == 9;
     }
+
+
 }

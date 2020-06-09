@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Requests\Config\UsersRequest;
 use App\Role;
 use App\User;
-use App\Http\Requests\UserRequest;
+use Carbon\Carbon;
+use App\Model\Config\City;
+use App\Model\Config\Gender;
 use Illuminate\Support\Facades\Hash;
+use App\Model\Config\DocumentType;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -24,18 +30,24 @@ class UserController extends Controller
     {
         $this->authorize('manage-users', User::class);
 
-        return view('config.users.index', ['users' => $model->with('role')->get()]);
+        return view('config.users.index', ['users' => $model->where('role_id',9)->get()]);
     }
 
     /**
      * Show the form for creating a new user
      *
-     * @param  \App\Role  $model
+     * @param DocumentType $documentTypes
+     * @param City $cities
+     * @param Gender $genders
      * @return \Illuminate\View\View
      */
-    public function create(Role $model)
+    public function create(DocumentType $documentTypes, City $cities, Gender $genders)
     {
-        return view('config.users.create', ['roles' => $model->get(['id', 'name'])]);
+        return view('config.users.create', [
+            'documentTypes' => $documentTypes->get(['id', 'type']),
+            'cities' => $cities->orderBy('name')->get(),
+            'genders' => $genders->get(['id', 'type'])
+        ]);
     }
 
     /**
@@ -49,22 +61,32 @@ class UserController extends Controller
     {
         $model->create($request->merge([
             'picture' => $request->photo ? $request->photo->store('profile', 'public') : null,
-            'password' => Hash::make($request->get('password'))
+            'password' => Hash::make($request->get('password')),
+            'birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null,
+            'role_id' => 9
         ])->all());
 
-        return redirect()->route('user.index')->withStatus(__('User successfully created.'));
+        return redirect()->route('user.index')->withStatus(__('Usuario creado con éxito.'));
     }
 
     /**
      * Show the form for editing the specified user
      *
-     * @param  \App\User  $user
-     * @param  \App\Role  $model
+     * @param \App\User $user
+     * @param \App\Role $role
+     * @param DocumentType $documentTypes
+     * @param City $cities
+     * @param Gender $genders
      * @return \Illuminate\View\View
      */
-    public function edit(User $user, Role $model)
+    public function edit(User $user, Role $role, DocumentType $documentTypes, City $cities, Gender $genders)
     {
-        return view('config.users.edit', ['user' => $user->load('role'), 'roles' => $model->get(['id', 'name'])]);
+        return view('config.users.edit', [
+            'user' => $user->load('role'),
+            'documentTypes' => $documentTypes->get(['id', 'type']),
+            'cities' => $cities->orderBy('name')->get(),
+            'genders' => $genders->get(['id', 'type'])
+        ]);
     }
 
     /**
@@ -81,10 +103,30 @@ class UserController extends Controller
             $request->merge([
                 'picture' => $request->photo ? $request->photo->store('profile', 'public') : $user->picture,
                 'password' => Hash::make($request->get('password'))
-            ])->except([$hasPassword ? '' : 'password'])
+            ])->except([
+                $hasPassword ? '' : 'password',
+            ])
         );
 
-        return redirect()->route('user.index')->withStatus(__('User successfully updated.'));
+        return redirect()->route('user.index')->withStatus(__('Usuario actualizado con éxito.'));
+    }
+
+    /**
+     * Update the profile
+     *
+     * @param  \App\Http\Requests\UsersRequest  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function data(UsersRequest $request, User $user)
+    {
+        $user->update(
+            $request->merge(
+                ['birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null]
+            )->all()
+        );
+        return back()->withStatus(__('Datos actualizados con éxito.'));
+
     }
 
     /**

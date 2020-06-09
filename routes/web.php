@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('role', 'RoleController', ['except' => ['show', 'destroy']]);
     Route::resource('user', 'UserController', ['except' => ['show']]);
+    Route::put('users/{user}', ['as' => 'users.data', 'uses' => 'UserController@data']);
     Route::resource('module', 'Config\ModuleController', ['except' => ['show']]);
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'Config\ProfileController@edit']);

@@ -24,9 +24,6 @@
                   <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
                     <thead class="text-primary">
                       <th>
-                          {{ __('Foto') }}
-                      </th>
-                      <th>
                           {{ __('Nombre') }}
                       </th>
                       <th>
@@ -47,11 +44,6 @@
                     <tbody>
                       @foreach($users as $user)
                         <tr>
-                          <td>
-                            <div class="avatar avatar-sm rounded-circle img-circle" style="width:100px; height:100px;overflow: hidden;">
-                                <img src="{{ $user->profilePicture() }}" alt="" style="max-width: 100px;">
-                            </div>
-                          </td>
                           <td>
                             {{ $user->name }}
                           </td>

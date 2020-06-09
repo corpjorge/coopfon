@@ -26,9 +26,9 @@ class ProfileController extends Controller
     public function edit(DocumentType $documentTypes, City $cities, Gender $genders)
     {
         return view('config.profile.edit', [
-            'documentTypes' => $documentTypes->all(),
-            'cities' => $cities->all(),
-            'genders' => $genders->all()
+            'documentTypes' => $documentTypes->get(['id', 'type']),
+            'cities' => $cities->orderBy('name')->get(),
+            'genders' => $genders->get(['id', 'type'])
         ]);
     }
 

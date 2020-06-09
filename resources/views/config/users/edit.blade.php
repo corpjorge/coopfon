@@ -65,19 +65,6 @@
                   </div>
                 </div>
                 <div class="row">
-                  <label class="col-sm-2 col-form-label">{{ __('Role') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group{{ $errors->has('role_id') ? ' has-danger' : '' }}">
-                      <select class="selectpicker col-sm-12 pl-0 pr-0" name="role_id" data-style="select-with-transition" title="" data-size="100">
-                        <option value="1" @if (old('role_id', $user->role_id) == '1') selected="selected" @endif>{{ __('Admin') }}</option>
-                        <option value="2" @if (old('role_id', $user->role_id) == '2') selected="selected" @endif>{{ __('Creator') }}</option>
-                        <option value="3" @if (old('role_id', $user->role_id) == '3') selected="selected" @endif>{{ __('Member') }}</option>
-                      </select>
-                      @include('alerts.feedback', ['field' => 'role_id'])
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
                   <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Contraseña') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
@@ -100,6 +87,126 @@
               </div>
             </div>
           </form>
+
+            <form method="post" action="{{ route('users.data', $user) }}" class="form-horizontal" >
+                @csrf
+                @method('put')
+            <div class="card">
+                <div class="card-header card-header-icon card-header-rose">
+                    <div class="card-icon">
+                        <i class="material-icons">contacts</i>
+                    </div>
+                    <h4 class="card-title">{{ __('Datos personales') }}</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Tipo de documento') }}</label>
+                        <div class="col-lg-5 col-md-6 col-sm-3">
+                            <select class="selectpicker form-control{{ $errors->has('document_type_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-document_type_id" title="Tipo de documento" name="document_type_id" required>
+                                <option selected value="{{ old('document_type_id', isset($user->documentType->id) ?  $user->documentType->id : '' ) }}">{{ old('document_type_id', isset($user->documentType->type) ?  $user->documentType->type : '' )  }}</option>
+                                @foreach($documentTypes as $documentType)
+                                    <option value="{{$documentType->id}}">{{$documentType->type}}</option>
+                                @endforeach
+
+                            </select>
+                            @include('alerts.feedback', ['field' => 'document_type_id'])
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Documento') }}</label>
+                        <div class="col-sm-7">
+                            <div class="form-group{{ $errors->has('document') ? ' has-danger' : '' }}">
+                                <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }}"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document', $user->document) }}" required />
+                                @include('alerts.feedback', ['field' => 'document'])
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Celular') }}</label>
+                        <div class="col-sm-7">
+                            <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
+                                <input class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}"  type="tel" name="phone" id="input-current-phone" placeholder="{{ __('Celular') }}" value="{{ old('phone', $user->phone) }}"  />
+                                @include('alerts.feedback', ['field' => 'phone'])
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Código') }}</label>
+                        <div class="col-sm-7">
+                            <div class="form-group{{ $errors->has('code') ? ' has-danger' : '' }}">
+                                <input class="form-control{{ $errors->has('code') ? ' is-invalid' : '' }}"  type="text" name="code" id="input-current-code" placeholder="{{ __('Código') }}" value="{{ old('code', $user->code) }}"  />
+                                @include('alerts.feedback', ['field' => 'code'])
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Genero') }}</label>
+                        <div class="col-lg-5 col-md-6 col-sm-3">
+                            <select class="selectpicker form-control{{ $errors->has('gender_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-gender" title="Genero" name="gender_id" >
+                                <option selected value="{{ old('gender_id', isset($user->gender->id) ?  $user->gender->id : '' ) }}">{{ old('gender_id', isset($user->gender->type) ?  $user->gender->type : '' ) }}</option>
+                                @foreach($genders as $gender)
+                                    <option value="{{$gender->id}}">{{$gender->type}}</option>
+                                @endforeach
+                            </select>
+                            @include('alerts.feedback', ['field' => 'gender'])
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Dirección') }}</label>
+                        <div class="col-sm-7">
+                            <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
+                                <input class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}"  type="text" name="address" id="input-current-address" placeholder="{{ __('Dirección') }}" value="{{ old('address', $user->address) }}"  />
+                                @include('alerts.feedback', ['field' => 'address'])
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Area/Zona') }}</label>
+                        <div class="col-sm-7">
+                            <div class="form-group{{ $errors->has('area') ? ' has-danger' : '' }}">
+                                <input class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}"  type="text" name="area" id="input-current-area" placeholder="{{ __('Area') }}" value="{{ old('area', $user->area) }}"  />
+                                @include('alerts.feedback', ['field' => 'area'])
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Fecha nacimiento') }}</label>
+                        <div class="col-sm-7">
+                            <div class="form-group{{ $errors->has('birth_date') ? ' has-danger' : '' }}">
+                                <input type="text"  name="birth_date" id="input-current-birth_date" placeholder="{{ __('Fecha nacimiento') }}" class="form-control{{ $errors->has('birth_date') ? ' is-invalid' : '' }} datepicker"
+                                       value="{{ old('birth_date', \Carbon\Carbon::parse($user->birth_date)->format('d-m-Y')) }}" />
+                                @include('alerts.feedback', ['field' => 'birth_date'])
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Ciudad') }}</label>
+                        <div class="col-lg-5 col-md-6 col-sm-3">
+                            <select class="selectpicker form-control{{ $errors->has('city_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-city_id" title="Ciudad" name="city_id" >
+                                <option selected value="{{ old('city_id', isset($user->city->code) ?  $user->city->code : '' ) }}">{{ old('city_id', isset($user->city->name) ?  $user->city->name.' / '.$user->city->department->name : '' ) }}</option>
+                                @foreach($cities as $city)
+                                    <option value="{{$city->code}}">{{$city->name}} / {{$city->department->name}}</option>
+                                @endforeach
+                            </select>
+                            @include('alerts.feedback', ['field' => 'city_id'])
+                        </div>
+                    </div>
+                </div>
+                    <div class="card-footer ml-auto mr-auto">
+                        <button type="submit" class="btn btn-rose">{{ __('Guardar') }}</button>
+                    </div>
+                    <div class="clearfix"></div>
+            </div>
+            </form>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DataRequest extends FormRequest
+class UsersRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,8 +27,8 @@ class DataRequest extends FormRequest
     {
         return [
             'document_type_id' => ['required'],
-            'document' => ['required', Rule::unique((new User)->getTable())->ignore(auth()->id())],
-            'code' => ['nullable', Rule::unique((new User)->getTable())->ignore(auth()->id())],
+            'document' => ['required', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)],
+            'code' => ['nullable', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)],
             'phone' => ['nullable'],
             'gender' => ['nullable'],
             'address' => ['nullable'],
