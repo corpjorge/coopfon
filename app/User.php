@@ -91,7 +91,7 @@ class User extends Authenticatable
             return "/storage/{$this->picture}";
         }
 
-        return 'http://i.pravatar.cc/200';
+        return "/coopfon/img/placeholder.jpg";
     }
 
     /**

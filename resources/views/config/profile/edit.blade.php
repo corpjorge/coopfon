@@ -113,7 +113,7 @@
       <div class="col-md-4">
         <div class="card card-profile">
           <div class="card-avatar">
-            <a href="">
+            <a href="{{ auth()->user()->profilePicture() }}" target="_blank">
               <img class="img" src="{{ auth()->user()->profilePicture() }}" />
             </a>
           </div>

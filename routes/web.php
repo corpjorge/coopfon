@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('users', ['as' => 'users.store', 'uses' => 'Config\UsersController@store']);
     Route::get('users', ['as' => 'users.index', 'uses' => 'Config\UsersController@index']);
     Route::delete('users/restore/{user}', ['as' => 'users.restore', 'uses' => 'Config\UsersController@restore']);
+    Route::resource('admin', 'Config\AdminController', ['except' => ['show']]);
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'Config\ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'Config\ProfileController@update']);

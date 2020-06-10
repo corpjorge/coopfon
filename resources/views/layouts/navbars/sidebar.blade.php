@@ -69,6 +69,15 @@
               </li>
             @endcan
 
+              @can('manage-users', App\User::class)
+                  <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
+                      <a class="nav-link" href="{{ route('admin.index') }}">
+                          <span class="sidebar-mini"> AD </span>
+                          <span class="sidebar-normal"> {{ __('Administradores') }} </span>
+                      </a>
+                  </li>
+              @endcan
+
             @can('manage-roles', App\Role::class)
               <li class="nav-item{{ $activePage == 'role-management' ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('role.index') }}">
