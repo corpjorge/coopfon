@@ -55,6 +55,18 @@ class UserPolicy
     }
 
     /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Model\Config\Module  $module
+     * @return mixed
+     */
+    public function restore(User $user, User $model)
+    {
+        return $user->isSuperAdmin();
+    }
+
+    /**
      * Determine whether the authenticate user can manage other users.
      *
      * @param  \App\User  $user

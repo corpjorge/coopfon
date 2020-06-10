@@ -13,7 +13,6 @@ class GlobalModuleTableSeeder extends Seeder
     {
         DB::table('modules')->insert([
             'id' => 1,
-            'state_id' => 2,
             'name' => 'Boletería',
             'title' => 'Boletería',
             'route' => 'tickets',
@@ -26,7 +25,6 @@ class GlobalModuleTableSeeder extends Seeder
 
         DB::table('modules')->insert([
             'id' => 2,
-            'state_id' => 2,
             'name' => 'Votaciones',
             'title' => 'Votaciones',
             'route' => 'votes',

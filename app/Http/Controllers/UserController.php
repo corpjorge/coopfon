@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Http\Requests\Config\UsersRequest;
 use App\Role;
 use App\User;
 use Carbon\Carbon;
@@ -12,6 +10,7 @@ use App\Model\Config\Gender;
 use Illuminate\Support\Facades\Hash;
 use App\Model\Config\DocumentType;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\Config\UsersRequest;
 
 class UserController extends Controller
 {
@@ -23,8 +22,9 @@ class UserController extends Controller
     /**
      * Display a listing of the users
      *
-     * @param  \App\User  $model
+     * @param \App\User $model
      * @return \Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(User $model)
     {
