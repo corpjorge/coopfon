@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de usuarios')])
+@extends('layouts.app', ['activePage' => 'admin-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de administradores')])
 
 @section('content')
   <div class="content">
@@ -10,13 +10,13 @@
                 <div class="card-icon">
                   <i class="material-icons">group</i>
                 </div>
-                <h4 class="card-title">{{ __('Restaurar usuario') }}</h4>
+                <h4 class="card-title">{{ __('Restaurar administrador') }}</h4>
               </div>
               <div class="card-body">
                 @can('create', App\User::class)
                   <div class="row">
                     <div class="col-12 text-right">
-                        <a href="{{ route('user.index') }}" class="btn btn-sm btn-rose">{{ __('Volver a la lista') }}</a>
+                        <a href="{{ route('admin.index') }}" class="btn btn-sm btn-rose">{{ __('Volver a la lista') }}</a>
                     </div>
                   </div>
                 @endcan
@@ -58,7 +58,7 @@
                           </td>
                           @can('manage-users', App\User::class)
                               <td class="td-actions text-right">
-                                <form action="{{ route('users.restore', $user) }}" method="post">
+                                <form action="{{ route('admin.restore', $user) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     @can('restore', $user)

@@ -45,13 +45,13 @@
                   <div class="row">
                       <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Tipo de documento') }}</label>
                       <div class="col-lg-3 col-md-6 col-sm-3">
-                          <select class="selectpicker form-control{{ $errors->has('document_type_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-document_type_id" title="Tipo de documento" name="document_type_id" required>
-                              <option selected></option>
+                          <select class="selectpicker form-control{{ $errors->has('document_type_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-document_type_id" title="Tipo de documento" name="document_type_id">
+                              <option></option>
                               @foreach($documentTypes as $documentType)
-                                  <option value="{{$documentType->id}}">{{$documentType->type}}</option>
+                                  <option value="{{$documentType->id}}" {{ old('document_type_id') == $documentType->id ? 'selected' : '' }}>{{$documentType->type}}</option>
                               @endforeach
                           </select>
-                          @include('alerts.feedback', ['field' => 'document_type_id'])
+                          <div style="margin-top: 9px;">@include('alerts.feedback', ['field' => 'document_type_id'])</div>
                       </div>
                   </div><br>
 
@@ -83,18 +83,6 @@
                   </div>
                 </div>
 
-                  <div class="row">
-                      <label class="col-sm-2 col-form-label label-checkbox">{{ __('Activar') }}</label>
-                      <div class="col-sm-10 checkbox-radios">
-                          <div class="togglebutton">
-                              <label>
-                                  <input type="checkbox" name="state_id" value="1" checked>
-                                  <span class="toggle"></span>
-                              </label>
-                          </div>
-                      </div>
-                  </div>
-
                   <hr>
                   <h5 class="card-title">{{ __('Datos personales') }}</h5>
 
@@ -121,14 +109,50 @@
                   </div>
 
                   <div class="row">
+                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Area/Zona') }}</label>
+                      <div class="col-sm-7">
+                          <div class="form-group{{ $errors->has('area') ? ' has-danger' : '' }}">
+                              <input class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}"  type="text" name="area" id="input-current-area" placeholder="{{ __('Area') }}" value="{{ old('area') }}" />
+                              @include('alerts.feedback', ['field' => 'area'])
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Ciudad') }}</label>
+                      <div class="col-lg-5 col-md-6 col-sm-3">
+                          <select class="selectpicker form-control{{ $errors->has('city_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-city_id" title="Seleccionar ciudad" name="city_id" >
+                              <option></option>
+                              @foreach($cities as $city)
+                                  <option value="{{$city->code}}" {{ old('city_id') == $city->code ? 'selected' : '' }}>{{$city->name}} / {{$city->department->name}}</option>
+                              @endforeach
+
+                          </select>
+                          @include('alerts.feedback', ['field' => 'city_id'])
+                      </div>
+                  </div><br>
+
+                  <div class="row">
+                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Miembro') }}</label>
+                      <div class="col-lg-5 col-md-6 col-sm-3">
+                          <select class="selectpicker form-control{{ $errors->has('member_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-member_id" title="Seleccionar miembro" name="member_id" >
+                              <option></option>
+                              @foreach($members as $member)
+                                <option value="{{$member->id}}" {{ old('member_id') == $member->id ? 'selected' : '' }}>{!!json_decode($member->name)->{'M'}!!}</option>
+                              @endforeach
+                          </select>
+                          @include('alerts.feedback', ['field' => 'member_id'])
+                      </div>
+                  </div><br>
+
+                  <div class="row">
                       <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Genero') }}</label>
                       <div class="col-lg-5 col-md-6 col-sm-3">
                           <select class="selectpicker form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-gender" title="Seleccionar genero" name="gender" >
-                              <option selected ></option>
+                              <option></option>
                               @foreach($genders as $gender)
-                                  <option value="{{$gender->id}}">{{$gender->type}}</option>
+                                  <option value="{{$gender->id}}" {{ old('gender') == $gender->id ? 'selected' : '' }}>{{$gender->type}}</option>
                               @endforeach
-
                           </select>
                           @include('alerts.feedback', ['field' => 'gender'])
                       </div>
@@ -145,16 +169,6 @@
                   </div>
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Area/Zona') }}</label>
-                      <div class="col-sm-7">
-                          <div class="form-group{{ $errors->has('area') ? ' has-danger' : '' }}">
-                              <input class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}"  type="text" name="area" id="input-current-area" placeholder="{{ __('Area') }}" value="{{ old('area') }}" />
-                              @include('alerts.feedback', ['field' => 'area'])
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="row">
                       <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Fecha nacimiento') }}</label>
                       <div class="col-sm-7">
                           <div class="form-group{{ $errors->has('birth_date') ? ' has-danger' : '' }}">
@@ -163,22 +177,6 @@
                           </div>
                       </div>
                   </div>
-
-                  <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Ciudad') }}</label>
-                      <div class="col-lg-5 col-md-6 col-sm-3">
-                          <select class="selectpicker form-control{{ $errors->has('city_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-city_id" title="Seleccionar ciudad" name="city_id" >
-                              <option selected ></option>
-                              @foreach($cities as $city)
-                                  <option value="{{$city->code}}">{{$city->name}} / {{$city->department->name}}</option>
-                              @endforeach
-
-                          </select>
-                          @include('alerts.feedback', ['field' => 'city_id'])
-                      </div>
-                  </div>
-
-
 
               </div>
               <div class="card-footer ml-auto mr-auto">

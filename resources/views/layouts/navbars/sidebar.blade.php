@@ -70,7 +70,7 @@
             @endcan
 
               @can('manage-users', App\User::class)
-                  <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
+                  <li class="nav-item{{ $activePage == 'admin-management' ? ' active' : '' }}">
                       <a class="nav-link" href="{{ route('admin.index') }}">
                           <span class="sidebar-mini"> AD </span>
                           <span class="sidebar-normal"> {{ __('Administradores') }} </span>

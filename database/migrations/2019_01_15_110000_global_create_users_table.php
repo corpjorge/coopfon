@@ -30,6 +30,8 @@ class GlobalCreateUsersTable extends Migration
                 $table->string('document')->unique()->nullable();
                 $table->biginteger('phone')->nullable();
                 $table->string('code')->unique()->nullable();
+                $table->foreignId('member_id')->unsigned()->nullable();
+                $table->foreign('member_id')->references('id')->on('members');
                 $table->foreignId('gender_id')->unsigned()->nullable();
                 $table->foreign('gender_id')->references('id')->on('genders');
                 $table->string('address')->nullable();

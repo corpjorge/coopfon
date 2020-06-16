@@ -1,11 +1,11 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de usuarios')])
+@extends('layouts.app', ['activePage' => 'admin-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de administradores')])
 
 @section('content')
   <div class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <form method="post" enctype="multipart/form-data" action="{{ route('user.update', $user) }}" autocomplete="off" class="form-horizontal">
+          <form method="post" enctype="multipart/form-data" action="{{ route('admin.update', $user) }}" autocomplete="off" class="form-horizontal">
             @csrf
             @method('put')
 
@@ -19,7 +19,7 @@
               <div class="card-body ">
                 <div class="row">
                   <div class="col-md-12 text-right">
-                      <a href="{{ route('user.index') }}" class="btn btn-sm btn-rose">{{ __('Volver a la lista') }}</a>
+                      <a href="{{ route('admin.index') }}" class="btn btn-sm btn-rose">{{ __('Volver a la lista') }}</a>
                   </div>
                 </div>
                 <div class="row">
@@ -88,7 +88,7 @@
             </div>
           </form>
 
-            <form method="post" action="{{ route('users.data', $user) }}" class="form-horizontal" >
+            <form method="post" action="{{ route('admin.data', $user) }}" class="form-horizontal" >
                 @csrf
                 @method('put')
             <div class="card">

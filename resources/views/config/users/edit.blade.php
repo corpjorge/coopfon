@@ -104,9 +104,9 @@
                         <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Tipo de documento') }}</label>
                         <div class="col-lg-5 col-md-6 col-sm-3">
                             <select class="selectpicker form-control{{ $errors->has('document_type_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-document_type_id" title="Tipo de documento" name="document_type_id" required>
-                                <option selected value="{{ old('document_type_id', isset($user->documentType->id) ?  $user->documentType->id : '' ) }}">{{ old('document_type_id', isset($user->documentType->type) ?  $user->documentType->type : '' )  }}</option>
+                                <option selected value="{{ old('document_type_id', $user->documentType->id ?? '' ) }}">{{ old('document_type_id', $user->documentType->type ?? '' )  }}</option>
                                 @foreach($documentTypes as $documentType)
-                                    <option value="{{$documentType->id}}">{{$documentType->type}}</option>
+                                    <option value="{{$documentType->id}}" {{ old('document_type_id') == $documentType->id ? 'selected' : '' }}>{{$documentType->type}}</option>
                                 @endforeach
 
                             </select>
@@ -118,7 +118,7 @@
                         <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Documento') }}</label>
                         <div class="col-sm-7">
                             <div class="form-group{{ $errors->has('document') ? ' has-danger' : '' }}">
-                                <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }}"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document', $user->document) }}" required />
+                                <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }}"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document', $user->document) }}"  />
                                 @include('alerts.feedback', ['field' => 'document'])
                             </div>
                         </div>
@@ -145,12 +145,25 @@
                     </div>
 
                     <div class="row">
+                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Miembro') }}</label>
+                        <div class="col-lg-5 col-md-6 col-sm-3">
+                            <select class="selectpicker form-control{{ $errors->has('member_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-member_id" title="Seleccionar miembro" name="member_id" >
+                                <option selected value="{{ old('member_id', $user->member->id ?? '' ) }}">{{ old('gender_id', json_decode($user->member->name)->{$user->gender->abbreviation} ?? '' ) }}</option>
+                                @foreach($members as $member)
+                                    <option value="{{$member->id}}" {{ old('member_id') == $member->id ? 'selected' : '' }}>{!!json_decode($member->name)->{'M'}!!}</option>
+                                @endforeach
+                            </select>
+                            @include('alerts.feedback', ['field' => 'member_id'])
+                        </div>
+                    </div><br>
+
+                    <div class="row">
                         <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Genero') }}</label>
                         <div class="col-lg-5 col-md-6 col-sm-3">
                             <select class="selectpicker form-control{{ $errors->has('gender_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-gender" title="Genero" name="gender_id" >
-                                <option selected value="{{ old('gender_id', isset($user->gender->id) ?  $user->gender->id : '' ) }}">{{ old('gender_id', isset($user->gender->type) ?  $user->gender->type : '' ) }}</option>
+                                <option selected value="{{ old('gender_id', $user->gender->id ?? '' ) }}">{{ old('gender_id', $user->gender->type ?? '' ) }}</option>
                                 @foreach($genders as $gender)
-                                    <option value="{{$gender->id}}">{{$gender->type}}</option>
+                                    <option value="{{$gender->id}}" {{ old('gender_id') == $gender->id ? 'selected' : '' }}>{{$gender->type}}</option>
                                 @endforeach
                             </select>
                             @include('alerts.feedback', ['field' => 'gender'])
@@ -192,9 +205,9 @@
                         <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Ciudad') }}</label>
                         <div class="col-lg-5 col-md-6 col-sm-3">
                             <select class="selectpicker form-control{{ $errors->has('city_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-city_id" title="Ciudad" name="city_id" >
-                                <option selected value="{{ old('city_id', isset($user->city->code) ?  $user->city->code : '' ) }}">{{ old('city_id', isset($user->city->name) ?  $user->city->name.' / '.$user->city->department->name : '' ) }}</option>
+                                <option selected value="{{ old('city_id',$user->city->code ?? '' ) }}">{{ old('city_id', isset($user->city->name) ?  $user->city->name.' / '.$user->city->department->name : '' ) }}</option>
                                 @foreach($cities as $city)
-                                    <option value="{{$city->code}}">{{$city->name}} / {{$city->department->name}}</option>
+                                    <option value="{{$city->code}}" {{ old('city_id') == $city->code ? 'selected' : '' }}>{{$city->name}} / {{$city->department->name}}</option>
                                 @endforeach
                             </select>
                             @include('alerts.feedback', ['field' => 'city_id'])

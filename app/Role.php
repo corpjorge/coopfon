@@ -22,4 +22,9 @@ class Role extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function list(array $array)
+    {
+        return $this->where('id','!=',1)->where('id','<',8)->get();
+    }
 }

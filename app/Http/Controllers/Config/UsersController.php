@@ -66,6 +66,7 @@ class UsersController extends Controller
      */
     public function restore($id)
     {
+        //onlyTrashed
         $user = User::withTrashed()->find($id);
         $user->restore();
         return back()->withStatus(__('Usuario restaurado.'));

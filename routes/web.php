@@ -28,13 +28,20 @@ Route::get('error', ['as' => 'page.error', 'uses' => 'ExamplePagesController@err
 Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('role', 'RoleController', ['except' => ['show', 'destroy']]);
+
     Route::resource('user', 'UserController', ['except' => ['show']]);
     Route::put('users/{user}', ['as' => 'users.data', 'uses' => 'UserController@data']);
     Route::get('users/create', ['as' => 'users.create', 'uses' => 'Config\UsersController@create']);
     Route::post('users', ['as' => 'users.store', 'uses' => 'Config\UsersController@store']);
     Route::get('users', ['as' => 'users.index', 'uses' => 'Config\UsersController@index']);
     Route::delete('users/restore/{user}', ['as' => 'users.restore', 'uses' => 'Config\UsersController@restore']);
+
+
     Route::resource('admin', 'Config\AdminController', ['except' => ['show']]);
+    Route::put('admins/{user}', ['as' => 'admin.data', 'uses' => 'Config\AdminController@data']);
+    Route::get('admins', ['as' => 'admins.index', 'uses' => 'Config\AdminController@indexDelete']);
+    Route::delete('admin/restore/{user}', ['as' => 'admin.restore', 'uses' => 'Config\AdminController@restore']);
+
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'Config\ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'Config\ProfileController@update']);

@@ -19,8 +19,6 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithVali
     */
     public function model(array $row)
     {
-        //$chunkOffset = $this->getChunkOffset();
-
         return new User([
             'role_id'  => 9,
             'name'  => $row['name'],
