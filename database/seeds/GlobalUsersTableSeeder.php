@@ -15,7 +15,6 @@ class GlobalUsersTableSeeder extends Seeder
         factory(App\User::class)->create([
             'id' => 1,
             'role_id' => 1,
-            'state_id' => 1,
             'name' => 'Admin',
             'email' => 'corpjorge@hotmail.com',
             'password' => Hash::make('admin'),
@@ -27,7 +26,6 @@ class GlobalUsersTableSeeder extends Seeder
         factory(App\User::class)->create([
             'id' => 2,
             'role_id' => 2,
-            'state_id' => 1,
             'name' => 'corpjorge',
             'email' => 'corpjorge@gmail.com',
             'password' => Hash::make('admin'),
@@ -38,8 +36,7 @@ class GlobalUsersTableSeeder extends Seeder
 
         factory(App\User::class)->create([
             'id' => 3,
-            'role_id' => 3,
-            'state_id' => 1,
+            'role_id' => 9,
             'name' => 'Material',
             'email' => 'admin@material.com',
             'password' => Hash::make('secret'),

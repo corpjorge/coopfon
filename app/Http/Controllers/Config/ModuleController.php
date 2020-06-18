@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Config;
 
 use App\Http\Controllers\Controller;
 use App\Model\Config\Module;
-use App\User;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller

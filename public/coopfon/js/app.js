@@ -1,28 +1,28 @@
 /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The modules cache
+/******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
-/******/ 		// Check if modules is in cache
+/******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
 /******/ 		}
-/******/ 		// Create a new modules (and put it into the cache)
+/******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
 /******/ 			exports: {}
 /******/ 		};
 /******/
-/******/ 		// Execute the modules function
+/******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/
-/******/ 		// Flag the modules as loaded
+/******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
 /******/
-/******/ 		// Return the exports of the modules
+/******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
 /******/
@@ -30,7 +30,7 @@
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
 /******/
-/******/ 	// expose the modules cache
+/******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// define getter function for harmony exports
@@ -49,7 +49,7 @@
 /******/ 	};
 /******/
 /******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a modules id, require it
+/******/ 	// mode & 1: value is a module id, require it
 /******/ 	// mode & 2: merge all properties of value into the ns
 /******/ 	// mode & 4: return value when already ns object
 /******/ 	// mode & 8|1: behave like require
@@ -80,7 +80,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/
-/******/ 	// Load entry modules and return exports
+/******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
@@ -2332,10 +2332,10 @@ module.exports = {
   /** Detect free variable `exports`. */
   var freeExports =  true && exports && !exports.nodeType && exports;
 
-  /** Detect free variable `modules`. */
+  /** Detect free variable `module`. */
   var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
 
-  /** Detect the popular CommonJS extension `modules.exports`. */
+  /** Detect the popular CommonJS extension `module.exports`. */
   var moduleExports = freeModule && freeModule.exports === freeExports;
 
   /** Detect free variable `process` from Node.js. */
@@ -6368,7 +6368,7 @@ module.exports = {
     }
 
     /**
-     * A `baseRest` alias which can be replaced with `identity` by modules
+     * A `baseRest` alias which can be replaced with `identity` by module
      * replacement plugins.
      *
      * @private
@@ -19000,8 +19000,8 @@ module.exports = {
     // Use `_.noConflict` to remove Lodash from the global object.
     root._ = _;
 
-    // Define as an anonymous modules so, through path mapping, it can be
-    // referenced as the "underscore" modules.
+    // Define as an anonymous module so, through path mapping, it can be
+    // referenced as the "underscore" module.
     !(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
       return _;
     }).call(exports, __webpack_require__, exports, module),
@@ -19011,7 +19011,7 @@ module.exports = {
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../webpack/buildin/modules.js */ "./node_modules/webpack/buildin/module.js")(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../webpack/buildin/module.js */ "./node_modules/webpack/buildin/module.js")(module)))
 
 /***/ }),
 
@@ -19243,7 +19243,7 @@ module.exports = g;
 
 /***/ "./node_modules/webpack/buildin/module.js":
 /*!***********************************!*\
-  !*** (webpack)/buildin/modules.js ***!
+  !*** (webpack)/buildin/module.js ***!
   \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -19252,7 +19252,7 @@ module.exports = function(module) {
 	if (!module.webpackPolyfill) {
 		module.deprecate = function() {};
 		module.paths = [];
-		// modules.parent = undefined by default
+		// module.parent = undefined by default
 		if (!module.children) module.children = [];
 		Object.defineProperty(module, "loaded", {
 			enumerable: true,

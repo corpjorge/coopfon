@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isAdmin();
+        return $user->isSuperAdmin();
     }
 
     /**
@@ -28,7 +28,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->isAdmin();
+        return $user->isSuperAdmin();
     }
 
     /**
@@ -40,7 +40,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->isAdmin();
+        return $user->isSuperAdmin();
     }
 
     /**
@@ -51,7 +51,19 @@ class UserPolicy
      * @return boolean
      */
     public function delete(User $user, User $model)    {
-        return $user->isAdmin() && $user->id != $model->id;
+        return $user->isSuperAdmin() && $user->id != $model->id;
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Model\Config\Module  $module
+     * @return mixed
+     */
+    public function restore(User $user, User $model)
+    {
+        return $user->isSuperAdmin();
     }
 
     /**
@@ -62,17 +74,18 @@ class UserPolicy
      */
     public function manageUsers(User $user)
     {
-        return $user->isAdmin();
+        return $user->isSuperAdmin();
     }
 
     /**
-     * Determine whether the authenticate user can manage items and other related entities(tags, categories).
+     * Determine whether the authenticate user can manage other users.
      *
      * @param  \App\User  $user
      * @return boolean
      */
-    public function manageItems(User $user)
+    public function manageAdmins(User $user)
     {
-        return $user->isAdmin() || $user->isCreator();
+        return $user->isSuperAdmin();
     }
+
 }

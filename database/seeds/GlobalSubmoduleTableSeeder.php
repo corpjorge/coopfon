@@ -13,8 +13,8 @@ class GlobalSubmoduleTableSeeder extends Seeder
     {
         DB::table('submodules')->insert([
             'id' => 1,
-            'state_id' => 2,
             'module_id' => 1,
+            'role_id' => 1,
             'name' => 'Boletería',
             'title' => 'Boletería',
             'route' => 'tickets',
@@ -27,8 +27,8 @@ class GlobalSubmoduleTableSeeder extends Seeder
 
         DB::table('submodules')->insert([
             'id' => 2,
-            'state_id' => 2,
             'module_id' => 2,
+            'role_id' => 9,
             'name' => 'voto',
             'title' => 'voto',
             'route' => 'tickets',

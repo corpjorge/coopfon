@@ -1,26 +1,16 @@
 <?php
-/*
 
-=========================================================
-* Argon Dashboard PRO - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-laravel
-* Copyright 2018 Creative Tim (https://www.creative-tim.com) & UPDIVISION (https://www.updivision.com)
-
-* Coded by www.creative-tim.com & www.updivision.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 namespace App\Http\Controllers;
 
-use App\Role;
 use App\User;
-use App\Http\Requests\UserRequest;
+use Carbon\Carbon;
+use App\Model\Config\City;
+use App\Model\Config\Gender;
+use App\Model\Config\Member;
 use Illuminate\Support\Facades\Hash;
+use App\Model\Config\DocumentType;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\Config\UsersRequest;
 
 class UserController extends Controller
 {
@@ -32,25 +22,34 @@ class UserController extends Controller
     /**
      * Display a listing of the users
      *
-     * @param  \App\User  $model
+     * @param \App\User $model
      * @return \Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(User $model)
     {
         $this->authorize('manage-users', User::class);
 
-        return view('users.index', ['users' => $model->with('role')->get()]);
+        return view('config.users.index', ['users' => $model->where('role_id',9)->get()]);
     }
 
     /**
      * Show the form for creating a new user
      *
-     * @param  \App\Role  $model
+     * @param DocumentType $documentTypes
+     * @param City $cities
+     * @param Member $members
+     * @param Gender $genders
      * @return \Illuminate\View\View
      */
-    public function create(Role $model)
+    public function create(DocumentType $documentTypes, City $cities, Member $members, Gender $genders)
     {
-        return view('users.create', ['roles' => $model->get(['id', 'name'])]);
+        return view('config.users.create', [
+            'documentTypes' => $documentTypes->get(['id', 'type']),
+            'cities' => $cities->orderBy('name')->get(),
+            'members' => $members->get(['id', 'name']),
+            'genders' => $genders->get(['id', 'type'])
+        ]);
     }
 
     /**
@@ -64,22 +63,33 @@ class UserController extends Controller
     {
         $model->create($request->merge([
             'picture' => $request->photo ? $request->photo->store('profile', 'public') : null,
-            'password' => Hash::make($request->get('password'))
+            'password' => $request->password ? Hash::make($request->get('password')): Hash::make(rand()),
+            'birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null,
+            'role_id' => 9
         ])->all());
 
-        return redirect()->route('user.index')->withStatus(__('User successfully created.'));
+        return redirect()->route('user.index')->withStatus(__('Usuario creado con éxito.'));
     }
 
     /**
      * Show the form for editing the specified user
      *
-     * @param  \App\User  $user
-     * @param  \App\Role  $model
+     * @param \App\User $user
+     * @param DocumentType $documentTypes
+     * @param City $cities
+     * @param Member $members
+     * @param Gender $genders
      * @return \Illuminate\View\View
      */
-    public function edit(User $user, Role $model)
+    public function edit(User $user, DocumentType $documentTypes, City $cities, Member $members, Gender $genders)
     {
-        return view('users.edit', ['user' => $user->load('role'), 'roles' => $model->get(['id', 'name'])]);
+        return view('config.users.edit', [
+            'user' => $user->load('role'),
+            'documentTypes' => $documentTypes->get(['id', 'type']),
+            'cities' => $cities->orderBy('name')->get(),
+            'members' => $members->get(['id', 'name']),
+            'genders' => $genders->get(['id', 'type'])
+        ]);
     }
 
     /**
@@ -96,10 +106,30 @@ class UserController extends Controller
             $request->merge([
                 'picture' => $request->photo ? $request->photo->store('profile', 'public') : $user->picture,
                 'password' => Hash::make($request->get('password'))
-            ])->except([$hasPassword ? '' : 'password'])
+            ])->except([
+                $hasPassword ? '' : 'password',
+            ])
         );
 
-        return redirect()->route('user.index')->withStatus(__('User successfully updated.'));
+        return redirect()->route('user.index')->withStatus(__('Usuario actualizado con éxito.'));
+    }
+
+    /**
+     * Update the profile
+     *
+     * @param  \App\Http\Requests\UsersRequest  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function data(UsersRequest $request, User $user)
+    {
+        $user->update(
+            $request->merge(
+                ['birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null]
+            )->all()
+        );
+        return back()->withStatus(__('Datos actualizados con éxito.'));
+
     }
 
     /**
@@ -112,6 +142,8 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
+        return redirect()->route('user.index')->withStatus(__('Usuario eliminado exitosamente.'));
     }
+
+
 }

@@ -15,7 +15,8 @@ class GlobalCreatePermissionsTable extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('submodule_id')->constrained();
             $table->timestamps();
         });
     }

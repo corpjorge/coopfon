@@ -15,12 +15,12 @@ class GlobalCreateModulesTable extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('state_id')->constrained();
             $table->string('name');
             $table->string('title');
             $table->string('route');
             $table->string('icon');
             $table->string('order');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

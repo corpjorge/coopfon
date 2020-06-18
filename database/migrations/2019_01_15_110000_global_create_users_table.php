@@ -17,21 +17,21 @@ class GlobalCreateUsersTable extends Migration
             function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('role_id')->constrained();
-                $table->foreignId('state_id')->constrained();
                 $table->string('name');
                 $table->string('email')->nullable()->unique();
                 $table->timestamp('email_verified_at')->nullable();
                 $table->string('password');
                 $table->rememberToken();
 
-
                 //Datos extras
                 $table->string('social_id')->nullable();
                 $table->foreignId('document_type_id')->unsigned()->nullable();
                 $table->foreign('document_type_id')->references('id')->on('document_types');
                 $table->string('document')->unique()->nullable();
-                $table->integer('phone')->nullable();
+                $table->biginteger('phone')->nullable();
                 $table->string('code')->unique()->nullable();
+                $table->foreignId('member_id')->unsigned()->nullable();
+                $table->foreign('member_id')->references('id')->on('members');
                 $table->foreignId('gender_id')->unsigned()->nullable();
                 $table->foreign('gender_id')->references('id')->on('genders');
                 $table->string('address')->nullable();
@@ -40,6 +40,7 @@ class GlobalCreateUsersTable extends Migration
                 $table->foreign('city_id')->references('code')->on('city');
                 $table->string('picture')->nullable();
                 $table->date('birth_date')->nullable();
+                $table->softDeletes();
                 $table->timestamps();
             });
     }
