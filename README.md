@@ -6,7 +6,7 @@
 
 ![Product Image](https://github.com/creativetimofficial/public-assets/raw/master/material-dashboard-pro-laravel/material-dashboard-pro-laravel.gif?raw=true)
 
-Speed up your web development with the Bootstrap 4 Admin Dashboard built for Laravel Framework 5.5 and up.
+CoopFon.
 
 ## Prerrequisitos
 
@@ -45,9 +45,9 @@ Por favor vea el [changelog](CHANGELOG.md) para más información sobre lo que h
 ## Creditos
 
 - [Fycls Ingenieria](https://fyclsingenieria.com/)
-- [CorpJorge](https://corpjorge.com)
+- [SuperFluo](https://superfluo.co)
 
  
 ## Licencia
 
-- Copyright 2020 Fycls Ingeniera 
+- Copyright 2020 CoopFon 
