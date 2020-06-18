@@ -26,8 +26,6 @@ class UsersRequest extends FormRequest
     public function rules()
     {
         return [
-            'document_type_id' => ['required'],
-            'document' => ['required', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)],
             'code' => ['nullable', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)],
             'phone' => ['nullable'],
             'gender' => ['nullable'],

@@ -4,6 +4,7 @@ namespace App\Model\Config;
 
 use App\Model\Config\Department;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class City extends Model
 {
@@ -14,7 +15,7 @@ class City extends Model
     /**
      * Get the department of the Cities
      *
-     * @return \App\Model\Config\Department
+     * @return BelongsTo
      */
     public function department()
     {

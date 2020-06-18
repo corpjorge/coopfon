@@ -17,25 +17,36 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('register', 'HomeController@index')->name('register');
+Route::get('register', 'Config\HomeController@index')->name('register');
 
 
 Route::get('home', 'Config\HomeController@index')->name('home');
 Route::get('dashboard', 'Config\HomeController@index')->name('home');
-Route::get('lock', 'ExamplePagesController@lock')->name('page.lock');
-Route::get('error', ['as' => 'page.error', 'uses' => 'ExamplePagesController@error']);
 
 Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('role', 'RoleController', ['except' => ['show', 'destroy']]);
+
     Route::resource('user', 'UserController', ['except' => ['show']]);
     Route::put('users/{user}', ['as' => 'users.data', 'uses' => 'UserController@data']);
-    Route::resource('module', 'Config\ModuleController', ['except' => ['show']]);
+    Route::get('users/create', ['as' => 'users.create', 'uses' => 'Config\UsersController@create']);
+    Route::post('users', ['as' => 'users.store', 'uses' => 'Config\UsersController@store']);
+    Route::get('users', ['as' => 'users.index', 'uses' => 'Config\UsersController@index']);
+    Route::delete('users/restore/{user}', ['as' => 'users.restore', 'uses' => 'Config\UsersController@restore']);
+
+
+    Route::resource('admin', 'Config\AdminController', ['except' => ['show']]);
+    Route::put('admins/{user}', ['as' => 'admins.data', 'uses' => 'Config\AdminController@data']);
+    Route::get('admins', ['as' => 'admins.index', 'uses' => 'Config\AdminController@indexDelete']);
+    Route::delete('admin/restore/{admin}', ['as' => 'admin.restore', 'uses' => 'Config\AdminController@restore']);
+
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'Config\ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'Config\ProfileController@update']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'Config\ProfileController@password']);
     Route::put('profile/data', ['as' => 'profile.data', 'uses' => 'Config\ProfileController@data']);
+
+    Route::resource('module', 'Config\ModuleController', ['except' => ['show']]);
 
 });
 

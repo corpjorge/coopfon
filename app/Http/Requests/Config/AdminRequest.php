@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Config;
 
 use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class AdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
                 'required', 'min:3'
             ],
             'email' => [
-                'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
+                'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->admin->id ?? null)
             ],
             'password' => [
                 'nullable', 'confirmed', 'min:6'
@@ -39,24 +39,10 @@ class UserRequest extends FormRequest
                 'required'
             ],
             'document' => [
-                'required', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
-            ],
-            'code' => [
-                'nullable', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
+                'required', Rule::unique((new User)->getTable())->ignore($this->route()->admin->id ?? null)
             ],
 
         ];
     }
 
-    /**
-     * Get the validation attributes that apply to the request.
-     *
-     * @return array
-     */
-    public function attributes()
-    {
-        return [
-            'role_id' => 'role',
-        ];
-    }
 }

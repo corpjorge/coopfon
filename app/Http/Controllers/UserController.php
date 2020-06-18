@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Http\Requests\Config\UsersRequest;
-use App\Role;
 use App\User;
 use Carbon\Carbon;
 use App\Model\Config\City;
 use App\Model\Config\Gender;
+use App\Model\Config\Member;
 use Illuminate\Support\Facades\Hash;
 use App\Model\Config\DocumentType;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\Config\UsersRequest;
 
 class UserController extends Controller
 {
@@ -23,8 +22,9 @@ class UserController extends Controller
     /**
      * Display a listing of the users
      *
-     * @param  \App\User  $model
+     * @param \App\User $model
      * @return \Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(User $model)
     {
@@ -38,14 +38,16 @@ class UserController extends Controller
      *
      * @param DocumentType $documentTypes
      * @param City $cities
+     * @param Member $members
      * @param Gender $genders
      * @return \Illuminate\View\View
      */
-    public function create(DocumentType $documentTypes, City $cities, Gender $genders)
+    public function create(DocumentType $documentTypes, City $cities, Member $members, Gender $genders)
     {
         return view('config.users.create', [
             'documentTypes' => $documentTypes->get(['id', 'type']),
             'cities' => $cities->orderBy('name')->get(),
+            'members' => $members->get(['id', 'name']),
             'genders' => $genders->get(['id', 'type'])
         ]);
     }
@@ -61,7 +63,7 @@ class UserController extends Controller
     {
         $model->create($request->merge([
             'picture' => $request->photo ? $request->photo->store('profile', 'public') : null,
-            'password' => Hash::make($request->get('password')),
+            'password' => $request->password ? Hash::make($request->get('password')): Hash::make(rand()),
             'birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null,
             'role_id' => 9
         ])->all());
@@ -73,18 +75,19 @@ class UserController extends Controller
      * Show the form for editing the specified user
      *
      * @param \App\User $user
-     * @param \App\Role $role
      * @param DocumentType $documentTypes
      * @param City $cities
+     * @param Member $members
      * @param Gender $genders
      * @return \Illuminate\View\View
      */
-    public function edit(User $user, Role $role, DocumentType $documentTypes, City $cities, Gender $genders)
+    public function edit(User $user, DocumentType $documentTypes, City $cities, Member $members, Gender $genders)
     {
         return view('config.users.edit', [
             'user' => $user->load('role'),
             'documentTypes' => $documentTypes->get(['id', 'type']),
             'cities' => $cities->orderBy('name')->get(),
+            'members' => $members->get(['id', 'name']),
             'genders' => $genders->get(['id', 'type'])
         ]);
     }
@@ -139,6 +142,8 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
+        return redirect()->route('user.index')->withStatus(__('Usuario eliminado exitosamente.'));
     }
+
+
 }

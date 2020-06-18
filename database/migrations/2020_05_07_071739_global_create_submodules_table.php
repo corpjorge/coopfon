@@ -15,7 +15,6 @@ class GlobalCreateSubmodulesTable extends Migration
     {
         Schema::create('submodules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('state_id')->constrained();
             $table->foreignId('module_id')->constrained();
             $table->foreignId('role_id')->constrained();
             $table->string('name');
@@ -23,6 +22,7 @@ class GlobalCreateSubmodulesTable extends Migration
             $table->string('route');
             $table->string('icon')->nullable();
             $table->string('order');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

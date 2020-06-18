@@ -26,15 +26,12 @@ class DataRequest extends FormRequest
     public function rules()
     {
         return [
-            'document_type_id' => ['required'],
-            'document' => ['required', Rule::unique((new User)->getTable())->ignore(auth()->id())],
-            'code' => ['nullable', Rule::unique((new User)->getTable())->ignore(auth()->id())],
-            'phone' => ['nullable'],
-            'gender' => ['nullable'],
-            'address' => ['nullable'],
+            'phone' => ['required'],
+            'gender_id' => ['required'],
+            'address' => ['required'],
             'area' => ['nullable'],
-            'birth_date' => ['nullable', 'date_format:d-m-Y'],
-            'city_id' => ['nullable']
+            'birth_date' => ['required', 'date_format:d-m-Y'],
+            'city_id' => ['required']
         ];
     }
 }
