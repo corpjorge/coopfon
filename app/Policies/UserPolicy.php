@@ -77,4 +77,15 @@ class UserPolicy
         return $user->isSuperAdmin();
     }
 
+    /**
+     * Determine whether the authenticate user can manage other users.
+     *
+     * @param  \App\User  $user
+     * @return boolean
+     */
+    public function manageAdmins(User $user)
+    {
+        return $user->isSuperAdmin();
+    }
+
 }

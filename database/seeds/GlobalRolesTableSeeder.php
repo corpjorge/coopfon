@@ -45,7 +45,7 @@ class GlobalRolesTableSeeder extends Seeder
 
         DB::table('roles')->insert([
             'id' => 5,
-            'name' => 'Coordinator',
+            'name' => 'Coordinador',
             'description' => 'Este es el rol coordinador',
             'created_at' => now(),
             'updated_at' => now()
@@ -53,7 +53,7 @@ class GlobalRolesTableSeeder extends Seeder
 
         DB::table('roles')->insert([
             'id' => 6,
-            'name' => 'Auxiliary',
+            'name' => 'Auxiliar',
             'description' => 'Este es el rol auxiliar',
             'created_at' => now(),
             'updated_at' => now()
@@ -61,7 +61,7 @@ class GlobalRolesTableSeeder extends Seeder
 
         DB::table('roles')->insert([
             'id' => 7,
-            'name' => 'Assistant',
+            'name' => 'Asistente',
             'description' => 'Este es el rol asistente',
             'created_at' => now(),
             'updated_at' => now()
@@ -69,15 +69,15 @@ class GlobalRolesTableSeeder extends Seeder
 
         DB::table('roles')->insert([
             'id' => 8,
-            'name' => 'External',
-            'description' => 'Este es el rol para usuarios externos',
+            'name' => 'Externo',
+            'description' => 'Este es el rol para administradores externos',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('roles')->insert([
             'id' => 9,
-            'name' => 'User',
+            'name' => 'Asociado',
             'description' => 'Este es el rol clientes / asociados',
             'created_at' => now(),
             'updated_at' => now()
@@ -85,7 +85,15 @@ class GlobalRolesTableSeeder extends Seeder
 
         DB::table('roles')->insert([
             'id' => 10,
-            'name' => 'Public',
+            'name' => 'Invitado',
+            'description' => 'Este es el rol para invitados',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('roles')->insert([
+            'id' => 11,
+            'name' => 'Publico',
             'description' => 'Este es el rol para publicaciones publicas',
             'created_at' => now(),
             'updated_at' => now()

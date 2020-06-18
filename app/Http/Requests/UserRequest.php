@@ -35,8 +35,15 @@ class UserRequest extends FormRequest
             'password' => [
                 'nullable', 'confirmed', 'min:6'
             ],
-            'document_type_id' => ['required'],
-            'document' => ['required', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)],
+            'document_type_id' => [
+                'required'
+            ],
+            'document' => [
+                'required', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
+            ],
+            'code' => [
+                'nullable', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
+            ],
 
         ];
     }

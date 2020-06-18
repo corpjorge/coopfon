@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de usuarios')])
+@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de asociados')])
 
 @section('content')
   <div class="content">
@@ -10,7 +10,7 @@
                 <div class="card-icon">
                   <i class="material-icons">group</i>
                 </div>
-                <h4 class="card-title">{{ __('Restaurar usuario') }}</h4>
+                <h4 class="card-title">{{ __('Restaurar asociado') }}</h4>
               </div>
               <div class="card-body">
                 @can('create', App\User::class)
@@ -62,7 +62,7 @@
                                     @csrf
                                     @method('delete')
                                     @can('restore', $user)
-                                      <button type="button" class="btn btn-success btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas restaurar a este usuario?") }}') ? this.parentElement.submit() : ''">
+                                      <button type="button" class="btn btn-success btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas restaurar a este asociado?") }}') ? this.parentElement.submit() : ''">
                                           <i class="material-icons">restore</i>
                                           <div class="ripple-container"></div>
                                       </button>

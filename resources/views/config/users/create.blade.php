@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de usuarios')])
+@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de asociados')])
 
 @section('content')
   <div class="content">
@@ -14,7 +14,7 @@
                 <div class="card-icon">
                   <i class="material-icons">person</i>
                 </div>
-                <h4 class="card-title">{{ __('Agregar usuario') }}</h4>
+                <h4 class="card-title">{{ __('Agregar asociado') }}</h4>
               </div>
               <div class="card-body ">
                 <div class="row">
@@ -45,7 +45,7 @@
                   <div class="row">
                       <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Tipo de documento') }}</label>
                       <div class="col-lg-3 col-md-6 col-sm-3">
-                          <select class="selectpicker form-control{{ $errors->has('document_type_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-document_type_id" title="Tipo de documento" name="document_type_id">
+                          <select class="selectpicker form-control{{ $errors->has('document_type_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-document_type_id" title="Tipo de documento" name="document_type_id" required>
                               <option></option>
                               @foreach($documentTypes as $documentType)
                                   <option value="{{$documentType->id}}" {{ old('document_type_id') == $documentType->id ? 'selected' : '' }}>{{$documentType->type}}</option>
@@ -59,7 +59,7 @@
                       <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Documento') }}</label>
                       <div class="col-sm-7">
                           <div class="form-group{{ $errors->has('document') ? ' has-danger' : '' }}">
-                              <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }}"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document') }}" />
+                              <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }}"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document') }}" required />
                               @include('alerts.feedback', ['field' => 'document'])
                           </div>
                       </div>
@@ -180,7 +180,7 @@
 
               </div>
               <div class="card-footer ml-auto mr-auto">
-                <button type="submit" class="btn btn-rose">{{ __('Agregar usuario') }}</button>
+                <button type="submit" class="btn btn-rose">{{ __('Agregar asociado') }}</button>
               </div>
             </div>
           </form>
@@ -208,6 +208,26 @@
                 },
                 format: 'DD-MM-YYYY'
             });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            @if ($errors->any())
+            @foreach ($errors->all() as $error)
+            $.notify({
+                icon: "error",
+                message: "{{ $error }}"
+            }, {
+                type: 'danger',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            @endforeach
+            @endif
         });
     </script>
 @endpush

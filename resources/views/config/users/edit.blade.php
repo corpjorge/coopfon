@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de usuarios')])
+@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de asociados')])
 
 @section('content')
   <div class="content">
@@ -14,7 +14,7 @@
                 <div class="card-icon">
                   <i class="material-icons">person</i>
                 </div>
-                <h4 class="card-title">{{ __('Editar usuario') }}</h4>
+                <h4 class="card-title">{{ __('Editar asociado') }}</h4>
               </div>
               <div class="card-body ">
                 <div class="row">
@@ -64,6 +64,30 @@
                     </div>
                   </div>
                 </div>
+                  <div class="row">
+                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Tipo de documento') }}</label>
+                      <div class="col-lg-5 col-md-6 col-sm-3">
+                          <select class="selectpicker form-control{{ $errors->has('document_type_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-document_type_id" title="Tipo de documento" name="document_type_id" required>
+                              <option selected value="{{ old('document_type_id', $user->documentType->id ?? '' ) }}">{{ old('document_type_id', $user->documentType->type ?? '' )  }}</option>
+                              @foreach($documentTypes as $documentType)
+                                  <option value="{{$documentType->id}}" {{ old('document_type_id') == $documentType->id ? 'selected' : '' }}>{{$documentType->type}}</option>
+                              @endforeach
+
+                          </select>
+                          <div style="margin-top: 9px;">@include('alerts.feedback', ['field' => 'document_type_id'])</div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Documento') }}</label>
+                      <div class="col-sm-7">
+                          <div class="form-group{{ $errors->has('document') ? ' has-danger' : '' }}">
+                              <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }}"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document', $user->document) }}"  required/>
+                              @include('alerts.feedback', ['field' => 'document'])
+                          </div>
+                      </div>
+                  </div>
+
                 <div class="row">
                   <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Contraseña') }}</label>
                   <div class="col-sm-7">
@@ -96,34 +120,10 @@
                     <div class="card-icon">
                         <i class="material-icons">contacts</i>
                     </div>
-                    <h4 class="card-title">{{ __('Datos personales') }}</h4>
+                    <h4 class="card-title">{{ __('Editar datos personales') }}</h4>
                 </div>
 
                 <div class="card-body">
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Tipo de documento') }}</label>
-                        <div class="col-lg-5 col-md-6 col-sm-3">
-                            <select class="selectpicker form-control{{ $errors->has('document_type_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-document_type_id" title="Tipo de documento" name="document_type_id" required>
-                                <option selected value="{{ old('document_type_id', $user->documentType->id ?? '' ) }}">{{ old('document_type_id', $user->documentType->type ?? '' )  }}</option>
-                                @foreach($documentTypes as $documentType)
-                                    <option value="{{$documentType->id}}" {{ old('document_type_id') == $documentType->id ? 'selected' : '' }}>{{$documentType->type}}</option>
-                                @endforeach
-
-                            </select>
-                            @include('alerts.feedback', ['field' => 'document_type_id'])
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Documento') }}</label>
-                        <div class="col-sm-7">
-                            <div class="form-group{{ $errors->has('document') ? ' has-danger' : '' }}">
-                                <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }}"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document', $user->document) }}"  />
-                                @include('alerts.feedback', ['field' => 'document'])
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="row">
                         <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Celular') }}</label>
                         <div class="col-sm-7">
@@ -148,12 +148,12 @@
                         <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Miembro') }}</label>
                         <div class="col-lg-5 col-md-6 col-sm-3">
                             <select class="selectpicker form-control{{ $errors->has('member_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-member_id" title="Seleccionar miembro" name="member_id" >
-                                <option selected value="{{ old('member_id', $user->member->id ?? '' ) }}">{{ old('gender_id', json_decode($user->member->name)->{$user->gender->abbreviation} ?? '' ) }}</option>
+                                <option selected value="{{ old('member_id', $user->member->id ?? '' ) }}">{{ old('gender_id', json_decode($user->member->name ?? '')->{$user->gender->abbreviation ?? 'M'} ?? '' ) }}</option>
                                 @foreach($members as $member)
                                     <option value="{{$member->id}}" {{ old('member_id') == $member->id ? 'selected' : '' }}>{!!json_decode($member->name)->{'M'}!!}</option>
                                 @endforeach
                             </select>
-                            @include('alerts.feedback', ['field' => 'member_id'])
+                            <div style="margin-top: 9px;">@include('alerts.feedback', ['field' => 'member_id'])</div>
                         </div>
                     </div><br>
 
@@ -166,9 +166,9 @@
                                     <option value="{{$gender->id}}" {{ old('gender_id') == $gender->id ? 'selected' : '' }}>{{$gender->type}}</option>
                                 @endforeach
                             </select>
-                            @include('alerts.feedback', ['field' => 'gender'])
+                            <div style="margin-top: 9px;"> @include('alerts.feedback', ['field' => 'gender'])</div>
                         </div>
-                    </div>
+                    </div><br>
 
                     <div class="row">
                         <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Dirección') }}</label>
@@ -195,7 +195,7 @@
                         <div class="col-sm-7">
                             <div class="form-group{{ $errors->has('birth_date') ? ' has-danger' : '' }}">
                                 <input type="text"  name="birth_date" id="input-current-birth_date" placeholder="{{ __('Fecha nacimiento') }}" class="form-control{{ $errors->has('birth_date') ? ' is-invalid' : '' }} datepicker"
-                                       value="{{ old('birth_date', \Carbon\Carbon::parse($user->birth_date)->format('d-m-Y')) }}" />
+                                       value="{{ old('birth_date', $user->birth_date ? \Carbon\Carbon::parse($user->birth_date)->format('d-m-Y') : '' )}}" />
                                 @include('alerts.feedback', ['field' => 'birth_date'])
                             </div>
                         </div>
@@ -210,7 +210,7 @@
                                     <option value="{{$city->code}}" {{ old('city_id') == $city->code ? 'selected' : '' }}>{{$city->name}} / {{$city->department->name}}</option>
                                 @endforeach
                             </select>
-                            @include('alerts.feedback', ['field' => 'city_id'])
+                            <div style="margin-top: 9px;">@include('alerts.feedback', ['field' => 'city_id'])</div>
                         </div>
                     </div>
                 </div>
@@ -225,3 +225,25 @@
     </div>
   </div>
 @endsection
+
+@push('js')
+<script>
+    $(document).ready(function () {
+        @if ($errors->any())
+        @foreach ($errors->all() as $error)
+        $.notify({
+            icon: "error",
+            message: "{{ $error }}"
+        }, {
+            type: 'danger',
+            timer: 3000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
+        @endforeach
+        @endif
+    });
+</script>
+@endpush

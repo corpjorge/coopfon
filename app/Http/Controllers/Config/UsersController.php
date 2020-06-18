@@ -26,7 +26,7 @@ class UsersController extends Controller
     {
         $this->authorize('manage-users', User::class);
 
-        return view('config.users.index-delete', ['users' => $model->withTrashed()->where('deleted_at', '!=', NULL)->get()]);
+        return view('config.users.index-delete', ['users' => $model->onlyTrashed()->where('role_id', 9)->get()]);
     }
 
     /**
@@ -66,9 +66,8 @@ class UsersController extends Controller
      */
     public function restore($id)
     {
-        //onlyTrashed
-        $user = User::withTrashed()->find($id);
-        $user->restore();
+        User::onlyTrashed()->find($id)->restore();
+
         return back()->withStatus(__('Usuario restaurado.'));
 
     }

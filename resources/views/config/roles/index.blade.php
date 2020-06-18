@@ -23,6 +23,9 @@
                 <div class="table-responsive">
                   <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
                     <thead class="text-primary">
+                    <th>
+                        {{ __('ID') }}
+                    </th>
                       <th>
                           {{ __('Nombre') }}
                       </th>
@@ -41,6 +44,9 @@
                     <tbody>
                       @foreach($roles as $role)
                         <tr>
+                          <td>
+                            {{ $role->id }}
+                          </td>
                           <td>
                             {{ $role->name }}
                           </td>
@@ -89,7 +95,7 @@
         searchPlaceholder: "Buscar roles",
       },
       "columnDefs": [
-        { "orderable": false, "targets": 3 },
+        { "orderable": false, "targets": 4 },
       ],
     });
   });

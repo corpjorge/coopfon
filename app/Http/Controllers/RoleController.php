@@ -23,7 +23,7 @@ class RoleController extends Controller
     {
         $this->authorize('manage-users', User::class);
 
-        return view('config.roles.index', ['roles' => $model->all()]);
+        return view('config.roles.index', ['roles' => $model->where('id','!=',1)->get()]);
     }
 
     /**

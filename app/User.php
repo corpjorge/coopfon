@@ -167,7 +167,7 @@ class User extends Authenticatable
         return $this->role_id == 9;
     }
 
-    public function admins()
+    public function adminsAll()
     {
         return $this->where('role_id','!=',9)->where('role_id','!=',1)->get();
     }

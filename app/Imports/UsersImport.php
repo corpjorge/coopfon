@@ -28,6 +28,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithVali
             'document'  => $row['document'],
             'phone'  => $row['phone'],
             'code'  => $row['code'],
+            'member_id'  => $row['member_id'],
             'gender_id'  => $row['gender_id'],
             'address'  => $row['address'],
             'area'  => $row['area'],

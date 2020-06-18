@@ -118,13 +118,19 @@
             </a>
           </div>
           <div class="card-body">
-              <h6 class="card-category text-gray">{{auth()->user()->memberGender()}}</h6>
               <h4 class="card-title">{{auth()->user()->name}}</h4>
+              <h6 class="card-category text-gray">
+                  @if(auth()->user()->role_id == 9)
+                    {{auth()->user()->memberGender()}}
+                  @else
+                    {{auth()->user()->role->name}}<br>
+                    {{auth()->user()->memberGender()}}
+                  @endif
+              </h6>
               <p class="card-description">
-                  {{auth()->user()->documentType->type}} {{auth()->user()->document}}<br>
-                  Código {{auth()->user()->code}}
+                  {{auth()->user()->documentType->type ?? ''}} {{auth()->user()->document}}<br>
+                  {{auth()->user()->code}}
               </p>
-
           </div>
         </div>
 

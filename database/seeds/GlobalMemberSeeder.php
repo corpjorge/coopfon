@@ -13,21 +13,28 @@ class GlobalMemberSeeder extends Seeder
     {
         DB::table('members')->insert([
             'id' => 1,
-            'name' => '{ "F": "Presidenta", "M":"Presidente"}',
+            'name' => '{ "F": "Asociada", "M":"Asociado"}',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('members')->insert([
             'id' => 2,
-            'name' => '{ "F": "Consejera", "M":"Consejero"}',
+            'name' => '{ "F": "Delelgada", "M":"Delelgado"}',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('members')->insert([
             'id' => 3,
-            'name' => '{ "F": "Delelgada", "M":"Delelgado"}',
+            'name' => '{ "F": "Consejera", "M":"Consejero"}',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('members')->insert([
+            'id' => 4,
+            'name' => '{ "F": "Presidenta", "M":"Presidente"}',
             'created_at' => now(),
             'updated_at' => now()
         ]);

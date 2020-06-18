@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
 use App\User;
 use Carbon\Carbon;
 use App\Model\Config\City;
@@ -78,7 +77,7 @@ class UserController extends Controller
      * @param \App\User $user
      * @param DocumentType $documentTypes
      * @param City $cities
-     * @param Member $cities
+     * @param Member $members
      * @param Gender $genders
      * @return \Illuminate\View\View
      */

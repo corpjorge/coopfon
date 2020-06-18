@@ -29,27 +29,19 @@ class AdminRequest extends FormRequest
             'name' => [
                 'required', 'min:3'
             ],
-            'role' => [
-                'required'
-            ],
             'email' => [
-                'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
+                'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->admin->id ?? null)
             ],
             'password' => [
-                $this->route()->user ? 'nullable' : 'required', 'confirmed', 'min:6'
-            ]
-        ];
-    }
+                'nullable', 'confirmed', 'min:6'
+            ],
+            'document_type_id' => [
+                'required'
+            ],
+            'document' => [
+                'required', Rule::unique((new User)->getTable())->ignore($this->route()->admin->id ?? null)
+            ],
 
-    /**
-     * Get the validation attributes that apply to the request.
-     *
-     * @return array
-     */
-    public function attributes()
-    {
-        return [
-            'role_id' => 'role',
         ];
     }
 

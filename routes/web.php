@@ -17,13 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('register', 'HomeController@index')->name('register');
+Route::get('register', 'Config\HomeController@index')->name('register');
 
 
 Route::get('home', 'Config\HomeController@index')->name('home');
 Route::get('dashboard', 'Config\HomeController@index')->name('home');
-Route::get('lock', 'ExamplePagesController@lock')->name('page.lock');
-Route::get('error', ['as' => 'page.error', 'uses' => 'ExamplePagesController@error']);
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -38,9 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::resource('admin', 'Config\AdminController', ['except' => ['show']]);
-    Route::put('admins/{user}', ['as' => 'admin.data', 'uses' => 'Config\AdminController@data']);
+    Route::put('admins/{user}', ['as' => 'admins.data', 'uses' => 'Config\AdminController@data']);
     Route::get('admins', ['as' => 'admins.index', 'uses' => 'Config\AdminController@indexDelete']);
-    Route::delete('admin/restore/{user}', ['as' => 'admin.restore', 'uses' => 'Config\AdminController@restore']);
+    Route::delete('admin/restore/{admin}', ['as' => 'admin.restore', 'uses' => 'Config\AdminController@restore']);
 
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'Config\ProfileController@edit']);

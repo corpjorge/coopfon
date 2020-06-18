@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de usuarios')])
+@extends('layouts.app', ['activePage' => 'user-management', 'menuParent' => 'config', 'titlePage' => __('Gestión de asociados')])
 
 @section('content')
   <div class="content">
@@ -17,7 +17,7 @@
                 <div class="card-icon">
                   <i class="material-icons">person</i>
                 </div>
-                <h4 class="card-title">{{ __('Agregar usuarios') }}</h4>
+                <h4 class="card-title">{{ __('Agregar asociados') }}</h4>
               </div>
               <div class="card-body ">
                 <div class="row">
@@ -37,7 +37,7 @@
 
               </div>
               <div class="card-footer ml-auto mr-auto">
-                <button type="submit" class="btn btn-rose">{{ __('Agregar usuarios') }}</button>
+                <button type="submit" class="btn btn-rose">{{ __('Cargar asociados') }}</button>
               </div>
             </div>
           </form>
