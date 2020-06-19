@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -21,39 +22,44 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithVali
     {
         return new User([
             'role_id'  => 9,
-            'name'  => $row['name'],
-            'email'  => $row['email'],
+            'name'  => $row['nombre_completo'],
+            'email'  => $row['correo'],
             'password' => Hash::make($row['password']),
-            'document_type_id'  => $row['document_type_id'],
-            'document'  => $row['document'],
-            'phone'  => $row['phone'],
-            'code'  => $row['code'],
-            'member_id'  => $row['member_id'],
-            'gender_id'  => $row['gender_id'],
-            'address'  => $row['address'],
+            'document_type_id'  => $row['tipo_documento'],
+            'document'  => $row['documento'],
+            'phone'  => $row['celular'],
+            'code'  => $row['codigo'],
+            'member_id'  => $row['miembro'],
+            'gender_id'  => $row['genero'],
+            'address'  => $row['direccion'],
             'area'  => $row['area'],
-            'city_id'  => $row['city_id'],
-            'birth_date'  => $row['birth_date'],
+            'city_id'  => $row['codigo_ciudad'],
+            'birth_date'  => $row['fecha_nacimiento'] ? Carbon::parse($row['fecha_nacimiento'])->format('Y-m-d') : null
         ]);
+
     }
 
     public function rules(): array
     {
         return [
 
-            '*.email' => [ 'required', 'email', Rule::unique((new User)->getTable()), function($attribute, $value, $onFailure) {
-                $usuario = User::where('email',$value)->first();
-                if ($usuario) {
-                   $onFailure('¡¡ERROR!! El correo '.$value.' ya se encuentra ingresado');
-                }
-            }],
+            '*.nombre_completo'  => ['required'],
 
-            '*.document' => [ 'nullable', Rule::unique((new User)->getTable()), function($attribute, $value, $onFailure) {
-                $usuario = User::where('document',$value)->first();
-                if ($usuario) {
-                    $onFailure('¡¡ERROR!! La cedula '.$value.' ya se encuentra ingresada');
-                }
-            }],
+            '*.correo' => ['required', 'email', 'unique:users,email'],
+
+            '*.documento' => ['required', 'integer', 'unique:users,document'],
+
+            'tipo_documento' => ['nullable', 'integer', 'exists:document_types,id'],
+
+            '*.codigo' => ['nullable', 'unique:users,code'],
+
+            'miembro' => ['nullable', 'integer', 'exists:members,id'],
+
+            'genero' => ['nullable', 'integer', 'exists:genders,id'],
+
+            'codigo_ciudad' => ['nullable', 'integer', 'exists:city,code'],
+
+            //'fecha_nacimiento' => ['nullable', 'date_format:Y-m-d'],
 
         ];
     }

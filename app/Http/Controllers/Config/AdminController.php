@@ -10,9 +10,10 @@ use App\Model\Config\City;
 use App\Model\Config\Gender;
 use App\Model\Config\Member;
 use App\Model\Config\DocumentType;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Config\AdminRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -92,7 +93,7 @@ class AdminController extends Controller
         $this->authorize('manageAdmins', User::class);
 
         return view('config.admin.edit', [
-            'roles' => $role->get(['id', 'name']),
+            'roles' => $role->list(['id', 'name']),
             'user' => $admin->load('role'),
             'documentTypes' => $documentTypes->get(['id', 'type']),
             'cities' => $cities->orderBy('name')->get(),
@@ -128,9 +129,10 @@ class AdminController extends Controller
     /**
      * Update the profile
      *
-     * @param  \App\Http\Requests\AdminRequest  $request
-     * @param  \App\User  $admin
+     * @param \App\Http\Requests\AdminRequest $request
+     * @param \App\User $admin
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function data(AdminRequest $request, User $admin)
     {
@@ -144,6 +146,56 @@ class AdminController extends Controller
         return back()->withStatus(__('Datos actualizados con éxito.'));
 
     }
+
+    /**
+     * Update the profile
+     *
+     * @param \App\Http\Requests\AdminRequest $request
+     * @param \App\User $admin
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function find($idInput, $value)
+    {
+        $this->authorize('manageAdmins', User::class);
+        $user = User::where($idInput,$value)->where('role_id',9)->first();
+
+        if($user){
+            return response()->json([
+                'status' => 'success',
+                'idUser' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'document' => $user->document,
+            ]);
+        };
+
+    }
+
+    /**
+     * Update the profile
+     *
+     * @param \App\Http\Requests\AdminRequest $request
+     * @param \App\User $admin
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function enRoll(Request $request, User $admin)
+    {
+        $this->authorize('manageAdmins', User::class);
+
+        $role = isset($admin->role_id) ? $admin->role_id : 1;
+
+        if($role == 1){
+            return back()->withStatus(__('Datos actualizados con exito.'));
+        }
+
+        $admin->update($request->all());
+
+        return redirect()->route('admin.index')->withStatus(__('Datos actualizados con éxito.'));
+
+    }
+
 
     /**
      * Display a listing of the users

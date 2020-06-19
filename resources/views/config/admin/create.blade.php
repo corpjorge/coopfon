@@ -36,7 +36,7 @@
                                     <label class="col-sm-2 col-form-label">{{ __('Email') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                                            <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" id="input-email" type="email" placeholder="{{ __('Email') }}" value="{{ old('email') }}" required />
+                                            <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} find" name="email" id="input-email" type="email" placeholder="{{ __('Email') }}" value="{{ old('email') }}" required/>
                                             @include('alerts.feedback', ['field' => 'email'])
                                         </div>
                                     </div>
@@ -72,11 +72,12 @@
                                     <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Documento') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('document') ? ' has-danger' : '' }}">
-                                            <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }}"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document') }}" required/>
+                                            <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }} find"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document') }}" required autocomplete="off" />
                                             @include('alerts.feedback', ['field' => 'document'])
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Contraseña') }}</label>
@@ -201,6 +202,9 @@
             </div>
         </div>
     </div>
+
+    @include('config.admin.modal')
+
 @endsection
 
 
@@ -222,5 +226,34 @@
                 format: 'DD-MM-YYYY'
             });
         });
+    </script>
+
+    <script>
+
+        $(document).ready(function(){
+            $(".find").change(function(){
+                let val     = $(this).val();
+                let idInput = $(this).attr('name');
+                let url     = '{{ url('admins/find/') }}'+'/'+idInput+'/'+val;
+                let route   = '{{ url('admins/find') }}';
+
+                $.ajax({
+                    url: url,
+                    success: function(respuesta) {
+                        if(respuesta.status){
+                            $("#name").text(respuesta.name);
+                            $("#document").text(respuesta.document);
+                            $("#email").text(respuesta.email);
+
+                            $('#formFind').attr('action', route+'/'+respuesta.idUser);
+
+                            $('#noticeModal').modal('show');
+
+                        }
+                    }
+                });
+            });
+        });
+
     </script>
 @endpush

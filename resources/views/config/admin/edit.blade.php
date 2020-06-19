@@ -72,6 +72,7 @@
                                             @foreach($roles as $role)
                                                 <option value="{{$role->id}}" {{ old('role_id') == $role->id ? 'selected' : '' }}>{{$role->name}}</option>
                                             @endforeach
+                                            <option value="9" {{ old('role_id') == 9 ? 'selected' : '' }}>Asociado</option>
                                         </select>
                                         <div style="margin-top: 9px;">@include('alerts.feedback', ['field' => 'role_id'])</div>
                                     </div>
