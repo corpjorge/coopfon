@@ -20,8 +20,7 @@ class ModuleController extends Controller
      */
     public function index(Module $model)
     {
-        $this->authorize('manage-users', User::class);
-        return view('config.modules.index', ['modules' => $model->all()]);
+        return view('config.modules.index', ['modules' => $model->withTrashed()->get()]);
     }
 
     /**
@@ -79,14 +78,32 @@ class ModuleController extends Controller
         //
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Module from storage.
      *
-     * @param  \App\Model\Config\Module  $module
-     * @return \Illuminate\Http\Response
+     * @param Module $module
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Module $module)
     {
-        //
+
+        $module->delete();
+
+        return redirect()->route('module.index')->withStatus(__('Modulo eliminado exitosamente.'));
+    }
+
+    /**
+     * restore the specified Module to storage.
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore($id)
+    {
+        Module::onlyTrashed()->find($id)->restore();
+
+        return back()->withStatus(__('Modulo restaurado.'));
     }
 }

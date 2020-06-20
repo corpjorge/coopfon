@@ -34,6 +34,6 @@ class ModuleComposer
      */
     public function compose(View $view)
     {
-        $view->with('modules', $this->modules);
+        $view->with('menuModules', $this->modules);
     }
 }

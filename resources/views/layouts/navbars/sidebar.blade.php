@@ -36,6 +36,7 @@
         </div>
       </div>
     </div>
+
     <ul class="nav">
       <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('home') }}">
@@ -43,6 +44,13 @@
             <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
+
+    {{--Menu Modulos --}}
+        @foreach($menuModules as $module)
+            @include('layouts.navbars.'.$module->view)
+        @endforeach
+    {{--Menu Modulos end--}}
+
 
       <li class="nav-item {{ $menuParent == 'config' ? 'active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#config" {{ $menuParent == 'config' ? 'aria-expanded="true"' : '' }}>
@@ -87,7 +95,7 @@
               </li>
             @endcan
 
-            @can('manage-modules', App\Model\Config\Module::class)
+            @can('manageModules', App\Model\Config\Module::class)
               @can('viewAny', App\Model\Config\Module::class)
               <li class="nav-item{{ $activePage == 'module' ? ' active' : '' }}">
                   <a class="nav-link" href="{{ route('module.index') }}">
@@ -97,12 +105,9 @@
               </li>
               @endcan
             @endcan
-
           </ul>
         </div>
       </li>
-
-
     </ul>
   </div>
 </div>

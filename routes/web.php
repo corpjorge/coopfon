@@ -48,5 +48,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('profile/data', ['as' => 'profile.data', 'uses' => 'Config\ProfileController@data']);
 
     Route::resource('module', 'Config\ModuleController', ['except' => ['show']]);
+    Route::delete('module/{admin}/restore', ['as' => 'module.restore', 'uses' => 'Config\ModuleController@restore']);
 
 });

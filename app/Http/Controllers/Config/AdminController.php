@@ -179,10 +179,13 @@ class AdminController extends Controller
      * @param \App\User $admin
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function enRoll(Request $request, User $admin)
     {
         $this->authorize('manageAdmins', User::class);
+
+        $this->Validate($request, [ 'role_id' => 'required' ]);
 
         $role = isset($admin->role_id) ? $admin->role_id : 1;
 

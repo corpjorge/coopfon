@@ -148,16 +148,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if the user has creator role
-     *
-     * @return boolean
-     */
-    public function isCreator()
-    {
-        return $this->role_id == 2;
-    }
-
-    /**
      * Check if the user has user role
      *
      * @return boolean

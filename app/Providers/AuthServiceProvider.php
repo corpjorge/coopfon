@@ -35,8 +35,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('manage-users', 'App\Policies\UserPolicy@manageUsers');
         Gate::define('manage-roles', 'App\Policies\RolePolicy@manageRoles');
-        Gate::define('manage-modules', 'App\Policies\Config\ModulePolicy@manageModules');
-
 
     }
 }

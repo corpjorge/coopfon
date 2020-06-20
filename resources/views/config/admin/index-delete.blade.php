@@ -95,8 +95,18 @@
         ],
         responsive: true,
         language: {
-          search: "_INPUT_",
-          searchPlaceholder: "Buscar usuarios",
+            search: "_INPUT_",
+            searchPlaceholder: "Buscar usuarios",
+            paginate: {
+                first:      "Primero",
+                last:       "Último",
+                next:       "Siguiente",
+                previous:   "Anterior"
+            },
+            info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            lengthMenu: "Mostrar _MENU_ registros",
+            emptyTable: "Ningún dato disponible en esta tabla",
         },
         "columnDefs": [
           { "orderable": false, "targets": 4 },

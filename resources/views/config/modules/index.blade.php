@@ -27,7 +27,7 @@
                           {{ __('Nombre') }}
                       </th>
                       <th>
-                        {{ __('Descripción') }}
+                        {{ __('Vista') }}
                       </th>
                       <th>
                         {{ __('Fecha de creación') }}
@@ -45,19 +45,33 @@
                             {{ $module->name }}
                           </td>
                           <td>
-                            {{ $module->route }}
+                            {{ $module->view }}
                           </td>
                           <td>
                             {{ $module->created_at->format('Y-m-d') }}
                           </td>
-                          @can('manage-users', App\User::class)
+                          @can('manageModules', App\Model\Config\Module::class)
                             <td class="td-actions text-right">
-                              @can('update', $module)
-                                <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('module.edit', $module) }}" data-original-title="" title="">
-                                  <i class="material-icons">edit</i>
-                                  <div class="ripple-container"></div>
-                                </a>
-                              @endcan
+                                <form action="{{ route('module.destroy', $module) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    @can('delete', $module)
+                                        <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas eliminar a este administrador?") }}') ? this.parentElement.submit() : ''">
+                                            <i class="material-icons">delete</i>
+                                            <div class="ripple-container"></div>
+                                        </button>
+                                    @endcan
+                                </form>
+                                <form action="{{ route('module.restore', $module) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    @can('delete', $module)
+                                        <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas eliminar a este administrador?") }}') ? this.parentElement.submit() : ''">
+                                            <i class="material-icons">close</i>
+                                            <div class="ripple-container"></div>
+                                        </button>
+                                    @endcan
+                                </form>
                             </td>
                           @endcan
                         </tr>
@@ -85,8 +99,18 @@
       ],
       responsive: true,
       language: {
-        search: "_INPUT_",
-        searchPlaceholder: "Buscar modulo",
+          search: "_INPUT_",
+          searchPlaceholder: "Buscar modulo",
+          paginate: {
+              first:      "Primero",
+              last:       "Último",
+              next:       "Siguiente",
+              previous:   "Anterior"
+          },
+          info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+          infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+          lengthMenu: "Mostrar _MENU_ registros",
+          emptyTable: "Ningún dato disponible en esta tabla",
       },
       "columnDefs": [
         { "orderable": false, "targets": 3 },
