@@ -19,14 +19,5 @@ class GlobalModuleTableSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-
-//        DB::table('modules')->insert([
-//            'id' => 2,
-//            'name' => 'Votaciones',
-//            'view' => 'votaciones',
-//            'created_at' => now(),
-//            'updated_at' => now()
-//        ]);
-
     }
 }
