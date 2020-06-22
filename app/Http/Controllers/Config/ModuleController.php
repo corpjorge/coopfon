@@ -91,7 +91,7 @@ class ModuleController extends Controller
 
         $module->delete();
 
-        return redirect()->route('module.index')->withStatus(__('Modulo eliminado exitosamente.'));
+        return redirect()->route('module.index')->withStatus(__('Modulo desactivado exitosamente.'));
     }
 
     /**

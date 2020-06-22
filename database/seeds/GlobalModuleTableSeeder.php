@@ -13,8 +13,10 @@ class GlobalModuleTableSeeder extends Seeder
     {
         DB::table('modules')->insert([
             'id' => 1,
-            'name' => 'Boletería',
-            'view' => 'boleteria',
+            'state_id' => '2',
+            'name' => 'Servicios',
+            'path' => 'service',
+            'version' => '2.0.0',
             'created_at' => now(),
             'updated_at' => now()
         ]);

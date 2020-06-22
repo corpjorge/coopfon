@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Config;
 
+use App\Model\Config\Module;
 use App\Role;
 use App\User;
 use Exception;
@@ -36,19 +37,21 @@ class AdminController extends Controller
      *
      * @param Role $role
      * @param DocumentType $documentTypes
+     * @param Module $module
      * @param City $cities
      * @param Member $members
      * @param Gender $genders
      * @return \Illuminate\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create(Role $role, DocumentType $documentTypes, City $cities, Member $members, Gender $genders)
+    public function create(Role $role, DocumentType $documentTypes, Module $module, City $cities, Member $members, Gender $genders)
     {
         $this->authorize('manageAdmins', User::class);
 
         return view('config.admin.create', [
             'roles' => $role->list(['id', 'name']),
             'documentTypes' => $documentTypes->get(['id', 'type']),
+            'modules' => $module->active(),
             'cities' => $cities->orderBy('name')->get(),
             'members' => $members->get(['id', 'name']),
             'genders' => $genders->get(['id', 'type'])
@@ -67,11 +70,12 @@ class AdminController extends Controller
     {
         $this->authorize('manageAdmins', User::class);
 
-        $model->create($request->merge([
+        $user = $model->create($request->merge([
             'picture' => $request->photo ? $request->photo->store('profile', 'public') : null,
             'password' => $request->password ? Hash::make($request->get('password')): Hash::make(rand()),
             'birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null
         ])->all());
+        $user->modules()->sync($request->get('module_id'));
 
         return redirect()->route('admin.index')->withStatus(__('administrador creado con éxito.'));
     }
@@ -82,20 +86,22 @@ class AdminController extends Controller
      * @param User $admin
      * @param \App\Role $role
      * @param DocumentType $documentTypes
+     * @param Module $module
      * @param City $cities
      * @param Member $members
      * @param Gender $genders
      * @return \Illuminate\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit(User $admin, Role $role, DocumentType $documentTypes, City $cities, Member $members, Gender $genders)
+    public function edit(User $admin, Role $role, DocumentType $documentTypes,  Module $module, City $cities, Member $members, Gender $genders)
     {
         $this->authorize('manageAdmins', User::class);
 
         return view('config.admin.edit', [
+            'user' => $admin->load('role')->load('modules'),
             'roles' => $role->list(['id', 'name']),
-            'user' => $admin->load('role'),
             'documentTypes' => $documentTypes->get(['id', 'type']),
+            'modules' => $module->active(),
             'cities' => $cities->orderBy('name')->get(),
             'members' => $members->get(['id', 'name']),
             'genders' => $genders->get(['id', 'type'])
@@ -122,6 +128,8 @@ class AdminController extends Controller
                 $hasPassword ? '' : 'password',
             ])
         );
+
+        $admin->modules()->sync($request->get('module_id'));
 
         return redirect()->route('admin.index')->withStatus(__('administrador actualizado con éxito.'));
     }

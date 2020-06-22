@@ -20,8 +20,8 @@
           <ul class="navbar-nav">
 
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('home') }}">
-                <i class="material-icons">dashboard</i>
+              <a class="nav-link" href="{{ url('/') }}">
+                <i class="material-icons">web</i>
                 <p class="d-lg-none d-md-block">
                   {{ __('Stats') }}
                 </p>
@@ -31,17 +31,14 @@
             <li class="nav-item dropdown">
               <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="material-icons">notifications</i>
-                <span class="notification">5</span>
+                <span class="notification">2</span>
                 <p class="d-lg-none d-md-block">
                   {{ __('Some Actions') }}
                 </p>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">{{ __('Mike John responded to your email') }}</a>
-                <a class="dropdown-item" href="#">{{ __('You have 5 new tasks') }}</a>
-                <a class="dropdown-item" href="#">{{ __('You\'re now friend with Andrew') }}</a>
-                <a class="dropdown-item" href="#">{{ __('Another Notification') }}</a>
-                <a class="dropdown-item" href="#">{{ __('Another One') }}</a>
+                <a class="dropdown-item" href="#">{{ __('Prueba 1') }}</a>
+                <a class="dropdown-item" href="#">{{ __('Prueba 2') }}</a>
               </div>
             </li>
           <li class="nav-item dropdown">

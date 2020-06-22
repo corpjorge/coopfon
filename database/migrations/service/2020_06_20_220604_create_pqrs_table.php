@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class GlobalCreateModulesTable extends Migration
+class CreatePqrsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class GlobalCreateModulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('modules', function (Blueprint $table) {
+        Schema::create('s_pqrs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('state_id')->constrained();
-            $table->string('name');
-            $table->string('path');
-            $table->string('version');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('s_type_id')->constrained();
+            $table->foreignId('s_state_id')->constrained();
+            $table->string('description');
+            $table->string('file');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +32,6 @@ class GlobalCreateModulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modules');
+        Schema::dropIfExists('s_pqrs');
     }
 }

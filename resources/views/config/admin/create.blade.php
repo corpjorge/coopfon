@@ -97,6 +97,24 @@
                                     </div>
                                 </div>
 
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label label-checkbox">Módulos</label>
+                                    <div class="col-sm-10 checkbox-radios">
+                                        @foreach($modules as $module)
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="{{$module->id}}"  {{ old('module_id') && in_array($module->id, old('module_id')) ? ' checked' : '' }}  name="module_id[]" id="module_id" > {{$module->name}}
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        @endforeach
+                                        @include('alerts.feedback', ['field' => 'module_id'])
+                                    </div>
+                                </div>
+
                                 <hr>
                                 <h5 class="card-title">{{ __('Datos personales') }}</h5>
 

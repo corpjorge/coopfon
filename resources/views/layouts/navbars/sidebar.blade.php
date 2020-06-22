@@ -38,76 +38,31 @@
     </div>
 
     <ul class="nav">
-      <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('home') }}">
-          <i class="material-icons">dashboard</i>
-            <p>{{ __('Dashboard') }}</p>
-        </a>
-      </li>
+        <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
+            <a class="nav-link" href="{{ route('home') }}">
+              <i class="material-icons">dashboard</i>
+                <p>{{ __('Tablero') }}</p>
+            </a>
+        </li>
 
-    {{--Menu Modulos --}}
+        <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
+            <a class="nav-link" href="{{ route('profile.edit') }}">
+                <i class="material-icons">account_box</i>
+                <p>{{ __('Perfil') }}</p>
+            </a>
+        </li>
+
+        {{--Menu Modulos --}}
         @foreach($menuModules as $module)
-            @include('layouts.navbars.'.$module->view)
+            @if($module->state_id == 1)
+                @include('layouts.navbars.'.$module->path)
+            @endif
         @endforeach
-    {{--Menu Modulos end--}}
+        {{--Menu Modulos end--}}
+
+        @include('layouts.navbars.config')
 
 
-      <li class="nav-item {{ $menuParent == 'config' ? 'active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#config" {{ $menuParent == 'config' ? 'aria-expanded="true"' : '' }}>
-            <i class="fa fa-cog fa-2x"></i>
-          <p>{{ __('Configuración') }}
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div class="collapse {{ $menuParent == 'config' ? 'show' : '' }}" id="config">
-          <ul class="nav">
-            <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('profile.edit') }}">
-                <span class="sidebar-mini"> P </span>
-                <span class="sidebar-normal">{{ __('Perfil') }} </span>
-              </a>
-            </li>
-
-            @can('manage-users', App\User::class)
-              <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-                  <a class="nav-link" href="{{ route('user.index') }}">
-                      <span class="sidebar-mini"> A </span>
-                      <span class="sidebar-normal"> {{ __('Asociados') }} </span>
-                  </a>
-              </li>
-            @endcan
-
-              @can('manage-users', App\User::class)
-                  <li class="nav-item{{ $activePage == 'admin-management' ? ' active' : '' }}">
-                      <a class="nav-link" href="{{ route('admin.index') }}">
-                          <span class="sidebar-mini"> AD </span>
-                          <span class="sidebar-normal"> {{ __('Administradores') }} </span>
-                      </a>
-                  </li>
-              @endcan
-
-            @can('manage-roles', App\Role::class)
-              <li class="nav-item{{ $activePage == 'role-management' ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('role.index') }}">
-                  <span class="sidebar-mini"> R </span>
-                  <span class="sidebar-normal"> {{ __('Roles') }} </span>
-                </a>
-              </li>
-            @endcan
-
-            @can('manageModules', App\Model\Config\Module::class)
-              @can('viewAny', App\Model\Config\Module::class)
-              <li class="nav-item{{ $activePage == 'module' ? ' active' : '' }}">
-                  <a class="nav-link" href="{{ route('module.index') }}">
-                      <span class="sidebar-mini"> M </span>
-                      <span class="sidebar-normal"> {{ __('Modulos') }} </span>
-                  </a>
-              </li>
-              @endcan
-            @endcan
-          </ul>
-        </div>
-      </li>
     </ul>
   </div>
 </div>

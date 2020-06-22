@@ -21,63 +21,86 @@
                   </div>
                 @endcan
                 <div class="table-responsive">
-                  <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
-                    <thead class="text-primary">
-                      <th>
-                          {{ __('Nombre') }}
-                      </th>
-                      <th>
-                        {{ __('Vista') }}
-                      </th>
-                      <th>
-                        {{ __('Fecha de creación') }}
-                      </th>
-                      @can('manage-users', App\User::class)
-                        <th class="text-right">
-                          {{ __('Acción') }}
-                        </th>
-                      @endcan
-                    </thead>
-                    <tbody>
-                      @foreach($modules as $module)
+
+                    <table class="table">
+                        <thead>
                         <tr>
-                          <td>
-                            {{ $module->name }}
-                          </td>
-                          <td>
-                            {{ $module->view }}
-                          </td>
-                          <td>
-                            {{ $module->created_at->format('Y-m-d') }}
-                          </td>
-                          @can('manageModules', App\Model\Config\Module::class)
-                            <td class="td-actions text-right">
-                                <form action="{{ route('module.destroy', $module) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    @can('delete', $module)
-                                        <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas eliminar a este administrador?") }}') ? this.parentElement.submit() : ''">
-                                            <i class="material-icons">delete</i>
-                                            <div class="ripple-container"></div>
-                                        </button>
-                                    @endcan
-                                </form>
-                                <form action="{{ route('module.restore', $module) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    @can('delete', $module)
-                                        <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas eliminar a este administrador?") }}') ? this.parentElement.submit() : ''">
-                                            <i class="material-icons">close</i>
-                                            <div class="ripple-container"></div>
-                                        </button>
-                                    @endcan
-                                </form>
-                            </td>
-                          @endcan
+                            <th>{{ __('Nombre') }}</th>
+                            <th>{{ __('Configuración') }}</th>
+                            <th>{{ __('Versión') }}</th>
+                            @can('manageModules', App\Model\Config\Module::class)
+                            <th class="text-right">
+                                {{ __('Acción') }}
+                            </th>
+                            @endcan
                         </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
+                        </thead>
+                        <tbody>
+                        @foreach($modules as $module)
+                        <tr>
+                            <td>{{ $module->name }}</td>
+                            <td>{{ $module->path }}</td>
+                            <td>{{ $module->version }}</td>
+                            @can('manageModules', App\Model\Config\Module::class)
+                                <td class="td-actions text-right">
+                                    @if($module->state_id == 1)
+                                        @if(!$module->deleted_at)
+                                            <form action="{{ route($module->path.'.update', $module) }}" method="get" style="display: inline;">
+                                                    <button type="button" class="btn btn-success btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas actualizar el módulo de ".$module->name."?") }}') ? this.parentElement.submit() : ''">
+                                                        <i class="material-icons">system_update_alt</i>
+                                                        <div class="ripple-container"></div> Actualizar
+                                                    </button>
+                                            </form>
+
+                                            <form action="{{ route('module.destroy', $module) }}" method="post" style="display: inline;">
+                                                @csrf
+                                                @method('delete')
+                                                @can('delete', $module)
+                                                    <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas desactivar el módulo de ".$module->name."?") }}') ? this.parentElement.submit() : ''">
+                                                        <i class="material-icons">power_settings_new</i>
+                                                        <div class="ripple-container"></div> Desactivar
+                                                    </button>
+                                                @endcan
+                                            </form>
+
+                                        @else
+                                            <form action="{{ route('module.restore', $module) }}" method="post" style="display: inline;">
+                                                @csrf
+                                                @method('delete')
+                                                @can('delete', $module)
+                                                    <button type="button" class="btn btn-success btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas activar el módulo de ".$module->name."?") }}') ? this.parentElement.submit() : ''">
+                                                        <i class="material-icons">power_settings_new</i>
+                                                        <div class="ripple-container"></div> Activar
+                                                    </button>
+                                                @endcan
+                                            </form>
+                                        @endif
+                                    @else
+                                        <form action="{{ route($module->path.'.install', $module) }}" method="get" style="display: inline;">
+                                            <button type="button" class="btn btn-info btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas instalar el módulo de ".$module->name."?") }}') ? this.parentElement.submit() : ''">
+                                                <i class="material-icons">get_app</i>
+                                                <div class="ripple-container"></div> Instalar
+                                            </button>
+                                        </form>
+                                    @endif
+                                </td>
+                            @endcan
+                        </tr>
+                        <tr>
+                            <td>Boletacoop</td>
+                            <td>ticket</td>
+                            <td>3.0.0</td>
+                            <td class="td-actions text-right">
+                                <button type="button" class="btn btn-info btn-link" data-original-title="" title="" disabled>
+                                    <i class="material-icons">get_app</i>
+                                    <div class="ripple-container"></div> No disponible
+                                </button>
+                            </td>
+
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
               </div>
             </div>
@@ -86,36 +109,3 @@
     </div>
   </div>
 @endsection
-
-@push('js')
-<script>
-  $(document).ready(function() {
-    $('#datatables').fadeIn(1100);
-    $('#datatables').DataTable({
-      "pagingType": "full_numbers",
-      "lengthMenu": [
-        [10, 25, 50, -1],
-        [10, 25, 50, "All"]
-      ],
-      responsive: true,
-      language: {
-          search: "_INPUT_",
-          searchPlaceholder: "Buscar modulo",
-          paginate: {
-              first:      "Primero",
-              last:       "Último",
-              next:       "Siguiente",
-              previous:   "Anterior"
-          },
-          info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-          infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
-          lengthMenu: "Mostrar _MENU_ registros",
-          emptyTable: "Ningún dato disponible en esta tabla",
-      },
-      "columnDefs": [
-        { "orderable": false, "targets": 3 },
-      ],
-    });
-  });
-</script>
-@endpush
