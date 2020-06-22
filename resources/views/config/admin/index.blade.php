@@ -31,11 +31,15 @@
                                         {{ __('Email') }}
                                     </th>
                                     <th>
+                                        {{ __('Documento') }}
+                                    </th>
+                                    <th>
                                         {{ __('Rol') }}
                                     </th>
                                     <th>
-                                        {{ __('Documento') }}
+                                        {{ __('Módulos') }}
                                     </th>
+
                                     @can('manage-users', App\User::class)
                                         <th class="text-right">
                                             {{ __('Acción') }}
@@ -52,11 +56,17 @@
                                                 {{ $user->email }}
                                             </td>
                                             <td>
+                                                {{ $user->document }}
+                                            </td>
+                                            <td>
                                                 {{ $user->role->name }}
                                             </td>
                                             <td>
-                                                {{ $user->document }}
+                                                @foreach ($user->modules as $module)
+                                                    <span class="badge badge-default">{{ $module->name }}</span>
+                                                @endforeach
                                             </td>
+
                                             @can('manage-users', App\User::class)
                                                 @if (auth()->user()->can('update', $user) || auth()->user()->can('delete', $user))
                                                     <td class="td-actions text-right">
