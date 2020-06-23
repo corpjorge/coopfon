@@ -104,6 +104,10 @@ Página del producto: https://www.coopfon.com/
               });
             @endif
           });
+
+          $(function () {
+              $('[data-toggle="tooltip"]').tooltip()
+          })
         </script>
         @stack('js')
 </body>

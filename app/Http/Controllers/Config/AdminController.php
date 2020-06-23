@@ -71,7 +71,7 @@ class AdminController extends Controller
         $this->authorize('manageAdmins', User::class);
 
         $user = $model->create($request->merge([
-            'picture' => $request->photo ? $request->photo->store('profile', 'public') : null,
+            'picture' => $request->photo ? '/storage/'.$request->photo->store('profile', 'public') : null,
             'password' => $request->password ? Hash::make($request->get('password')): Hash::make(rand()),
             'birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null
         ])->all());
@@ -122,7 +122,7 @@ class AdminController extends Controller
         $hasPassword = $request->get('password');
         $admin->update(
             $request->merge([
-                'picture' => $request->photo ? $request->photo->store('profile', 'public') : $admin->picture,
+                'picture' => $request->photo ? '/storage/'.$request->photo->store('profile', 'public') : $admin->picture,
                 'password' => Hash::make($request->get('password'))
             ])->except([
                 $hasPassword ? '' : 'password',

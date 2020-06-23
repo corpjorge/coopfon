@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -36,4 +40,43 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @param $driver
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider($driver)
+    {
+        return Socialite::driver($driver)->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @param $driver
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function handleProviderCallback($driver)
+    {
+         $userSocial = Socialite::driver($driver)->user();
+         $user = User::where('email',$userSocial->email)->first();
+
+         if ($user) {
+             Auth::login($user);
+             $user->name =$userSocial->name;
+             $user->picture =$userSocial->avatar;
+             $user->save();
+             return redirect($this->redirectTo);
+         }
+         else{
+             session()->flash('message', 'Usuario no existe');
+             return redirect('login');
+         }
+
+    }
+
+
+
 }

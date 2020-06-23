@@ -62,7 +62,7 @@ class UserController extends Controller
     public function store(UserRequest $request, User $model)
     {
         $model->create($request->merge([
-            'picture' => $request->photo ? $request->photo->store('profile', 'public') : null,
+            'picture' => $request->photo ? '/storage/'.$request->photo->store('profile', 'public') : null,
             'password' => $request->password ? Hash::make($request->get('password')): Hash::make(rand()),
             'birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null,
             'role_id' => 9
@@ -104,7 +104,7 @@ class UserController extends Controller
         $hasPassword = $request->get('password');
         $user->update(
             $request->merge([
-                'picture' => $request->photo ? $request->photo->store('profile', 'public') : $user->picture,
+                'picture' => $request->photo ? '/storage/'.$request->photo->store('profile', 'public') : $user->picture,
                 'password' => Hash::make($request->get('password'))
             ])->except([
                 $hasPassword ? '' : 'password',

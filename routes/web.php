@@ -22,9 +22,8 @@ Route::get('home', 'Config\HomeController@index')->name('home');
 Route::get('dashboard', 'Config\HomeController@index')->name('home');
 
 
-Route::get('login/github', 'Auth\LoginController@redirectToProvider');
-Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
-
+Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::group(['middleware' => 'auth'], function () {
 
