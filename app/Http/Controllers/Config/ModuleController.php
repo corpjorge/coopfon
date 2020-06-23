@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Config;
 use App\Http\Controllers\Controller;
 use App\Model\Config\Module;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Route;
 
 class ModuleController extends Controller
 {
@@ -30,29 +32,38 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        //
+        return view('config.modules.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Module $model
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Module $model)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required|unique:modules,name',
+            'path' => 'required|unique:modules,path',
+            'version' => 'required|',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\Config\Module  $module
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Module $module)
-    {
-        //
+        if(!Route::has($request->path.'.install'))
+        {
+           return back()->with('statusError', 'La ruta no existe');
+        }
+
+        $path = resource_path('views/layouts/navbars/'.$request->path.'.blade.php');
+
+        if(!File::exists($path)){
+            return back()->with('statusError', 'Navbars no existe');
+        }
+
+        $model->create($request->merge(['state_id' => 2])->all());
+
+        return redirect()->route('module.index')->withStatus(__('Modulo creado con éxito.'));
     }
 
     /**
@@ -63,7 +74,7 @@ class ModuleController extends Controller
      */
     public function edit(Module $module)
     {
-        //
+        return view('config.module.edit', compact('module'));
     }
 
     /**
@@ -75,7 +86,9 @@ class ModuleController extends Controller
      */
     public function update(Request $request, Module $module)
     {
-        //
+        $module->update($request->all());
+
+        return redirect()->route('module.index')->withStatus(__('Modulo actualizado con éxito.'));
     }
 
 

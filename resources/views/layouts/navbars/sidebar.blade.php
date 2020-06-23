@@ -54,9 +54,7 @@
 
         {{--Menu Modulos --}}
         @foreach($menuModules as $module)
-            @if($module->state_id == 1)
                 @include('layouts.navbars.'.$module->path)
-            @endif
         @endforeach
         {{--Menu Modulos end--}}
 

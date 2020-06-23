@@ -19,6 +19,7 @@ class GlobalCreateModulesTable extends Migration
             $table->string('name');
             $table->string('path');
             $table->string('version');
+            $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

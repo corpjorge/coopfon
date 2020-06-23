@@ -13,6 +13,8 @@ class Module extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $fillable = ['name', 'path', 'version', 'state_id'];
+
     /**
      * Get the users of the module
      *

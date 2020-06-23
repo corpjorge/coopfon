@@ -47,7 +47,7 @@ class RoleController extends Controller
     {
         $model->create($request->all());
 
-        return redirect()->route('role.index')->withStatus(__('Role successfully created.'));
+        return redirect()->route('role.index')->withStatus(__('Rol creado con éxito.'));
     }
 
     /**
@@ -72,6 +72,6 @@ class RoleController extends Controller
     {
         $role->update($request->all());
 
-        return redirect()->route('role.index')->withStatus(__('Role successfully updated.'));
+        return redirect()->route('role.index')->withStatus(__('Rol actualizado con éxito.'));
     }
 }
