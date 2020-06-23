@@ -65,7 +65,7 @@ class ModulePolicy
      */
     public function delete(User $user, Module $module)
     {
-        //
+        return $user->isUltraAdmin();
     }
 
     /**
@@ -77,7 +77,7 @@ class ModulePolicy
      */
     public function restore(User $user, Module $module)
     {
-        //
+        return $user->isUltraAdmin();
     }
 
     /**
@@ -89,7 +89,7 @@ class ModulePolicy
      */
     public function forceDelete(User $user, Module $module)
     {
-        //
+        return $user->isUltraAdmin();
     }
 
     /**
@@ -102,4 +102,5 @@ class ModulePolicy
     {
         return $user->isUltraAdmin();
     }
+
 }

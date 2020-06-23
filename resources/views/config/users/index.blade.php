@@ -32,7 +32,7 @@
                         {{ __('Email') }}
                       </th>
                       <th>
-                        {{ __('Fecha de creación') }}
+                        {{ __('Documento') }}
                       </th>
                       @can('manage-users', App\User::class)
                         <th class="text-right">
@@ -50,7 +50,7 @@
                             {{ $user->email }}
                           </td>
                           <td>
-                            {{ $user->created_at->format('Y-m-d') }}
+                            {{ $user->document }}
                           </td>
                           @can('manage-users', App\User::class)
                             @if (auth()->user()->can('update', $user) || auth()->user()->can('delete', $user))
@@ -109,8 +109,19 @@
         ],
         responsive: true,
         language: {
-          search: "_INPUT_",
-          searchPlaceholder: "Buscar usuarios",
+            search: "_INPUT_",
+            searchPlaceholder: "Buscar usuarios",
+            paginate: {
+                first:      "Primero",
+                last:       "Último",
+                next:       "Siguiente",
+                previous:   "Anterior"
+            },
+            info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            lengthMenu: "Mostrar _MENU_ registros",
+            emptyTable: "Ningún dato disponible en esta tabla",
+
         },
         "columnDefs": [
           { "orderable": false, "targets": 3 },

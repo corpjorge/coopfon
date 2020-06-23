@@ -20,7 +20,7 @@ class GlobalMemberSeeder extends Seeder
 
         DB::table('members')->insert([
             'id' => 2,
-            'name' => '{ "F": "Delelgada", "M":"Delelgado"}',
+            'name' => '{ "F": "Delegada", "M":"Delegado"}',
             'created_at' => now(),
             'updated_at' => now()
         ]);

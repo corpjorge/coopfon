@@ -23,7 +23,7 @@ class ModuleComposer
     public function __construct(Module $modules)
     {
         // Dependencies automatically resolved by service container...
-        $this->modules = $modules->all();
+        $this->modules = $modules->where('state_id',1)->orderBy('order')->get();
     }
 
     /**
@@ -34,6 +34,6 @@ class ModuleComposer
      */
     public function compose(View $view)
     {
-        $view->with('modules', $this->modules);
+        $view->with('menuModules', $this->modules);
     }
 }
