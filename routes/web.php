@@ -21,6 +21,11 @@ Route::get('register', 'Config\HomeController@index')->name('register');
 Route::get('home', 'Config\HomeController@index')->name('home');
 Route::get('dashboard', 'Config\HomeController@index')->name('home');
 
+
+Route::get('login/github', 'Auth\LoginController@redirectToProvider');
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
+
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('role', 'RoleController', ['except' => ['show', 'destroy']]);
