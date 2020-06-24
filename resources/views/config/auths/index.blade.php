@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'role-management', 'menuParent' => 'config', 'titlePage' => __('Administrador de Autenticaciones')])
+@extends('layouts.app', ['activePage' => 'auths-management', 'menuParent' => 'config', 'titlePage' => __('Administrador de Autenticaciones')])
 
 @section('content')
     <div class="content">
@@ -13,7 +13,7 @@
                             <h4 class="card-title">{{ __('Autenticaciones') }}</h4>
                         </div>
                         <div class="card-body">
-                            @can('create', App\Role::class)
+                            @can('manageModules', App\Model\Config\Module::class)
                                 <div class="row">
                                     <div class="col-12 text-right">
                                         <a href="{{ route('auths.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar Autenticación') }}</a>
@@ -23,49 +23,67 @@
                             <div class="table-responsive">
                                 <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
                                     <thead class="text-primary">
-                                    <th>
-                                        {{ __('ID') }}
-                                    </th>
-                                    <th>
-                                        {{ __('Nombre') }}
-                                    </th>
-                                    <th>
-                                        {{ __('Descripción') }}
-                                    </th>
-                                    <th>
-                                        {{ __('Fecha de creación') }}
-                                    </th>
-                                    @can('manage-users', App\User::class)
+                                        <th>
+                                            {{ __('ID') }}
+                                        </th>
+                                        <th>
+                                            {{ __('Nombre') }}
+                                        </th>
+                                        <th>
+                                            {{ __('Path') }}
+                                        </th>
+                                        <th>
+                                            {{ __('Descripción') }}
+                                        </th>
+                                        <th>
+                                            {{ __('Icono') }}
+                                        </th>
+                                        <th class="text-right">
+                                            {{ __('Editar') }}
+                                        </th>
                                         <th class="text-right">
                                             {{ __('Acción') }}
                                         </th>
-                                    @endcan
                                     </thead>
                                     <tbody>
-                                    @foreach($roles as $role)
+                                    @foreach($auths as $auth)
                                         <tr>
                                             <td>
-                                                {{ $role->id }}
+                                                {{ $auth->id }}
                                             </td>
                                             <td>
-                                                {{ $role->name }}
+                                                {{ $auth->name }}
                                             </td>
                                             <td>
-                                                {{ $role->description }}
+                                                {{ $auth->path }}
                                             </td>
                                             <td>
-                                                {{ $role->created_at->format('Y-m-d') }}
+                                                {{ $auth->description }}
                                             </td>
-                                            @can('manage-users', App\User::class)
+                                            <td>
+                                                {{ $auth->icon }}
+                                            </td>
+                                            <td class="td-actions text-right">
+                                                @can('manageModules', App\Model\Config\Module::class)
+                                                    <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('auths.edit', $auth) }}" data-original-title="" title="">
+                                                        <i class="material-icons">edit</i>
+                                                        <div class="ripple-container"></div>
+                                                    </a>
+                                                @endcan
+                                            </td>
+                                            <form action="{{ route('auths.status', $auth) }}" method="post" >
+                                                @csrf
+                                                @method('put')
                                                 <td class="td-actions text-right">
-                                                    @can('update', $role)
-                                                        <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('auths.edit', $role) }}" data-original-title="" title="">
-                                                            <i class="material-icons">edit</i>
-                                                            <div class="ripple-container"></div>
-                                                        </a>
-                                                    @endcan
+                                                    <div class="togglebutton">
+                                                        <label>
+                                                            <input class="status" type="checkbox" name="state_id" value="1" {{ old('show_on_homepage', $auth->state_id) == 1 ? ' checked' : '' }}>
+                                                            <span class="toggle"></span>
+                                                        </label>
+                                                    </div>
                                                 </td>
-                                            @endcan
+                                            </form>
+
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -109,5 +127,15 @@
                 ],
             });
         });
+    </script>
+
+    <script>
+
+        $(document).ready(function(){
+            $(".status").on("change", function(event){
+                this.form.submit();
+            });
+        });
+
     </script>
 @endpush

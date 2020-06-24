@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isSuperAdmin();
+        return $user->isAdmin();
     }
 
     /**
@@ -28,7 +28,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->isSuperAdmin();
+        return $user->isAdmin();
     }
 
     /**
@@ -40,7 +40,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->isSuperAdmin();
+        return $user->isAdmin();
     }
 
     /**
@@ -51,7 +51,7 @@ class UserPolicy
      * @return boolean
      */
     public function delete(User $user, User $model)    {
-        return $user->isSuperAdmin() && $user->id != $model->id;
+        return $user->isAdmin() && $user->id != $model->id;
     }
 
     /**
@@ -63,7 +63,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model)
     {
-        return $user->isSuperAdmin();
+        return $user->isAdmin();
     }
 
     /**
@@ -74,7 +74,7 @@ class UserPolicy
      */
     public function manageUsers(User $user)
     {
-        return $user->isSuperAdmin();
+        return $user->isAdmin();
     }
 
     /**
