@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminRequest extends FormRequest
+class AdminDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,29 +26,9 @@ class AdminRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'required', 'min:3'
-            ],
-            'email' => [
-                'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->admin->id ?? null)
-            ],
-            'password' => [
-                'nullable', 'confirmed', 'min:6'
-            ],
-            'document_type_id' => [
-                'required', 'integer', 'exists:document_types,id'
-            ],
-            'document' => [
-                'required', Rule::unique((new User)->getTable())->ignore($this->route()->admin->id ?? null)
-            ],
-            'role_id' => [
-                'required', 'integer', 'exists:roles,id'
-            ],
-            'module_id' => [
-                'nullable', 'integer', 'exists:modules,id'
-            ],
+
             'code' => [
-                'nullable', 'unique:users,code'
+                'nullable', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
             ],
             'gender_id' => [
                 'nullable', 'exists:genders,id'

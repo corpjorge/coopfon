@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Config;
 
 use App\Http\Controllers\Controller;
 use App\Model\Config\Module;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\View;
 
 class ModuleController extends Controller
 {
@@ -18,7 +21,7 @@ class ModuleController extends Controller
      * Display a listing of the resource.
      *
      * @param Module $model
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index(Module $model)
     {
@@ -28,7 +31,7 @@ class ModuleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
@@ -70,7 +73,7 @@ class ModuleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Model\Config\Module  $module
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function edit(Module $module)
     {

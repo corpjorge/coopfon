@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Config;
 
-use App\User;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DataRequest extends FormRequest
@@ -27,11 +25,11 @@ class DataRequest extends FormRequest
     {
         return [
             'phone' => ['required'],
-            'gender_id' => ['required'],
+            'gender_id' => ['required', 'integer', 'exists:genders,id'],
             'address' => ['required'],
             'area' => ['nullable'],
             'birth_date' => ['required', 'date_format:d-m-Y'],
-            'city_id' => ['required']
+            'city_id' => ['required', 'integer', 'exists:city,code']
         ];
     }
 }

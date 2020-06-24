@@ -35,6 +35,15 @@
                 </li>
             @endcan
 
+            @can('manage-users', App\User::class)
+                <li class="nav-item{{ $activePage == 'auths-management' ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ route('auths.index') }}">
+                        <span class="sidebar-mini"> AU </span>
+                        <span class="sidebar-normal"> {{ __('Autenticaciones') }} </span>
+                    </a>
+                </li>
+            @endcan
+
             @can('manageModules', App\Model\Config\Module::class)
                 @can('viewAny', App\Model\Config\Module::class)
                     <li class="nav-item{{ $activePage == 'module' ? ' active' : '' }}">

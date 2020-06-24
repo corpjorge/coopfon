@@ -2,58 +2,25 @@ composer dump-autoload
 
 -----BORRAR ARCHIVOS xxx DE PUBLIC----
 
-php artisan make:controller Config\GenderController --resource --model=Model\Config\Gender
+
 
 php artisan make:policy Config\ModulePolicy --model=Model\Config\Module
-
-
-php artisan make:model Model\Config\Permission
 
 php artisan make:request Config\UsersRequest
 
 php artisan make:controller Config\AdminController --model=User
-php artisan make:controller Config\DepartmentController --resource --model=Model\Config\Department
-php artisan make:controller Config\GenderController --resource --model=Model\Config\Gender
-
-
-git flow feature finish depurar
-git flow feature publish depurar
-
-git flow feature start modulos-permisos
-
-
-php artisan make:controller Config\AdminsController --model=User
-
-
-
-php artisan make:policy PostPolicy --model=User
-
+php artisan make:controller Config\AuthController --resource --model=Model\Config\Auth
 
 php artisan make:migration global_create_members_table --create=members
-php artisan make:seeder GlobalMemberSeeder
+php artisan make:seeder GlobalAuthTableSeeder
+
 php artisan make:model Model\Config\Member
 
-php artisan migrate --path=/database/migrations/new_folder
-
-servicios
-
-
-php artisan make:policy Service\ServicePolicy
-
-php artisan make:migration create_pqrs_table  --create=s_pqrs --path=\database\migrations\service
-
 php artisan make:migration create_states_table  --create=s_states --path=\database\migrations\service
-
 php artisan make:migration add_style_to_states_table --table=states --path=\database\migrations\service
 
-
-php artisan migrate --path=\database\migrations\service
 php artisan make:seeder service\stateSeeder
 
-php artisan make:controller Service\InstallController
-
-php artisan db:seed --class=stateSeeder
-
-
-
-
+git flow feature start nombre
+git flow feature publish nombre
+git flow feature finish nombre

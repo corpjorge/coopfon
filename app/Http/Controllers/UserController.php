@@ -61,6 +61,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request, User $model)
     {
+
         $model->create($request->merge([
             'picture' => $request->photo ? '/storage/'.$request->photo->store('profile', 'public') : null,
             'password' => $request->password ? Hash::make($request->get('password')): Hash::make(rand()),

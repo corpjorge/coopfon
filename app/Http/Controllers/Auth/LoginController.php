@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\User;
+use App\Model\Config\Auth as AuthCustom;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -42,14 +42,31 @@ class LoginController extends Controller
     }
 
     /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showLoginForm()
+    {
+        $AuthCustoms = AuthCustom::Where('state_id',1)->get();
+        return view('auth.login', ['AuthCustoms' => $AuthCustoms]);
+    }
+
+    /**
      * Redirect the user to the GitHub authentication page.
      *
      * @param $driver
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function redirectToProvider($driver)
     {
-        return Socialite::driver($driver)->redirect();
+        $AuthCustom = AuthCustom::Where('path',$driver)->where('state_id',1)->first();
+
+        if ($AuthCustom){
+            return Socialite::driver($driver)->redirect();
+        }
+
+        return redirect('login');
     }
 
     /**
