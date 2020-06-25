@@ -45,7 +45,7 @@
                                 <td class="td-actions text-right">
                                     @if($module->state_id == 1)
                                         @if(!$module->deleted_at)
-                                            <form action="{{ route($module->path.'.update', $module) }}" method="get" style="display: inline;">
+                                            <form action="{{ route($module->path.'.upgrade', $module) }}" method="get" style="display: inline;">
                                                     <button type="button" class="btn btn-success btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas actualizar el módulo de ".$module->name."?") }}') ? this.parentElement.submit() : ''">
                                                         <i class="material-icons">system_update_alt</i>
                                                         <div class="ripple-container"></div> Actualizar

@@ -58,6 +58,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Parámetros') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('parameters') ? ' has-danger' : '' }}">
+                                            <textarea cols="30" rows="10" class="form-control{{ $errors->has('parameters') ? ' is-invalid' : '' }}" name="parameters" id="input-parameters" type="text" placeholder="{{ __('{ "ip": "192.175.12.5", "protocolo" : "http", "puerto" : "80", "entidad": "LUNA"}') }}" required="true" aria-required="true">{{ old('parameters', $auth->parameters) }}</textarea>
+                                            @include('alerts.feedback', ['field' => 'parameters'])
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer ml-auto mr-auto">
                                 <button type="submit" class="btn btn-rose">{{ __('Guardar') }}</button>

@@ -16,7 +16,7 @@ php artisan make:seeder GlobalAuthTableSeeder
 
 php artisan make:model Model\Config\Member
 
-php artisan make:migration create_states_table  --create=s_states --path=\database\migrations\service
+php artisan make:migration create_terms_table  --create=pq_terms --path=\database\migrations\service
 php artisan make:migration add_style_to_states_table --table=states --path=\database\migrations\service
 
 php artisan make:seeder service\stateSeeder

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddStyleToStatesTable extends Migration
+class CreateTermsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddStyleToStatesTable extends Migration
      */
     public function up()
     {
-        Schema::table('s_states', function (Blueprint $table) {
-            $table->string('style')->after('name');
+        Schema::create('pq_conf', function (Blueprint $table) {
+            $table->id();
+            $table->longText('description');
+            $table->longText('terms');
+            $table->date('limit_date')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddStyleToStatesTable extends Migration
      */
     public function down()
     {
-        Schema::table('states', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('s_terms');
     }
 }

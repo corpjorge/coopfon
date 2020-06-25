@@ -13,7 +13,7 @@ class CreateStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('s_states', function (Blueprint $table) {
+        Schema::create('pq_states', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();

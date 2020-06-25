@@ -102,11 +102,41 @@ Página del producto: https://www.coopfon.com/
                 }
               });
             @endif
+
+            @if (session('error'))
+            $.notify({
+                icon: "done",
+                message: "{{ session('error') }}"
+            }, {
+                type: 'danger',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            @endif
+
+            @if (session('warning'))
+            $.notify({
+                icon: "done",
+                message: "{{ session('warning') }}"
+            }, {
+                type: 'warning',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            @endif
+
           });
 
           $(function () {
               $('[data-toggle="tooltip"]').tooltip()
           })
+
         </script>
         @stack('js')
 </body>
