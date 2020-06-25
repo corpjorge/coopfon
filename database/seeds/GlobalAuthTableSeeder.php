@@ -44,5 +44,17 @@ class GlobalAuthTableSeeder extends Seeder
             'updated_at' => now()
         ]);
 
+        DB::table('auths')->insert([
+            'id' => 4,
+            'state_id' => 1,
+            'name' => 'Financial',
+            'path' => 'financial',
+            'description' => 'Ingresar con Financial',
+            'icon' => 'fa fa-key',
+            'parameters' => '{ "ip": "190.145.4.62", "protocolo" : "http", "puerto" : "80", "entidad": "FONSODI"}',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
     }
 }

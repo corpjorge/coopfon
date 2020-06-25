@@ -15,4 +15,5 @@ yarn-error.log
 *.orig
 /.vscode
 /.idea
+_ide_helper.php
 

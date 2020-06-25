@@ -21,10 +21,15 @@ Route::get('register', 'Config\HomeController@index')->name('register');
 Route::get('home', 'Config\HomeController@index')->name('home');
 Route::get('dashboard', 'Config\HomeController@index')->name('home');
 
-
 //Login AUTH
+Route::get('login/email', 'Auth\LoginDocumentController@showLoginForm');
+
 Route::get('login/document', 'Auth\LoginDocumentController@showLoginForm');
 Route::post('login/document', 'Auth\LoginDocumentController@login')->name('login.document');
+
+Route::get('login/financial', 'Auth\LoginFinancialController@showLoginForm');
+Route::post('login/financial', 'Auth\LoginFinancialController@login')->name('login.financial');
+
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
 
