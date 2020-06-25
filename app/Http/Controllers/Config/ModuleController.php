@@ -4,7 +4,12 @@ namespace App\Http\Controllers\Config;
 
 use App\Http\Controllers\Controller;
 use App\Model\Config\Module;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Route;
+use Illuminate\View\View;
 
 class ModuleController extends Controller
 {
@@ -16,55 +21,63 @@ class ModuleController extends Controller
      * Display a listing of the resource.
      *
      * @param Module $model
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index(Module $model)
     {
-        $this->authorize('manage-users', User::class);
-        return view('config.modules.index', ['modules' => $model->all()]);
+        return view('config.modules.index', ['modules' => $model->withTrashed()->get()]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
-        //
+        return view('config.modules.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Module $model
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Module $model)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required|unique:modules,name',
+            'path' => 'required|unique:modules,path',
+            'version' => 'required|',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\Config\Module  $module
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Module $module)
-    {
-        //
+        if(!Route::has($request->path.'.install'))
+        {
+           return back()->with('statusError', 'La ruta no existe');
+        }
+
+        $path = resource_path('views/layouts/navbars/'.$request->path.'.blade.php');
+
+        if(!File::exists($path)){
+            return back()->with('statusError', 'Navbars no existe');
+        }
+
+        $model->create($request->merge(['state_id' => 2])->all());
+
+        return redirect()->route('module.index')->withStatus(__('Modulo creado con éxito.'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Model\Config\Module  $module
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function edit(Module $module)
     {
-        //
+        return view('config.module.edit', compact('module'));
     }
 
     /**
@@ -76,17 +89,37 @@ class ModuleController extends Controller
      */
     public function update(Request $request, Module $module)
     {
-        //
+        $module->update($request->all());
+
+        return redirect()->route('module.index')->withStatus(__('Modulo actualizado con éxito.'));
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Module from storage.
      *
-     * @param  \App\Model\Config\Module  $module
-     * @return \Illuminate\Http\Response
+     * @param Module $module
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Module $module)
     {
-        //
+
+        $module->delete();
+
+        return redirect()->route('module.index')->withStatus(__('Modulo desactivado exitosamente.'));
+    }
+
+    /**
+     * restore the specified Module to storage.
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore($id)
+    {
+        Module::onlyTrashed()->find($id)->restore();
+
+        return back()->withStatus(__('Modulo restaurado.'));
     }
 }

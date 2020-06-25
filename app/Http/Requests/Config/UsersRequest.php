@@ -28,11 +28,13 @@ class UsersRequest extends FormRequest
         return [
             'code' => ['nullable', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)],
             'phone' => ['nullable'],
-            'gender' => ['nullable'],
+            'gender' => ['nullable', 'integer', 'exists:genders,id'],
             'address' => ['nullable'],
             'area' => ['nullable'],
             'birth_date' => ['nullable', 'date_format:d-m-Y'],
-            'city_id' => ['nullable']
+            'city_id' => ['nullable', 'integer', 'exists:city,code'],
+            'member_id' => ['nullable', 'integer', 'exists:members,id'],
+
         ];
     }
 }

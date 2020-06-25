@@ -31,11 +31,15 @@
                                         {{ __('Email') }}
                                     </th>
                                     <th>
+                                        {{ __('Documento') }}
+                                    </th>
+                                    <th>
                                         {{ __('Rol') }}
                                     </th>
                                     <th>
-                                        {{ __('Fecha de creación') }}
+                                        {{ __('Módulos') }}
                                     </th>
+
                                     @can('manage-users', App\User::class)
                                         <th class="text-right">
                                             {{ __('Acción') }}
@@ -52,11 +56,17 @@
                                                 {{ $user->email }}
                                             </td>
                                             <td>
+                                                {{ $user->document }}
+                                            </td>
+                                            <td>
                                                 {{ $user->role->name }}
                                             </td>
                                             <td>
-                                                {{ $user->created_at->format('Y-m-d') }}
+                                                @foreach ($user->modules as $module)
+                                                    <span class="badge badge-default">{{ $module->name }}</span>
+                                                @endforeach
                                             </td>
+
                                             @can('manage-users', App\User::class)
                                                 @if (auth()->user()->can('update', $user) || auth()->user()->can('delete', $user))
                                                     <td class="td-actions text-right">
@@ -116,6 +126,16 @@
                 language: {
                     search: "_INPUT_",
                     searchPlaceholder: "Buscar administradores",
+                    paginate: {
+                        first:      "Primero",
+                        last:       "Último",
+                        next:       "Siguiente",
+                        previous:   "Anterior"
+                    },
+                    info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    lengthMenu: "Mostrar _MENU_ registros",
+                    emptyTable: "Ningún dato disponible en esta tabla",
                 },
                 "columnDefs": [
                     { "orderable": false, "targets": 4 },

@@ -17,9 +17,10 @@ class GlobalCreateAuthsTable extends Migration
             $table->id();
             $table->foreignId('state_id')->constrained();
             $table->string('name');
-            $table->string('client_id');
-            $table->string('client_secret');
-            $table->string('redirect');
+            $table->string('path');
+            $table->string('description');
+            $table->string('icon');
+            $table->string('parameters')->nullable();
             $table->timestamps();
         });
     }

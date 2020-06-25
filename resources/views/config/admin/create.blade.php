@@ -36,7 +36,7 @@
                                     <label class="col-sm-2 col-form-label">{{ __('Email') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                                            <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" id="input-email" type="email" placeholder="{{ __('Email') }}" value="{{ old('email') }}" required />
+                                            <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} find" name="email" id="input-email" type="email" placeholder="{{ __('Email') }}" value="{{ old('email') }}" required/>
                                             @include('alerts.feedback', ['field' => 'email'])
                                         </div>
                                     </div>
@@ -72,11 +72,12 @@
                                     <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Documento') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('document') ? ' has-danger' : '' }}">
-                                            <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }}"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document') }}" required/>
+                                            <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }} find"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document') }}" required autocomplete="off" />
                                             @include('alerts.feedback', ['field' => 'document'])
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Contraseña') }}</label>
@@ -93,6 +94,24 @@
                                         <div class="form-group">
                                             <input class="form-control" name="password_confirmation" id="input-password-confirmation" type="password" placeholder="{{ __('Confirmar contraseña') }}" />
                                         </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label label-checkbox">Módulos</label>
+                                    <div class="col-sm-10 checkbox-radios">
+                                        @foreach($modules as $module)
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="{{$module->id}}"  {{ old('module_id') && in_array($module->id, old('module_id')) ? ' checked' : '' }}  name="module_id[]" id="module_id" > {{$module->name}}
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        @endforeach
+                                        @include('alerts.feedback', ['field' => 'module_id'])
                                     </div>
                                 </div>
 
@@ -161,10 +180,10 @@
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Genero') }}</label>
                                     <div class="col-lg-5 col-md-6 col-sm-3">
-                                        <select class="selectpicker form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-gender" title="Seleccionar genero" name="gender" >
+                                        <select class="selectpicker form-control{{ $errors->has('gender_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-gender_id" title="Seleccionar genero" name="gender_id" >
                                             <option></option>
                                             @foreach($genders as $gender)
-                                                <option value="{{$gender->id}}" {{ old('gender') == $gender->id ? 'selected' : '' }}>{{$gender->type}}</option>
+                                                <option value="{{$gender->id}}" {{ old('gender_id') == $gender->id ? 'selected' : '' }}>{{$gender->type}}</option>
                                             @endforeach
                                         </select>
                                         @include('alerts.feedback', ['field' => 'gender'])
@@ -201,6 +220,9 @@
             </div>
         </div>
     </div>
+
+    @include('config.admin.modal')
+
 @endsection
 
 
@@ -221,6 +243,55 @@
                 },
                 format: 'DD-MM-YYYY'
             });
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function(){
+            $(".find").on("change", function(){
+                let val     = $(this).val();
+                let idInput = $(this).attr('name');
+                let url     = '{{ url('admins/find/') }}'+'/'+idInput+'/'+val;
+                let route   = '{{ url('admins/find') }}';
+
+                $.ajax({
+                    url: url,
+                    success: function(respuesta) {
+                        if(respuesta.status){
+                            $("#name").text(respuesta.name);
+                            $("#document").text(respuesta.document);
+                            $("#email").text(respuesta.email);
+
+                            $('#formFind').attr('action', route+'/'+respuesta.idUser);
+
+                            $('#noticeModal').modal('show');
+
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            @if ($errors->any())
+            @foreach ($errors->all() as $error)
+            $.notify({
+                icon: "error",
+                message: "{{ $error }}"
+            }, {
+                type: 'danger',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            @endforeach
+            @endif
         });
     </script>
 @endpush

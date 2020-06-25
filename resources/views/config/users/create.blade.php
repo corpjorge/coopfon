@@ -148,13 +148,13 @@
                   <div class="row">
                       <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Genero') }}</label>
                       <div class="col-lg-5 col-md-6 col-sm-3">
-                          <select class="selectpicker form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-gender" title="Seleccionar genero" name="gender" >
+                          <select class="selectpicker form-control{{ $errors->has('gender_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-gender_id" title="Seleccionar genero" name="gender_id" >
                               <option></option>
                               @foreach($genders as $gender)
-                                  <option value="{{$gender->id}}" {{ old('gender') == $gender->id ? 'selected' : '' }}>{{$gender->type}}</option>
+                                  <option value="{{$gender->id}}" {{ old('gender_id') == $gender->id ? 'selected' : '' }}>{{$gender->type}}</option>
                               @endforeach
                           </select>
-                          @include('alerts.feedback', ['field' => 'gender'])
+                          @include('alerts.feedback', ['field' => 'gender_id'])
                       </div>
                   </div><br>
 

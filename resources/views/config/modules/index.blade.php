@@ -13,7 +13,7 @@
                 <h4 class="card-title">{{ __('Modulos') }}</h4>
               </div>
               <div class="card-body">
-                @can('create', App\Role::class)
+                @can('create', App\Model\Config\Module::class)
                   <div class="row">
                     <div class="col-12 text-right">
                       <a href="{{ route('module.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar Modulo') }}</a>
@@ -21,49 +21,86 @@
                   </div>
                 @endcan
                 <div class="table-responsive">
-                  <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
-                    <thead class="text-primary">
-                      <th>
-                          {{ __('Nombre') }}
-                      </th>
-                      <th>
-                        {{ __('Descripción') }}
-                      </th>
-                      <th>
-                        {{ __('Fecha de creación') }}
-                      </th>
-                      @can('manage-users', App\User::class)
-                        <th class="text-right">
-                          {{ __('Acción') }}
-                        </th>
-                      @endcan
-                    </thead>
-                    <tbody>
-                      @foreach($modules as $module)
+
+                    <table class="table">
+                        <thead>
                         <tr>
-                          <td>
-                            {{ $module->name }}
-                          </td>
-                          <td>
-                            {{ $module->route }}
-                          </td>
-                          <td>
-                            {{ $module->created_at->format('Y-m-d') }}
-                          </td>
-                          @can('manage-users', App\User::class)
-                            <td class="td-actions text-right">
-                              @can('update', $module)
-                                <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('module.edit', $module) }}" data-original-title="" title="">
-                                  <i class="material-icons">edit</i>
-                                  <div class="ripple-container"></div>
-                                </a>
-                              @endcan
-                            </td>
-                          @endcan
+                            <th>{{ __('Nombre') }}</th>
+                            <th>{{ __('Configuración') }}</th>
+                            <th>{{ __('Versión') }}</th>
+                            @can('manageModules', App\Model\Config\Module::class)
+                            <th class="text-right">
+                                {{ __('Acción') }}
+                            </th>
+                            @endcan
                         </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
+                        </thead>
+                        <tbody>
+                        @foreach($modules as $module)
+                        <tr>
+                            <td>{{ $module->name }}</td>
+                            <td>{{ $module->path }}</td>
+                            <td>{{ $module->version }}</td>
+                            @can('manageModules', App\Model\Config\Module::class)
+                                <td class="td-actions text-right">
+                                    @if($module->state_id == 1)
+                                        @if(!$module->deleted_at)
+                                            <form action="{{ route($module->path.'.update', $module) }}" method="get" style="display: inline;">
+                                                    <button type="button" class="btn btn-success btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas actualizar el módulo de ".$module->name."?") }}') ? this.parentElement.submit() : ''">
+                                                        <i class="material-icons">system_update_alt</i>
+                                                        <div class="ripple-container"></div> Actualizar
+                                                    </button>
+                                            </form>
+
+                                            <form action="{{ route('module.destroy', $module) }}" method="post" style="display: inline;">
+                                                @csrf
+                                                @method('delete')
+                                                @can('delete', $module)
+                                                    <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas desactivar el módulo de ".$module->name."?") }}') ? this.parentElement.submit() : ''">
+                                                        <i class="material-icons">power_settings_new</i>
+                                                        <div class="ripple-container"></div> Desactivar
+                                                    </button>
+                                                @endcan
+                                            </form>
+
+                                        @else
+                                            <form action="{{ route('module.restore', $module) }}" method="post" style="display: inline;">
+                                                @csrf
+                                                @method('delete')
+                                                @can('delete', $module)
+                                                    <button type="button" class="btn btn-success btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas activar el módulo de ".$module->name."?") }}') ? this.parentElement.submit() : ''">
+                                                        <i class="material-icons">power_settings_new</i>
+                                                        <div class="ripple-container"></div> Activar
+                                                    </button>
+                                                @endcan
+                                            </form>
+                                        @endif
+                                    @else
+                                        <form action="{{ route($module->path.'.install', $module) }}" method="get" style="display: inline;">
+                                            <button type="button" class="btn btn-info btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas instalar el módulo de ".$module->name."?") }}') ? this.parentElement.submit() : ''">
+                                                <i class="material-icons">get_app</i>
+                                                <div class="ripple-container"></div> Instalar
+                                            </button>
+                                        </form>
+                                    @endif
+                                </td>
+                            @endcan
+                        </tr>
+                        <tr>
+                            <td>Boletacoop</td>
+                            <td>ticket</td>
+                            <td>3.0.0</td>
+                            <td class="td-actions text-right">
+                                <button type="button" class="btn btn-info btn-link" data-original-title="" title="" disabled>
+                                    <i class="material-icons">get_app</i>
+                                    <div class="ripple-container"></div> No disponible
+                                </button>
+                            </td>
+
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
               </div>
             </div>
@@ -72,26 +109,3 @@
     </div>
   </div>
 @endsection
-
-@push('js')
-<script>
-  $(document).ready(function() {
-    $('#datatables').fadeIn(1100);
-    $('#datatables').DataTable({
-      "pagingType": "full_numbers",
-      "lengthMenu": [
-        [10, 25, 50, -1],
-        [10, 25, 50, "All"]
-      ],
-      responsive: true,
-      language: {
-        search: "_INPUT_",
-        searchPlaceholder: "Buscar modulo",
-      },
-      "columnDefs": [
-        { "orderable": false, "targets": 3 },
-      ],
-    });
-  });
-</script>
-@endpush

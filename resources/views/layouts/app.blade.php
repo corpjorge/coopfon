@@ -85,7 +85,6 @@ Página del producto: https://www.coopfon.com/
         <script src="{{ asset('coopfon') }}/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
 
         <script src="{{ asset('coopfon') }}/js/application.js"></script>
-        <script src="{{ asset('coopfon') }}/demo/demo.js "></script>
 {{--        <script src="{{ asset('coopfon') }}/js/sidebar.js"></script>--}}
 
         <script>
@@ -104,6 +103,10 @@ Página del producto: https://www.coopfon.com/
               });
             @endif
           });
+
+          $(function () {
+              $('[data-toggle="tooltip"]').tooltip()
+          })
         </script>
         @stack('js')
 </body>

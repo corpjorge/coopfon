@@ -23,20 +23,15 @@
       <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
         <form class="form" method="POST" action="{{ route('login') }}">
           @csrf
-
           <div class="card card-login card-hidden">
             <div class="card-header card-header-rose text-center">
               <h4 class="card-title">{{ __('Iniciar sesión') }}</h4>
               <div class="social-line">
-                <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                  <i class="fa fa-facebook-square"></i>
-                </a>
-                <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                  <i class="fa fa-twitter"></i>
-                </a>
-                <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                  <i class="fa fa-google-plus"></i>
-                </a>
+                  @foreach($AuthCustoms as $AuthCustom)
+                      <a href="{{ url('login/'.$AuthCustom->path) }}" class="btn btn-just-icon btn-link btn-white" data-toggle="tooltip" data-placement="top" title="{{$AuthCustom->description}}">
+                          <i class="{{$AuthCustom->icon}}"></i>
+                      </a>
+                  @endforeach
               </div>
             </div>
             <div class="card-body ">

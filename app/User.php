@@ -6,10 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Model\Config\DocumentType;
+use App\Model\Config\Module;
 use App\Model\Config\Gender;
-use App\Model\Config\City;
 use App\Model\Config\Member;
+use App\Model\Config\City;
 
 class User extends Authenticatable
 {
@@ -90,6 +92,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the modules of the user
+     *
+     * @return BelongsToMany
+     */
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class, 'user_module');
+    }
+
+    /**
      * Get the gender of the member
      *
      * @return mixed $member
@@ -111,10 +123,17 @@ class User extends Authenticatable
     public function profilePicture()
     {
         if ($this->picture) {
-            return "/storage/{$this->picture}";
+            return "{$this->picture}";
         }
 
         return "/coopfon/img/placeholder.jpg";
+    }
+
+    public function getFullNameAttribute()
+    {
+        $nameFull = explode(" ",$this->name);
+        $NameSecon = isset($nameFull[1]) ? $nameFull[1] : '';
+        return "{$nameFull[0]} {$NameSecon}";
     }
 
     /**
@@ -145,16 +164,6 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->role_id <= 3;
-    }
-
-    /**
-     * Check if the user has creator role
-     *
-     * @return boolean
-     */
-    public function isCreator()
-    {
-        return $this->role_id == 2;
     }
 
     /**

@@ -36,10 +36,31 @@ class AdminRequest extends FormRequest
                 'nullable', 'confirmed', 'min:6'
             ],
             'document_type_id' => [
-                'required'
+                'required', 'integer', 'exists:document_types,id'
             ],
             'document' => [
                 'required', Rule::unique((new User)->getTable())->ignore($this->route()->admin->id ?? null)
+            ],
+            'role_id' => [
+                'required', 'integer', 'exists:roles,id'
+            ],
+            'module_id' => [
+                'nullable', 'integer', 'exists:modules,id'
+            ],
+            'code' => [
+                'nullable', 'unique:users,code'
+            ],
+            'gender_id' => [
+                'nullable', 'exists:genders,id'
+            ],
+            'city_id' => [
+                'nullable', 'integer', 'exists:city,code'
+            ],
+            'member_id' => [
+                'nullable', 'integer', 'exists:members,id'
+            ],
+            'birth_date' => [
+                'nullable', 'date_format:d-m-Y'
             ],
 
         ];

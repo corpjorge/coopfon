@@ -20,7 +20,7 @@
       <div class="user-info">
         <a data-toggle="collapse" href="#collapseExample" class="username">
           <span>
-            {{ auth()->user()->name }}
+            {{ auth()->user()->full_name }}
             <b class="caret"></b>
           </span>
         </a>
@@ -36,71 +36,29 @@
         </div>
       </div>
     </div>
+
     <ul class="nav">
-      <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('home') }}">
-          <i class="material-icons">dashboard</i>
-            <p>{{ __('Dashboard') }}</p>
-        </a>
-      </li>
+        <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
+            <a class="nav-link" href="{{ route('home') }}">
+              <i class="material-icons">dashboard</i>
+                <p>{{ __('Tablero') }}</p>
+            </a>
+        </li>
 
-      <li class="nav-item {{ $menuParent == 'config' ? 'active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#config" {{ $menuParent == 'config' ? 'aria-expanded="true"' : '' }}>
-            <i class="fa fa-cog fa-2x"></i>
-          <p>{{ __('Configuración') }}
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div class="collapse {{ $menuParent == 'config' ? 'show' : '' }}" id="config">
-          <ul class="nav">
-            <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('profile.edit') }}">
-                <span class="sidebar-mini"> UP </span>
-                <span class="sidebar-normal">{{ __('Perfil') }} </span>
-              </a>
-            </li>
+        <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
+            <a class="nav-link" href="{{ route('profile.edit') }}">
+                <i class="material-icons">account_box</i>
+                <p>{{ __('Perfil') }}</p>
+            </a>
+        </li>
 
-            @can('manage-users', App\User::class)
-              <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-                  <a class="nav-link" href="{{ route('user.index') }}">
-                      <span class="sidebar-mini"> UM </span>
-                      <span class="sidebar-normal"> {{ __('Asociados') }} </span>
-                  </a>
-              </li>
-            @endcan
+        {{--Menu Modulos --}}
+        @foreach($menuModules as $module)
+                @include('layouts.navbars.'.$module->path)
+        @endforeach
+        {{--Menu Modulos end--}}
 
-              @can('manage-users', App\User::class)
-                  <li class="nav-item{{ $activePage == 'admin-management' ? ' active' : '' }}">
-                      <a class="nav-link" href="{{ route('admin.index') }}">
-                          <span class="sidebar-mini"> AD </span>
-                          <span class="sidebar-normal"> {{ __('Administradores') }} </span>
-                      </a>
-                  </li>
-              @endcan
-
-            @can('manage-roles', App\Role::class)
-              <li class="nav-item{{ $activePage == 'role-management' ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('role.index') }}">
-                  <span class="sidebar-mini"> RM </span>
-                  <span class="sidebar-normal"> {{ __('Roles') }} </span>
-                </a>
-              </li>
-            @endcan
-
-            @can('manage-modules', App\Model\Config\Module::class)
-              @can('viewAny', App\Model\Config\Module::class)
-              <li class="nav-item{{ $activePage == 'module' ? ' active' : '' }}">
-                  <a class="nav-link" href="{{ route('module.index') }}">
-                      <span class="sidebar-mini"> M </span>
-                      <span class="sidebar-normal"> {{ __('Modulos') }} </span>
-                  </a>
-              </li>
-              @endcan
-            @endcan
-
-          </ul>
-        </div>
-      </li>
+        @include('layouts.navbars.config')
 
 
     </ul>

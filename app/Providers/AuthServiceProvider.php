@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Model\Config\Module;
-use App\Policies\Config\ModulePolicy;
 use App\Role;
 use App\User;
+use App\Model\Config\Module;
+use App\Policies\Config\ModulePolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -35,8 +35,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('manage-users', 'App\Policies\UserPolicy@manageUsers');
         Gate::define('manage-roles', 'App\Policies\RolePolicy@manageRoles');
-        Gate::define('manage-modules', 'App\Policies\Config\ModulePolicy@manageModules');
-
 
     }
 }
