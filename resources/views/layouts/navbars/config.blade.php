@@ -17,7 +17,7 @@
                     </a>
                 </li>
 
-            @can('manage-users', App\User::class)
+            @can('manageAdmins', App\User::class)
                 <li class="nav-item{{ $activePage == 'admin-management' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.index') }}">
                         <span class="sidebar-mini"> AD </span>
@@ -31,6 +31,15 @@
                     <a class="nav-link" href="{{ route('role.index') }}">
                         <span class="sidebar-mini"> R </span>
                         <span class="sidebar-normal"> {{ __('Roles') }} </span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('manageAdmins', App\User::class)
+                <li class="nav-item{{ $activePage == 'auths-management' ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ route('auths.index') }}">
+                        <span class="sidebar-mini"> AU </span>
+                        <span class="sidebar-normal"> {{ __('Autenticaciones') }} </span>
                     </a>
                 </li>
             @endcan

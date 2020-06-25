@@ -12,6 +12,7 @@ use App\Model\Config\Gender;
 use App\Model\Config\Member;
 use App\Model\Config\DocumentType;
 use App\Http\Requests\Config\AdminRequest;
+use App\Http\Requests\Config\AdminDataRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -61,7 +62,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in admin.
      *
-     * @param \App\Http\Requests\AdminRequest $request
+     * @param \App\Http\Requests\Config\AdminRequest $request
      * @param \App\User $model
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
@@ -71,7 +72,7 @@ class AdminController extends Controller
         $this->authorize('manageAdmins', User::class);
 
         $user = $model->create($request->merge([
-            'picture' => $request->photo ? $request->photo->store('profile', 'public') : null,
+            'picture' => $request->photo ? '/storage/'.$request->photo->store('profile', 'public') : null,
             'password' => $request->password ? Hash::make($request->get('password')): Hash::make(rand()),
             'birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null
         ])->all());
@@ -84,7 +85,7 @@ class AdminController extends Controller
      * Show the form for editing the specified admin.
      *
      * @param User $admin
-     * @param \App\Role $role
+     * @param Role $role
      * @param DocumentType $documentTypes
      * @param Module $module
      * @param City $cities
@@ -111,7 +112,7 @@ class AdminController extends Controller
     /**
      * Update the specified admin in storage.
      *
-     * @param  \App\Http\Requests\AdminRequest  $request
+     * @param  \App\Http\Requests\Config\AdminRequest  $request
      * @param  \App\User  $admin
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -122,7 +123,7 @@ class AdminController extends Controller
         $hasPassword = $request->get('password');
         $admin->update(
             $request->merge([
-                'picture' => $request->photo ? $request->photo->store('profile', 'public') : $admin->picture,
+                'picture' => $request->photo ? '/storage/'.$request->photo->store('profile', 'public') : $admin->picture,
                 'password' => Hash::make($request->get('password'))
             ])->except([
                 $hasPassword ? '' : 'password',
@@ -137,16 +138,16 @@ class AdminController extends Controller
     /**
      * Update the profile
      *
-     * @param \App\Http\Requests\AdminRequest $request
+     * @param \App\Http\Requests\Config\AdminDataRequest $request
      * @param \App\User $admin
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function data(AdminRequest $request, User $admin)
+    public function data(AdminDataRequest $request, User $user)
     {
         $this->authorize('manageAdmins', User::class);
 
-        $admin->update(
+        $user->update(
             $request->merge(
                 ['birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null]
             )->all()
@@ -163,7 +164,7 @@ class AdminController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function find($idInput, $value)
+    public function find($idInput, $value = 'x')
     {
         $this->authorize('manageAdmins', User::class);
         $user = User::where($idInput,$value)->where('role_id',9)->first();
@@ -177,13 +178,12 @@ class AdminController extends Controller
                 'document' => $user->document,
             ]);
         };
-
     }
 
     /**
      * Update the profile
      *
-     * @param \App\Http\Requests\AdminRequest $request
+     * @param Request $request
      * @param \App\User $admin
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
@@ -219,7 +219,7 @@ class AdminController extends Controller
     {
         $this->authorize('manageAdmins', User::class);
 
-        return view('config.admin.index-delete', ['users' => $model->onlyTrashed()->where('role_id', '!=', 9)->get()]);
+        return view('config.admin.index_delete', ['users' => $model->onlyTrashed()->where('role_id', '!=', 9)->get()]);
     }
 
     /**

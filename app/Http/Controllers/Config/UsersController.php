@@ -26,7 +26,7 @@ class UsersController extends Controller
     {
         $this->authorize('manage-users', User::class);
 
-        return view('config.users.index-delete', ['users' => $model->onlyTrashed()->where('role_id', 9)->get()]);
+        return view('config.users.index_delete', ['users' => $model->onlyTrashed()->where('role_id', 9)->get()]);
     }
 
     /**
@@ -39,7 +39,7 @@ class UsersController extends Controller
     {
         $this->authorize('manage-users', User::class);
 
-        return view('config.users.create-excel');
+        return view('config.users.create_excel');
     }
 
     /**

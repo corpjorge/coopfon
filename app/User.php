@@ -123,10 +123,17 @@ class User extends Authenticatable
     public function profilePicture()
     {
         if ($this->picture) {
-            return "/storage/{$this->picture}";
+            return "{$this->picture}";
         }
 
         return "/coopfon/img/placeholder.jpg";
+    }
+
+    public function getFullNameAttribute()
+    {
+        $nameFull = explode(" ",$this->name);
+        $NameSecon = isset($nameFull[1]) ? $nameFull[1] : '';
+        return "{$nameFull[0]} {$NameSecon}";
     }
 
     /**

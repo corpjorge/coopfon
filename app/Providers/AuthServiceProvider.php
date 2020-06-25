@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Model\Config\Module;
-use App\Policies\Config\ModulePolicy;
 use App\Role;
 use App\User;
+use App\Model\Config\Module;
+use App\Policies\Config\ModulePolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Gate;

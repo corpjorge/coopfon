@@ -42,7 +42,7 @@ class ProfileController extends Controller
     {
         auth()->user()->update(
             $request->merge([
-                'picture' => $request->photo ? $request->photo->store('profile', 'public') : null,
+                'picture' => $request->photo ? '/storage/'.$request->photo->store('profile', 'public') : null,
             ])->except([$request->hasFile('photo') ? '' : 'picture']));
 
         return back()->withStatus(__('Perfil actualizado con éxito.'));

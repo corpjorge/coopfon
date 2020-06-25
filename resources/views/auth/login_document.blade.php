@@ -21,29 +21,34 @@
     </div>
     <div class="row">
       <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-        <form class="form" method="POST" action="{{ route('login') }}">
+        <form class="form" method="POST" action="{{ route('login.document') }}">
           @csrf
           <div class="card card-login card-hidden">
             <div class="card-header card-header-rose text-center">
               <h4 class="card-title">{{ __('Iniciar sesión') }}</h4>
               <div class="social-line">
+                  <a href="{{ url('login') }}" class="btn btn-just-icon btn-link btn-white" data-toggle="tooltip" data-placement="top" title="Ingresar con correo">
+                      <i class="fa fa-envelope"></i>
+                  </a>
                   @foreach($AuthCustoms as $AuthCustom)
+                      @if($AuthCustom->path != 'document')
                       <a href="{{ url('login/'.$AuthCustom->path) }}" class="btn btn-just-icon btn-link btn-white" data-toggle="tooltip" data-placement="top" title="{{$AuthCustom->description}}">
                           <i class="{{$AuthCustom->icon}}"></i>
                       </a>
+                     @endif
                   @endforeach
               </div>
             </div>
             <div class="card-body ">
-              <span class="form-group  bmd-form-group email-error {{ $errors->has('email') ? ' has-danger' : '' }}" >
+              <span class="form-group  bmd-form-group email-error {{ $errors->has('document') ? ' has-danger' : '' }}" >
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">email</i>
+                      <i class="material-icons">payment</i>
                     </span>
                   </div>
-                  <input type="email" class="form-control" id="exampleEmails" name="email" placeholder="{{ __('Correo...') }}" value="{{ old('email', 'corpjorge@hotmail.com') }}" required>
-                  @include('alerts.feedback', ['field' => 'email'])
+                  <input type="number" class="form-control" id="exampleDocument" name="document" placeholder="{{ __('Documento...') }}" value="{{ old('document', '1014205146') }}" required>
+                  @include('alerts.feedback', ['field' => 'document'])
                 </div>
               </span>
               <span class="form-group bmd-form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
