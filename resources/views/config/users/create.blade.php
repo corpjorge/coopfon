@@ -138,7 +138,7 @@
                           <select class="selectpicker form-control{{ $errors->has('member_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-member_id" title="Seleccionar miembro" name="member_id" >
                               <option></option>
                               @foreach($members as $member)
-                                <option value="{{$member->id}}" {{ old('member_id') == $member->id ? 'selected' : '' }}>{!!json_decode($member->name)->{'M'}!!}</option>
+                                <option value="{{$member->id}}" {{ old('member_id') == $member->id ? 'selected' : '' }}>{{$member->name["M"]}}</option>
                               @endforeach
                           </select>
                           @include('alerts.feedback', ['field' => 'member_id'])

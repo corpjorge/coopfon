@@ -12,7 +12,7 @@
                         <div class="card ">
                             <div class="card-header card-header-rose card-header-icon">
                                 <div class="card-icon">
-                                    <i class="material-icons">person</i>
+                                    <i class="material-icons">supervisor_account</i>
                                 </div>
                                 <h4 class="card-title">{{ __('Editar administrador') }}</h4>
                             </div>
@@ -181,9 +181,9 @@
                                     <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Miembro') }}</label>
                                     <div class="col-lg-5 col-md-6 col-sm-3">
                                         <select class="selectpicker form-control{{ $errors->has('member_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-member_id" title="Seleccionar miembro" name="member_id" >
-                                            <option selected value="{{ old('member_id', $user->member->id ?? '' ) }}">{{ old('gender_id', json_decode($user->member->name ?? '')->{$user->gender->abbreviation ?? 'M'} ?? '' ) }}</option>
+                                            <option selected value="{{ old('member_id', $user->member->id ?? '' ) }}">{{ old('gender_id', $user->member->name[$user->gender->abbreviation ?? 'M'] ?? '' ) }}</option>
                                             @foreach($members as $member)
-                                                <option value="{{$member->id}}" {{ old('member_id') == $member->id ? 'selected' : '' }}>{!!json_decode($member->name)->{'M'}!!}</option>
+                                                <option value="{{$member->id}}" {{ old('member_id') == $member->id ? 'selected' : '' }}>{{$member->name["M"]}}</option>
                                             @endforeach
                                         </select>
                                         <div style="margin-top: 9px;">@include('alerts.feedback', ['field' => 'member_id'])</div>
@@ -261,6 +261,25 @@
 
 
 @push('js')
+    <script>
+        $(document).ready(function() {
+            $('.datepicker').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove'
+                },
+                format: 'DD-MM-YYYY'
+            });
+        });
+    </script>
+
     <script>
         $(document).ready(function () {
             @if ($errors->any())

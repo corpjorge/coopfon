@@ -8,7 +8,7 @@
             <div class="card">
               <div class="card-header card-header-rose card-header-icon">
                 <div class="card-icon">
-                  <i class="material-icons">group</i>
+                  <i class="material-icons">supervisor_account</i>
                 </div>
                 <h4 class="card-title">{{ __('Restaurar administrador') }}</h4>
               </div>

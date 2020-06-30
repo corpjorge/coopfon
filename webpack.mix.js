@@ -11,7 +11,5 @@ const mix = require('laravel-mix');
  |
  */
 
-/* mix.react(['resources/js/app.jsx', 'resources/js/sidebar.jsx'], 'public/coopfon/js') */
-mix.react('resources/js/app.jsx', 'public/coopfon/js')
-    .react('resources/js/sidebar.jsx', 'public/coopfon/js')
+mix.js('resources/js/app.js', 'public/coopfon/js')
     .sass('resources/sass/coopfon.scss', 'public/coopfon/css');

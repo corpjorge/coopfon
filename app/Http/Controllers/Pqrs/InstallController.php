@@ -20,53 +20,10 @@ class InstallController extends Controller
     {
         Artisan::call('migrate', array('--path' => 'database/migrations/pqrs',));
 
-        DB::table('pq_states')->insert([
+        DB::table('pq_config')->insert([
             'id' => 1,
-            'name' => 'Cerrado',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('pq_states')->insert([
-            'id' => 2,
-            'name' => 'En proceso',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('pq_types')->insert([
-            'id' => 1,
-            'name' => 'Petición',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('pq_types')->insert([
-            'id' => 2,
-            'name' => 'Queja',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('pq_types')->insert([
-            'id' => 3,
-            'name' => 'Queja',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('pq_types')->insert([
-            'id' => 4,
-            'name' => 'Reclamo',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('pq_types')->insert([
-            'id' => 5,
-            'name' => 'Felicitación',
-            'created_at' => now(),
-            'updated_at' => now()
+            'description' => 'Configure su descripción',
+            'terms' => 'Configure sus términos',
         ]);
 
         $module->state_id = 1;

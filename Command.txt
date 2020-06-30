@@ -9,12 +9,12 @@ php artisan make:policy Config\ModulePolicy --model=Model\Config\Module
 php artisan make:request Config\UsersRequest
 
 php artisan make:controller Config\AdminController --model=User
-php artisan make:controller Config\AuthController --resource --model=Model\Config\Auth
+php artisan make:controller Pqrs\PqrController --resource --model=Model\Pqrs\Pqr
 
 php artisan make:migration global_create_members_table --create=members
 php artisan make:seeder GlobalAuthTableSeeder
 
-php artisan make:model Model\Config\Member
+php artisan make:model Model\Pqrs\Pq_conf
 
 php artisan make:migration create_terms_table  --create=pq_terms --path=\database\migrations\service
 php artisan make:migration add_style_to_states_table --table=states --path=\database\migrations\service

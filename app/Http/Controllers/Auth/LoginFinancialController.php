@@ -80,10 +80,9 @@ class LoginFinancialController extends Controller
 
         $this->validateLogin($request);
 
-        $url = $AuthFinancial->parametersJSON()->{"protocolo"}.
-               '://'.$AuthFinancial->parametersJSON()->{"ip"}.':'.
-               $AuthFinancial->parametersJSON()->{"puerto"}.
-               $this->urlWsLogin($AuthFinancial->parametersJSON()->{"entidad"}, $request->document, $request->password);
+        $urlWsLogin = $this->urlWsLogin($AuthFinancial->parameters["entidad"], $request->document, $request->password);
+
+        $url = $this->url($AuthFinancial, $urlWsLogin);
 
         $response = Http::get($url);
         $dataLogin = simplexml_load_string($response);
@@ -93,12 +92,11 @@ class LoginFinancialController extends Controller
             return back();
         }
 
-        $urlData = $AuthFinancial->parametersJSON()->{"protocolo"}.
-            '://'.$AuthFinancial->parametersJSON()->{"ip"}.':'.
-            $AuthFinancial->parametersJSON()->{"puerto"}.
-            $this->urlWsEstadoCuenta($AuthFinancial->parametersJSON()->{"entidad"}, $request->document);
+        $urlWsEstadoCuenta = $this->urlWsEstadoCuenta($AuthFinancial->parameters["entidad"], $request->document);
 
-        $response = Http::get($urlData);
+        $url = $this->url($AuthFinancial, $urlWsEstadoCuenta);
+
+        $response = Http::get($url);
         $dataUser = simplexml_load_string($response);
 
         if($dataUser->email == '' OR $dataUser->email == '0' OR $dataUser->email == 'false'){
@@ -107,29 +105,15 @@ class LoginFinancialController extends Controller
         };
 
         if ($dataUser->result == 'true'){
-            $exist = User::Where('document',$dataUser->identificacion)->exists();
+            $existUser = User::Where('document',$dataUser->identificacion)->first();
 
-            if (!$exist){
-
-                $nameFull = $dataUser->primer_nombre.' '.$dataUser->segundo_nombre.' '.$dataUser->primer_apellido.' '.$dataUser->segundo_apellido;
-
-                $gender = Gender::where('abbreviation', $dataUser->genero)->first('id');
-
-                $user = new User;
-                $user->role_id = 9;
-                $user->name = $nameFull;
-                $user->document_type_id = $dataUser->tipo_identificacion;
-                $user->document = $dataUser->identificacion;
-                $user->gender_id = isset($gender->id) ? $gender->id : '';
-                $user->phone = $dataUser->telefono;
-                $user->password = Hash::make($request->password);
-                $user->code = $dataUser->cod_persona;
-                $user->birth_date = $dataUser->fecha_nacimiento ? Carbon::parse($dataUser->fecha_nacimiento)->format('Y-m-d') : null;
-                $user->email = $dataUser->email;
-                $user->area = $dataUser->cod_oficina;
-                $user->city_id = $dataUser->codciudadresidencia;
-                $user->address = $dataUser->direccion;
-                $user->save();
+            if ($existUser){
+                $existUser->email = $dataUser->email;
+                $existUser->password = Hash::make($request->password);
+                $existUser->save();
+            }
+            else{
+                $this->newUser($dataUser, $request);
             }
 
         }
@@ -160,6 +144,34 @@ class LoginFinancialController extends Controller
         return 'document';
     }
 
+
+    /**
+     * Get the url.
+     *
+     * @return string
+     */
+    public function url($AuthFinancial, $urlWs)
+    {
+        $protocol = $this->protocol(
+            $AuthFinancial->parameters["ip"],
+            $AuthFinancial->parameters["protocolo"],
+            $AuthFinancial->parameters["puerto"]
+        );
+
+        return $protocol.$urlWs;
+
+    }
+
+    /**
+     * Get the url protocol.
+     *
+     * @return string
+     */
+    public function protocol($ip, $protocolo, $puerto)
+    {
+        return $protocolo.'://'.$ip.':'.$puerto;
+    }
+
     /**
      * Get the url login.
      *
@@ -180,9 +192,36 @@ class LoginFinancialController extends Controller
         return "/WebServices/WSEstadoCuenta.asmx/ConsultarDatoBasicosPersona?pEntidad=".$entidad."&pIdentificador=".$document."&pTipo=Identificacion";
     }
 
+    /**
+     * Get the url data.
+     *
+     * @param $dataUser
+     * @param $request
+     * @return boolean
+     */
+    public function newUser($dataUser, $request)
+    {
+        $nameFull = $dataUser->primer_nombre.' '.$dataUser->segundo_nombre.' '.$dataUser->primer_apellido.' '.$dataUser->segundo_apellido;
 
+        $gender = Gender::where('abbreviation', $dataUser->genero)->first('id');
 
+        $user = new User;
+        $user->role_id = 9;
+        $user->name = $nameFull;
+        $user->document_type_id = $dataUser->tipo_identificacion;
+        $user->document = $dataUser->identificacion;
+        $user->gender_id = isset($gender->id) ? $gender->id : '';
+        $user->phone = $dataUser->telefono;
+        $user->password = Hash::make($request->password);
+        $user->code = $dataUser->cod_persona;
+        $user->birth_date = $dataUser->fecha_nacimiento ? Carbon::parse($dataUser->fecha_nacimiento)->format('Y-m-d') : null;
+        $user->email = $dataUser->email;
+        $user->area = $dataUser->cod_oficina;
+        $user->city_id = $dataUser->codciudadresidencia;
+        $user->address = $dataUser->direccion;
 
+        return $user->save();
+    }
 
 
 }

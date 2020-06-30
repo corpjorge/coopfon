@@ -21,7 +21,7 @@
 
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/') }}">
-                <i class="material-icons">web</i>
+                <i class="material-icons">home</i>
                 <p class="d-lg-none d-md-block">
                   {{ __('Stats') }}
                 </p>
@@ -49,7 +49,7 @@
               </p>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Perfil') }}</a>                
+                <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Perfil') }}</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar sesión') }}</a>
             </div>

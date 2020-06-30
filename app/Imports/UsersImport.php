@@ -7,35 +7,42 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
 class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithValidation
 {
+
+    use Importable;
+
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function model(array $row)
     {
-        return new User([
-            'role_id'  => 9,
+        $user =new User([
             'name'  => $row['nombre_completo'],
             'email'  => $row['correo'],
             'password' => Hash::make($row['password']),
             'document_type_id'  => $row['tipo_documento'],
-            'document'  => $row['documento'],
             'phone'  => $row['celular'],
-            'code'  => $row['codigo'],
-            'member_id'  => $row['miembro'],
             'gender_id'  => $row['genero'],
             'address'  => $row['direccion'],
             'area'  => $row['area'],
             'city_id'  => $row['codigo_ciudad'],
             'birth_date'  => $row['fecha_nacimiento'] ? Carbon::parse($row['fecha_nacimiento'])->format('Y-m-d') : null
         ]);
+
+        $user->role_id = 9;
+        $user->document = $row['documento'];
+        $user->code = $row['codigo'];
+        $user->member_id =  $row['miembro'];
+
+        return $user;
 
     }
 

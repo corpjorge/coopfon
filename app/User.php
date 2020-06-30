@@ -27,9 +27,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'picture' ,'role_id',
-        'birth_date', 'document_type_id', 'document',
-        'phone', 'code', 'member_id', 'gender_id', 'address', 'area', 'city_id',
+        'name', 'email', 'password', 'picture' , 'document_type_id',
+        'birth_date', 'phone', 'gender_id', 'address', 'area', 'city_id',
     ];
 
     /**
@@ -108,10 +107,8 @@ class User extends Authenticatable
      */
     public function memberGender()
     {
-        $member = isset($this->member->name) ? $this->member->name : '{ "F": "Asociada", "M":"Asociado"}';
-        $member = json_decode($member);
-        $abbreviation = isset($this->gender->abbreviation) ? $this->gender->abbreviation : 'M';
-        return $member->{$abbreviation};
+        $member = isset($this->member->name) ? $this->member->name : [ "F" => "Asociada", "M" => "Asociado" ];
+        return $member[isset($this->gender->abbreviation) ? $this->gender->abbreviation : 'M'];
     }
 
 

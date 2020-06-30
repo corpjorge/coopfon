@@ -12,7 +12,7 @@
                         <div class="card ">
                             <div class="card-header card-header-rose card-header-icon">
                                 <div class="card-icon">
-                                    <i class="material-icons">recent_actors</i>
+                                    <i class="material-icons">admin_panel_settings</i>
                                 </div>
                                 <h4 class="card-title">{{ __('Editar Autenticación') }}</h4>
                             </div>

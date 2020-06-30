@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTermsTable extends Migration
+class CreateConfigTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateTermsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pq_conf', function (Blueprint $table) {
+        Schema::create('pq_config', function (Blueprint $table) {
             $table->id();
-            $table->longText('description');
-            $table->longText('terms');
+            $table->longText('terms')->nullable();
             $table->date('limit_date')->nullable();
-            $table->timestamps();
         });
     }
 
