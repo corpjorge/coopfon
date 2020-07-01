@@ -15,7 +15,7 @@
                         <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 text-right">
-                                        <a href="{{ route('pqrs.close') }}" class="btn btn-sm btn-success">{{ __('PQRS Cerrados') }}</a>
+                                        <a href="{{ route('pqrs.reply') }}" class="btn btn-sm btn-rose">{{ __('Volver a la lista') }}</a>
                                     </div>
                                 </div>
                             <div class="table-responsive">
@@ -73,15 +73,13 @@
                                                 @endif
                                             </td>
                                             <td class="td-actions text-right">
-                                                <button class="btn btn-primary" data-toggle="modal" data-target="#pqrsModal-{{$pqr->id}}">
+                                                <button class="btn btn-info" data-toggle="modal" data-target="#pqrsModal-{{$pqr->id}}">
                                                     <i class="material-icons">description</i>
                                                     <div class="ripple-container"></div>
                                                 </button>
-                                               @can('update', $pqr)
-                                                <button type="button" rel="tooltip" class="btn btn-success" onclick="confirm('{{ "¿Desea entender la solicitud de ".$pqr->user->name."?" }}') ? location.href='{{ route("pqrs.edit", $pqr)}}' : ''">
+                                                <button class="btn btn-info" data-toggle="modal" data-target="#pqrsModalReply-{{$pqr->id}}">
                                                     <i class="material-icons">reply</i>
                                                 </button>
-                                               @endcan
                                             </td>
 
                                             <div class="modal fade bd-example-modal-lg" id="pqrsModal-{{$pqr->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -94,7 +92,38 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-4"></div>
+                                                                <div class="col-md-4 ml-auto">
+                                                                    @if($pqr->file)
+                                                                        <a href="{{ route('pqrs.file', $pqr) }}" target="_blank" >
+                                                                            <i class="material-icons">insert_drive_file</i>
+                                                                        </a>
+                                                                    @else
+                                                                        Sin adjunto
+                                                                    @endif
+                                                                </div>
+                                                            </div>
                                                             <p>{{ $pqr->description }}</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal fade bd-example-modal-lg" id="pqrsModalReply-{{$pqr->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Respuesta</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                <i class="material-icons">clear</i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>{{ $pqr->reply }}</p>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Cerrar</button>

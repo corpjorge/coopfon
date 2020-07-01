@@ -164,6 +164,56 @@ class User extends Authenticatable
     }
 
     /**
+     * Check if the user has Director role
+     *
+     * @return boolean
+     */
+    public function isDirector()
+    {
+        return $this->role_id <= 4;
+    }
+
+    /**
+     * Check if the user has Coordinator role
+     *
+     * @return boolean
+     */
+    public function isCoordinator()
+    {
+        return $this->role_id <= 5;
+    }
+
+    /**
+     * Check if the user has Auxiliary role
+     *
+     * @return boolean
+     */
+    public function isAuxiliary()
+    {
+        return $this->role_id <= 6;
+    }
+
+    /**
+     * Check if the user has Assistant role
+     *
+     * @return boolean
+     */
+    public function isAssistant()
+    {
+        return $this->role_id <= 7;
+    }
+
+    /**
+     * Check if the user has External role
+     *
+     * @return boolean
+     */
+    public function isExternal()
+    {
+        return $this->role_id <= 8;
+    }
+
+    /**
      * Check if the user has user role
      *
      * @return boolean
@@ -173,10 +223,29 @@ class User extends Authenticatable
         return $this->role_id == 9;
     }
 
+    /**
+     * Check if the user has Invited role
+     *
+     * @return boolean
+     */
+    public function isInvited()
+    {
+        return $this->role_id == 10;
+    }
+
+    /**
+     * Check if the user has Public role
+     *
+     * @return boolean
+     */
+    public function isPublic()
+    {
+        return $this->role_id == 11;
+    }
+
     public function adminsAll()
     {
         return $this->where('role_id','!=',9)->where('role_id','!=',1)->get();
     }
-
 
 }

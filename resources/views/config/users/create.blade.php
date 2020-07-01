@@ -43,7 +43,7 @@
                 </div>
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Tipo de documento') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-document_type_id">{{ __('Tipo de documento') }}</label>
                       <div class="col-lg-3 col-md-6 col-sm-3">
                           <select class="selectpicker form-control{{ $errors->has('document_type_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-document_type_id" title="Tipo de documento" name="document_type_id" required>
                               <option></option>
@@ -56,7 +56,7 @@
                   </div><br>
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Documento') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-document">{{ __('Documento') }}</label>
                       <div class="col-sm-7">
                           <div class="form-group{{ $errors->has('document') ? ' has-danger' : '' }}">
                               <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }}"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document') }}" required />
@@ -89,7 +89,7 @@
 
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Celular') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-phone">{{ __('Celular') }}</label>
                       <div class="col-sm-7">
                           <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                               <input class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}"  type="tel" name="phone" id="input-current-phone" placeholder="{{ __('Celular') }}" value="{{ old('phone') }}" />
@@ -99,7 +99,7 @@
                   </div>
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Código') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-code">{{ __('Código') }}</label>
                       <div class="col-sm-7">
                           <div class="form-group{{ $errors->has('code') ? ' has-danger' : '' }}">
                               <input class="form-control{{ $errors->has('code') ? ' is-invalid' : '' }}"  type="text" name="code" id="input-current-code" placeholder="{{ __('Código') }}" value="{{ old('code') }}" />
@@ -109,7 +109,7 @@
                   </div>
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Area/Zona') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-area">{{ __('Area/Zona') }}</label>
                       <div class="col-sm-7">
                           <div class="form-group{{ $errors->has('area') ? ' has-danger' : '' }}">
                               <input class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}"  type="text" name="area" id="input-current-area" placeholder="{{ __('Area') }}" value="{{ old('area') }}" />
@@ -119,7 +119,7 @@
                   </div>
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Ciudad') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-city_id">{{ __('Ciudad') }}</label>
                       <div class="col-lg-5 col-md-6 col-sm-3">
                           <select class="selectpicker form-control{{ $errors->has('city_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-city_id" title="Seleccionar ciudad" name="city_id" >
                               <option></option>
@@ -133,7 +133,7 @@
                   </div><br>
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Miembro') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-member_id">{{ __('Miembro') }}</label>
                       <div class="col-lg-5 col-md-6 col-sm-3">
                           <select class="selectpicker form-control{{ $errors->has('member_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-member_id" title="Seleccionar miembro" name="member_id" >
                               <option></option>
@@ -146,7 +146,7 @@
                   </div><br>
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Genero') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-gender_id">{{ __('Genero') }}</label>
                       <div class="col-lg-5 col-md-6 col-sm-3">
                           <select class="selectpicker form-control{{ $errors->has('gender_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-gender_id" title="Seleccionar genero" name="gender_id" >
                               <option></option>
@@ -159,7 +159,7 @@
                   </div><br>
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Dirección') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-address">{{ __('Dirección') }}</label>
                       <div class="col-sm-7">
                           <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
                               <input class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}"  type="text" name="address" id="input-current-address" placeholder="{{ __('Dirección') }}" value="{{ old('address') }}" />
@@ -169,7 +169,7 @@
                   </div>
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Fecha nacimiento') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-birth_date">{{ __('Fecha nacimiento') }}</label>
                       <div class="col-sm-7">
                           <div class="form-group{{ $errors->has('birth_date') ? ' has-danger' : '' }}">
                               <input type="text"  name="birth_date" id="input-current-birth_date" placeholder="{{ __('Fecha nacimiento') }}" class="form-control{{ $errors->has('birth_date') ? ' is-invalid' : '' }} datepicker" value="{{ old('birth_date') }}" />

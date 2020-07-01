@@ -16,7 +16,7 @@ class CreateConfigTable extends Migration
         Schema::create('pq_config', function (Blueprint $table) {
             $table->id();
             $table->longText('terms')->nullable();
-            $table->date('limit_date')->nullable();
+            $table->integer('limit_date')->nullable();
         });
     }
 

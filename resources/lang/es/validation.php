@@ -182,6 +182,7 @@ return [
         'phone'                 => 'teléfono',
         'picture'               => 'imagen',
         'price'                 => 'precio',
+        'reply'                 => 'respuesta',
         'role'                  => 'rol',
         'role_id'               => 'rol',
         'second'                => 'segundo',

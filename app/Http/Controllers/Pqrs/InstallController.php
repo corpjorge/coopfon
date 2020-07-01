@@ -22,8 +22,8 @@ class InstallController extends Controller
 
         DB::table('pq_config')->insert([
             'id' => 1,
-            'description' => 'Configure su descripción',
             'terms' => 'Configure sus términos',
+            'limit_date' => 30
         ]);
 
         $module->state_id = 1;

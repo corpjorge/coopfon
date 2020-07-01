@@ -13,12 +13,14 @@
                     <span class="sidebar-normal">{{ __('Radicaciones') }} </span>
                 </a>
             </li>
+            @can('reply', 'App\Model\Pqrs\PqPqr')
             <li class="nav-item{{ $activePage == 'pqrs-reply' ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('pqrs.reply') }}">
                     <span class="sidebar-mini"> S </span>
                     <span class="sidebar-normal">{{ __('Solicitudes') }} </span>
                 </a>
             </li>
+            @endcan
         </ul>
     </div>
 </li>

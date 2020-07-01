@@ -4,7 +4,7 @@ composer dump-autoload
 
 
 
-php artisan make:policy Config\ModulePolicy --model=Model\Config\Module
+php artisan make:policy Pqrs\PqrsPolicy --model=Model\Pqrs\PqPqr
 
 php artisan make:request Config\UsersRequest
 

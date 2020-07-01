@@ -8,9 +8,15 @@ use App\Model\Pqrs\PqrUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PqrController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(PqPqr::class, 'pqr');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -46,13 +52,11 @@ class PqrController extends Controller
             'doc' => 'nullable|mimes:jpeg,jpg,gif,png,xls,xlsx,doc,docx,pdf,zip,rar'
         ]);
 
-        $model->create(
-            $request->merge([
-                    'file' => $request->doc ? $request->doc->store('pqrs') : NULL,
-                    'user_id' => Auth::id(),
-                    'state' => 'En curso'
-            ])->all()
-        );
+        $model->description = $request->description;
+        $model->file = $request->doc ? $request->doc->store('pqrs') : NULL;
+        $model->user_id = Auth::id();
+        $model->state = 'En curso';
+        $model->save();
 
         return redirect()->route('pqrs.index')->withStatus(__('PQRS radicado con éxito.'));
     }
@@ -65,8 +69,8 @@ class PqrController extends Controller
      */
     public function reply(PqPqr $pqr)
     {
-//        $pqr->where('admin_id','!=', Auth::id())->get()
-        return view('pqrs.pqrs.reply', ['pqrs' => $pqr->all()]);
+        $this->authorize('reply', $pqr );
+        return view('pqrs.pqrs.reply', ['pqrs' => $pqr->where('state','En curso')->where('user_id','!=', Auth::id())->get()]);
     }
 
     /**
@@ -77,7 +81,12 @@ class PqrController extends Controller
      */
     public function edit(PqPqr $pqr)
     {
-        return view('pqrs.pqrs.edit', compact('pqr'));
+        $users = \App\Model\Config\Module::where('path','pqrs')->first()->users;
+
+        $pqr->admin_id = Auth::id();
+        $pqr->save();
+
+        return view('pqrs.pqrs.edit', compact('pqr'), [ 'users' => $users]);
     }
 
     /**
@@ -89,7 +98,57 @@ class PqrController extends Controller
      */
     public function update(Request $request, PqPqr $pqr)
     {
-        //
+        $request->validate(['reply' => 'required']);
+
+        $pqr->reply = $request->reply;
+        $pqr->state = 'Cerrado';
+        $pqr->save();
+
+        return redirect()->route('pqrs.reply')->withStatus(__('PQRS cerrado con éxito.'));
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Model\Pqrs\PqPqr  $pqr
+     * @return \Illuminate\Http\Response
+     */
+    public function file(PqPqr $pqr)
+    {
+        return Storage::download($pqr->file);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param Request $request
+     * @param \App\Model\Pqrs\PqPqr $pqr
+     * @return void
+     */
+    public function move(Request $request, PqPqr $pqr)
+    {
+        $this->authorize('reply', $pqr );
+
+        $request->validate(['admin_id' => 'required|exists:users,id']);
+
+        $pqr->admin_id = $request->admin_id;
+        $pqr->save();
+
+        return redirect()->route('pqrs.reply')->withStatus(__('Usuario traslado con éxito.'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Model\Pqrs\PqPqr  $pqr
+     * @return \Illuminate\Http\Response
+     */
+    public function close(PqPqr $pqr)
+    {
+        $this->authorize('reply', $pqr );
+        return view('pqrs.pqrs.close', ['pqrs' => $pqr->where('state','Cerrado')->get()]);
+    }
+
+
 
 }
