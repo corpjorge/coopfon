@@ -85,7 +85,6 @@ Página del producto: https://www.coopfon.com/
         <script src="{{ asset('coopfon') }}/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
 
         <script src="{{ asset('coopfon') }}/js/application.js"></script>
-{{--        <script src="{{ asset('coopfon') }}/js/sidebar.js"></script>--}}
 
         <script>
           $(document).ready(function () {
@@ -102,11 +101,41 @@ Página del producto: https://www.coopfon.com/
                 }
               });
             @endif
+
+            @if (session('error'))
+            $.notify({
+                icon: "done",
+                message: "{{ session('error') }}"
+            }, {
+                type: 'danger',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            @endif
+
+            @if (session('warning'))
+            $.notify({
+                icon: "done",
+                message: "{{ session('warning') }}"
+            }, {
+                type: 'warning',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            @endif
+
           });
 
           $(function () {
               $('[data-toggle="tooltip"]').tooltip()
           })
+
         </script>
         @stack('js')
 </body>

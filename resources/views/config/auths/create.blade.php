@@ -13,7 +13,7 @@
                         <div class="card ">
                             <div class="card-header card-header-rose card-header-icon">
                                 <div class="card-icon">
-                                    <i class="material-icons">recent_actors</i>
+                                    <i class="material-icons">admin_panel_settings</i>
                                 </div>
                                 <h4 class="card-title">{{ __('Añadir Autenticación') }}</h4>
                             </div>
@@ -56,6 +56,15 @@
                                         <div class="form-group{{ $errors->has('icon') ? ' has-danger' : '' }}">
                                             <input class="form-control{{ $errors->has('icon') ? ' is-invalid' : '' }}" name="icon" id="input-icon" type="text" placeholder="{{ __('Icono') }}" value="{{ old('icon') }}" required="true" aria-required="true"/>
                                             @include('alerts.feedback', ['field' => 'icon'])
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Parámetros') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('parameters') ? ' has-danger' : '' }}">
+                                            <textarea cols="30" rows="10" class="form-control{{ $errors->has('parameters') ? ' is-invalid' : '' }}" name="parameters" id="input-parameters" type="text" placeholder="{{ __('{ "ip": "192.175.12.5", "protocolo" : "http", "puerto" : "80", "entidad": "LUNA"}') }}">{{ old('parameters') }}</textarea>
+                                            @include('alerts.feedback', ['field' => 'parameters'])
                                         </div>
                                     </div>
                                 </div>

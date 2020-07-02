@@ -65,7 +65,7 @@
                   </div>
                 </div>
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Tipo de documento') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-document_type_id">{{ __('Tipo de documento') }}</label>
                       <div class="col-lg-5 col-md-6 col-sm-3">
                           <select class="selectpicker form-control{{ $errors->has('document_type_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-document_type_id" title="Tipo de documento" name="document_type_id" required>
                               <option selected value="{{ old('document_type_id', $user->documentType->id ?? '' ) }}">{{ old('document_type_id', $user->documentType->type ?? '' )  }}</option>
@@ -79,7 +79,7 @@
                   </div>
 
                   <div class="row">
-                      <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Documento') }}</label>
+                      <label class="col-sm-2 col-form-label" for="input-current-document">{{ __('Documento') }}</label>
                       <div class="col-sm-7">
                           <div class="form-group{{ $errors->has('document') ? ' has-danger' : '' }}">
                               <input class="form-control{{ $errors->has('document') ? ' is-invalid' : '' }}"  type="number" name="document" id="input-current-document" placeholder="{{ __('Documento') }}" value="{{ old('document', $user->document) }}"  required/>
@@ -125,7 +125,7 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Celular') }}</label>
+                        <label class="col-sm-2 col-form-label" for="input-current-phone">{{ __('Celular') }}</label>
                         <div class="col-sm-7">
                             <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                                 <input class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}"  type="tel" name="phone" id="input-current-phone" placeholder="{{ __('Celular') }}" value="{{ old('phone', $user->phone) }}"  />
@@ -135,7 +135,7 @@
                     </div>
 
                     <div class="row">
-                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Código') }}</label>
+                        <label class="col-sm-2 col-form-label" for="input-current-code">{{ __('Código') }}</label>
                         <div class="col-sm-7">
                             <div class="form-group{{ $errors->has('code') ? ' has-danger' : '' }}">
                                 <input class="form-control{{ $errors->has('code') ? ' is-invalid' : '' }}"  type="text" name="code" id="input-current-code" placeholder="{{ __('Código') }}" value="{{ old('code', $user->code) }}"  />
@@ -145,12 +145,12 @@
                     </div>
 
                     <div class="row">
-                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Miembro') }}</label>
+                        <label class="col-sm-2 col-form-label" for="input-current-member_id">{{ __('Miembro') }}</label>
                         <div class="col-lg-5 col-md-6 col-sm-3">
                             <select class="selectpicker form-control{{ $errors->has('member_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-member_id" title="Seleccionar miembro" name="member_id" >
-                                <option selected value="{{ old('member_id', $user->member->id ?? '' ) }}">{{ old('gender_id', json_decode($user->member->name ?? '')->{$user->gender->abbreviation ?? 'M'} ?? '' ) }}</option>
+                                <option selected value="{{ old('member_id', $user->member->id ?? '' ) }}">{{ old('gender_id', $user->member->name[$user->gender->abbreviation ?? 'M'] ?? '' ) }}</option>
                                 @foreach($members as $member)
-                                    <option value="{{$member->id}}" {{ old('member_id') == $member->id ? 'selected' : '' }}>{!!json_decode($member->name)->{'M'}!!}</option>
+                                    <option value="{{$member->id}}" {{ old('member_id') == $member->id ? 'selected' : '' }}>{{$member->name["M"]}}</option>
                                 @endforeach
                             </select>
                             <div style="margin-top: 9px;">@include('alerts.feedback', ['field' => 'member_id'])</div>
@@ -158,7 +158,7 @@
                     </div><br>
 
                     <div class="row">
-                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Genero') }}</label>
+                        <label class="col-sm-2 col-form-label" for="input-current-gender">{{ __('Genero') }}</label>
                         <div class="col-lg-5 col-md-6 col-sm-3">
                             <select class="selectpicker form-control{{ $errors->has('gender_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-gender" title="Genero" name="gender_id" >
                                 <option selected value="{{ old('gender_id', $user->gender->id ?? '' ) }}">{{ old('gender_id', $user->gender->type ?? '' ) }}</option>
@@ -171,7 +171,7 @@
                     </div><br>
 
                     <div class="row">
-                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Dirección') }}</label>
+                        <label class="col-sm-2 col-form-label" for="input-current-address">{{ __('Dirección') }}</label>
                         <div class="col-sm-7">
                             <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
                                 <input class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}"  type="text" name="address" id="input-current-address" placeholder="{{ __('Dirección') }}" value="{{ old('address', $user->address) }}"  />
@@ -181,7 +181,7 @@
                     </div>
 
                     <div class="row">
-                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Area/Zona') }}</label>
+                        <label class="col-sm-2 col-form-label" for="input-current-area">{{ __('Area/Zona') }}</label>
                         <div class="col-sm-7">
                             <div class="form-group{{ $errors->has('area') ? ' has-danger' : '' }}">
                                 <input class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}"  type="text" name="area" id="input-current-area" placeholder="{{ __('Area') }}" value="{{ old('area', $user->area) }}"  />
@@ -191,7 +191,7 @@
                     </div>
 
                     <div class="row">
-                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Fecha nacimiento') }}</label>
+                        <label class="col-sm-2 col-form-label" for="input-current-birth_date">{{ __('Fecha nacimiento') }}</label>
                         <div class="col-sm-7">
                             <div class="form-group{{ $errors->has('birth_date') ? ' has-danger' : '' }}">
                                 <input type="text"  name="birth_date" id="input-current-birth_date" placeholder="{{ __('Fecha nacimiento') }}" class="form-control{{ $errors->has('birth_date') ? ' is-invalid' : '' }} datepicker"
@@ -202,7 +202,7 @@
                     </div>
 
                     <div class="row">
-                        <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Ciudad') }}</label>
+                        <label class="col-sm-2 col-form-label" for="input-current-city_id">{{ __('Ciudad') }}</label>
                         <div class="col-lg-5 col-md-6 col-sm-3">
                             <select class="selectpicker form-control{{ $errors->has('city_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-city_id" title="Ciudad" name="city_id" >
                                 <option selected value="{{ old('city_id',$user->city->code ?? '' ) }}">{{ old('city_id', isset($user->city->name) ?  $user->city->name.' / '.$user->city->department->name : '' ) }}</option>

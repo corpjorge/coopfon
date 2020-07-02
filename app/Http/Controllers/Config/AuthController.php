@@ -96,7 +96,7 @@ class AuthController extends Controller
             'icon' => 'required|',
         ]);
 
-        $auth->update($request->all());
+        $auth->update($request->merge(['parameters' => json_decode($request->parameters)])->all());
 
         return redirect()->route('auths.index')->withStatus(__('Autenticación actualizada con éxito.'));
     }

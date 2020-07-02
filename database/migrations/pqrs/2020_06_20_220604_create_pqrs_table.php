@@ -13,14 +13,15 @@ class CreatePqrsTable extends Migration
      */
     public function up()
     {
-        Schema::create('s_pqrs', function (Blueprint $table) {
+        Schema::create('pq_pqrs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('s_type_id')->constrained();
-            $table->foreignId('s_state_id')->constrained();
-            $table->string('description');
-            $table->string('file');
-            $table->softDeletes();
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('users');
+            $table->string('state');
+            $table->longText('description');
+            $table->longText('reply')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

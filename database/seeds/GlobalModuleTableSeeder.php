@@ -14,8 +14,8 @@ class GlobalModuleTableSeeder extends Seeder
         DB::table('modules')->insert([
             'id' => 1,
             'state_id' => '2',
-            'name' => 'Servicios',
-            'path' => 'service',
+            'name' => 'PQRS',
+            'path' => 'pqrs',
             'version' => '2.0.0',
             'created_at' => now(),
             'updated_at' => now()

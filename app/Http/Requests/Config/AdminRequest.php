@@ -45,7 +45,7 @@ class AdminRequest extends FormRequest
                 'required', 'integer', 'exists:roles,id'
             ],
             'module_id' => [
-                'nullable', 'integer', 'exists:modules,id'
+                'nullable', 'exists:modules,id'
             ],
             'code' => [
                 'nullable', 'unique:users,code'
