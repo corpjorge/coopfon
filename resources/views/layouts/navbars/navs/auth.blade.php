@@ -37,8 +37,8 @@
                 </p>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">{{ __('Prueba 1') }}</a>
-                <a class="dropdown-item" href="#">{{ __('Prueba 2') }}</a>
+                <a class="dropdown-item" href="#">{{ __('Nuevo PQR') }}</a>
+                <a class="dropdown-item" href="#">{{ __('PQR Atrasado') }}</a>
               </div>
             </li>
           <li class="nav-item dropdown">
