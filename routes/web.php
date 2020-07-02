@@ -24,12 +24,15 @@ Route::get('dashboard', 'Config\HomeController@index')->name('home');
 //Login AUTH
 Route::get('login/email', 'Auth\LoginDocumentController@showLoginForm');
 
+//Login Document
 Route::get('login/document', 'Auth\LoginDocumentController@showLoginForm');
 Route::post('login/document', 'Auth\LoginDocumentController@login')->name('login.document');
 
+//Login Financial
 Route::get('login/financial', 'Auth\LoginFinancialController@showLoginForm');
 Route::post('login/financial', 'Auth\LoginFinancialController@login')->name('login.financial');
 
+//Login Socialite
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
 

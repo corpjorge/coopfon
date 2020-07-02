@@ -96,7 +96,6 @@
                                     <div class="ripple-container"></div> No disponible
                                 </button>
                             </td>
-
                         </tr>
                         @endforeach
                         </tbody>
