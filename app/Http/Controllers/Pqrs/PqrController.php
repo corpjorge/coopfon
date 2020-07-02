@@ -7,7 +7,6 @@ use App\Model\Pqrs\PqConfig;
 use App\Model\Pqrs\PqrUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PqrController extends Controller
@@ -25,7 +24,7 @@ class PqrController extends Controller
      */
     public function index(PqrUser $pqr)
     {
-        return view('pqrs.pqrs.index', ['pqrs' => $pqr->find(Auth::id())->pqrs]);
+        return view('pqrs.pqrs.index', ['pqrs' => $pqr->find(auth()->user()->id)->pqrs]);
     }
 
     /**
@@ -54,7 +53,7 @@ class PqrController extends Controller
 
         $model->description = $request->description;
         $model->file = $request->doc ? $request->doc->store('pqrs') : NULL;
-        $model->user_id = Auth::id();
+        $model->user_id = auth()->user()->id;
         $model->state = 'En curso';
         $model->save();
 
@@ -74,7 +73,7 @@ class PqrController extends Controller
         $this->authorize('reply', $pqr );
 
         return view('pqrs.pqrs.reply', [
-            'pqrs' => $pqr->where('state','En curso')->where('user_id','!=', Auth::id())->get(),
+            'pqrs' => $pqr->pqrActive()->where('user_id','!=', auth()->user()->id)->get(),
             'limit_date' => $pqConf->conf()->limit_date
         ]);
     }
@@ -89,7 +88,7 @@ class PqrController extends Controller
     {
         $users = \App\Model\Config\Module::where('path','pqrs')->first()->users;
 
-        $pqr->admin_id = Auth::id();
+        $pqr->admin_id = auth()->user()->id;
         $pqr->save();
 
         return view('pqrs.pqrs.edit', compact('pqr'), [ 'users' => $users]);

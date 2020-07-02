@@ -26,4 +26,18 @@ class PqPqr extends Model
     {
         return $this->belongsTo(User::class, 'admin_id');
     }
+
+    /**
+     * Scope a query to only include users that are authors
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     *
+     */
+    public function scopePqrActive($query)
+    {
+        return $query->where('state','En curso');
+    }
+
+
+
 }

@@ -19,7 +19,7 @@ class PqrsPolicy
      */
     public function viewAny(User $user)
     {
-       return Module::where('path','pqrs')->where('state_id',1)->exists();
+       return Module::moduleExist('pqrs');
     }
 
     /**
@@ -30,7 +30,7 @@ class PqrsPolicy
      */
     public function create(User $user)
     {
-        return Module::where('path','pqrs')->where('state_id',1)->exists();
+        return Module::moduleExist('pqrs');
     }
 
     /**
@@ -42,7 +42,7 @@ class PqrsPolicy
      */
     public function update(User $user, PqPqr $pqPqr)
     {
-        $exists = Module::where('path','pqrs')->where('state_id',1)->exists();
+        $exists = Module::moduleExist('pqrs');
 
         if (!$exists){
             return false;
@@ -82,7 +82,7 @@ class PqrsPolicy
      */
     public function reply(User $user)
     {
-        $exists = Module::where('path','pqrs')->where('state_id',1)->exists();
+        $exists = Module::moduleExist('pqrs');
 
         if (!$exists){
             return false;
@@ -107,7 +107,7 @@ class PqrsPolicy
      */
     public function config(User $user)
     {
-        $exists = Module::where('path','pqrs')->where('state_id',1)->exists();
+        $exists = Module::moduleExist('pqrs');
 
         if (!$exists){
             return false;
