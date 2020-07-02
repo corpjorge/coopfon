@@ -48,7 +48,7 @@ class PqrsPolicy
             return false;
         }
 
-        if ($user->isSuperAdmin()){
+        if ($user->isAdmin()){
             return true;
         }
 
@@ -88,7 +88,7 @@ class PqrsPolicy
             return false;
         }
 
-        if ($user->isSuperAdmin()){
+        if ($user->isAdmin()){
             return true;
         }
 
@@ -97,5 +97,31 @@ class PqrsPolicy
         if (isset($permissions->path) AND $user->isAssistant()){
             return true;
         }
+    }
+
+    /**
+     * Determine whether the user can conf.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function config(User $user)
+    {
+        $exists = Module::where('path','pqrs')->where('state_id',1)->exists();
+
+        if (!$exists){
+            return false;
+        }
+
+        if ($user->isAdmin()){
+            return true;
+        }
+
+        if (isset($permissions->path) AND $user->isDirector()){
+            return true;
+        }
+
+        return false;
+
     }
 }

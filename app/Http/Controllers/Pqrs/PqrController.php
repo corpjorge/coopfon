@@ -64,13 +64,19 @@ class PqrController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Pqrs\PqPqr  $pqr
+     * @param \App\Model\Pqrs\PqPqr $pqr
+     * @param PqConfig $pqConf
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function reply(PqPqr $pqr)
+    public function reply(PqPqr $pqr, PqConfig $pqConf)
     {
         $this->authorize('reply', $pqr );
-        return view('pqrs.pqrs.reply', ['pqrs' => $pqr->where('state','En curso')->where('user_id','!=', Auth::id())->get()]);
+
+        return view('pqrs.pqrs.reply', [
+            'pqrs' => $pqr->where('state','En curso')->where('user_id','!=', Auth::id())->get(),
+            'limit_date' => $pqConf->conf()->limit_date
+        ]);
     }
 
     /**
@@ -108,7 +114,7 @@ class PqrController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show file.
      *
      * @param  \App\Model\Pqrs\PqPqr  $pqr
      * @return \Illuminate\Http\Response
@@ -119,11 +125,12 @@ class PqrController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * move.
      *
      * @param Request $request
      * @param \App\Model\Pqrs\PqPqr $pqr
      * @return void
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function move(Request $request, PqPqr $pqr)
     {
@@ -138,17 +145,16 @@ class PqrController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Display a listing of the resource.
      *
-     * @param  \App\Model\Pqrs\PqPqr  $pqr
+     * @param \App\Model\Pqrs\PqPqr $pqr
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function close(PqPqr $pqr)
     {
         $this->authorize('reply', $pqr );
         return view('pqrs.pqrs.close', ['pqrs' => $pqr->where('state','Cerrado')->get()]);
     }
-
-
 
 }

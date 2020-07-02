@@ -1,11 +1,11 @@
-@extends('layouts.app', ['activePage' => 'pqrs-reply', 'menuParent' => 'pqrs', 'titlePage' => __('Solicitudes PQRS')])
+@extends('layouts.app', ['activePage' => 'pqrs-external', 'menuParent' => 'pqrs', 'titlePage' => __('Solicitudes PQRS')])
 
 @section('content')
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <form method="post" action="{{ route('pqrs.update', $pqr) }}" autocomplete="off" class="form-horizontal">
+                    <form method="post" action="{{ route('pqrs_external.update', $pqr) }}" autocomplete="off" class="form-horizontal">
                         @csrf
                         @method('put')
 
@@ -19,7 +19,7 @@
                             <div class="card-body ">
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        <a href="{{ route('pqrs.reply') }}" class="btn btn-sm btn-rose">{{ __('Volver a la lista') }}</a>
+                                        <a href="{{ route('pqrs_external.index') }}" class="btn btn-sm btn-rose">{{ __('Volver a la lista') }}</a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -27,7 +27,7 @@
                                     <div class="col-sm-7">
                                         <div class="form-group">
                                             @if($pqr->file)
-                                            <a href="{{ route('pqrs.file', $pqr) }}" target="_blank" >
+                                            <a href="{{ route('pqrs_external.file', $pqr) }}" target="_blank" >
                                                <i class="material-icons">insert_drive_file</i> Descargar
                                             </a>
                                             @else
@@ -60,7 +60,7 @@
                         </div>
                     </form>
 
-                    <form method="post" action="{{ route('pqrs.move', $pqr) }}" autocomplete="off" class="form-horizontal">
+                    <form method="post" action="{{ route('pqrs_external.move', $pqr) }}" autocomplete="off" class="form-horizontal">
                         @csrf
                         @method('put')
 

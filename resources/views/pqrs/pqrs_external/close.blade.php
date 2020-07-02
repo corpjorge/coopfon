@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'pqrs-filings', 'menuParent' => 'pqrs', 'titlePage' => __('Solicitudes PQRS')])
+@extends('layouts.app', ['activePage' => 'pqrs-external', 'menuParent' => 'pqrs', 'titlePage' => __('Solicitudes PQRS externas')])
 
 @section('content')
     <div class="content">
@@ -10,12 +10,12 @@
                             <div class="card-icon">
                                 <i class="material-icons">support_agent</i>
                             </div>
-                            <h4 class="card-title">{{ __('PQRS') }}</h4>
+                            <h4 class="card-title">{{ __('PQRS Externos') }}</h4>
                         </div>
                         <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 text-right">
-                                        <a href="{{ route('pqrs.create') }}" class="btn btn-sm btn-rose">{{ __('Radicar PQRS') }}</a>
+                                        <a href="{{ route('pqrs_external.index') }}" class="btn btn-sm btn-rose">{{ __('Volver a la lista') }}</a>
                                     </div>
                                 </div>
                             <div class="table-responsive">
@@ -25,7 +25,16 @@
                                         {{ __('ID') }}
                                     </th>
                                     <th>
+                                        {{ __('Documento') }}
+                                    </th>
+                                    <th>
+                                        {{ __('Nombre') }}
+                                    </th>
+                                    <th>
                                         {{ __('Fecha de creación') }}
+                                    </th>
+                                    <th>
+                                        {{ __('Gestor') }}
                                     </th>
                                     <th>
                                         {{ __('Estado') }}
@@ -41,24 +50,36 @@
                                                 {{ $pqr->id }}
                                             </td>
                                             <td>
+                                                {{ $pqr->document }}
+                                            </td>
+                                            <td>
+                                                {{ $pqr->name }}
+                                            </td>
+                                            <td>
                                                 {{ $pqr->created_at->format('Y-m-d') }}
                                             </td>
                                             <td>
-                                                <span class="badge badge-{{ $pqr->state == "Cerrado" ? 'success' : 'warning' }}">
+                                                {{$pqr->admin->name ?? ''}}
+                                            </td>
+                                            <td>
+                                                @if($pqr->state == "En curso")
+                                                <span class="badge badge-{{ $pqr->state == "Cerrado" ? 'danger' : 'warning' }}">
                                                     {{ $pqr->state }}
                                                 </span>
+                                                @else
+                                                <span class="badge badge-success">
+                                                    {{ $pqr->state }}
+                                                </span>
+                                                @endif
                                             </td>
                                             <td class="td-actions text-right">
-                                                <button class="btn btn-primary" data-toggle="modal" data-target="#pqrsModal-{{$pqr->id}}">
+                                                <button class="btn btn-info" data-toggle="modal" data-target="#pqrsModal-{{$pqr->id}}">
                                                     <i class="material-icons">description</i>
                                                     <div class="ripple-container"></div>
                                                 </button>
-                                                @if($pqr->reply)
-                                                <button class="btn btn-success" data-toggle="modal" data-target="#pqrsModalReply-{{$pqr->id}}">
-                                                    <i class="material-icons">flag</i>
-                                                    <div class="ripple-container"></div>
+                                                <button class="btn btn-info" data-toggle="modal" data-target="#pqrsModalReply-{{$pqr->id}}">
+                                                    <i class="material-icons">reply</i>
                                                 </button>
-                                                @endif
                                             </td>
 
                                             <div class="modal fade bd-example-modal-lg" id="pqrsModal-{{$pqr->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -71,6 +92,18 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-4"></div>
+                                                                <div class="col-md-4 ml-auto">
+                                                                    @if($pqr->file)
+                                                                        <a href="{{ route('pqrs_external.file', $pqr) }}" target="_blank" >
+                                                                            <i class="material-icons">insert_drive_file</i>
+                                                                        </a>
+                                                                    @else
+                                                                        Sin adjunto
+                                                                    @endif
+                                                                </div>
+                                                            </div>
                                                             <p>{{ $pqr->description }}</p>
                                                         </div>
                                                         <div class="modal-footer">
@@ -80,12 +113,11 @@
                                                 </div>
                                             </div>
 
-                                            @if($pqr->reply)
                                             <div class="modal fade bd-example-modal-lg" id="pqrsModalReply-{{$pqr->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Descripción</h4>
+                                                            <h4 class="modal-title">Respuesta</h4>
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                                                 <i class="material-icons">clear</i>
                                                             </button>
@@ -99,7 +131,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            @endif
 
                                         </tr>
                                     @endforeach
@@ -140,9 +171,7 @@
                     emptyTable: "Ningún dato disponible en esta tabla",
                 },
                 "order": [[ 0, "desc" ]],
-                "columnDefs": [
-                    { "orderable": true, "targets": 1 },
-                ],
+
             });
         });
     </script>

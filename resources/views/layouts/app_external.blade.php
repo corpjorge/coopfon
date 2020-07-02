@@ -1,3 +1,18 @@
+{{--
+
+=========================================================
+* CoopFon - v1.0.0
+=========================================================
+
+*
+Página del producto: https://www.coopfon.com/
+* Copyright 2020 Fycls Ingenieria (fyclsingenieria.com) & UPDIVISION (https://www.corpjorge.com)
+
+* Codificado por www.corpjorge.com & www.fyclsingenieria.com
+
+=========================================================
+
+--}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,15 +29,17 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="{{ asset('coopfon') }}/css/coopfon.css?v=2.1.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="{{ asset('coopfon') }}/demo/demo.css" rel="stylesheet" />
+  <link href="{{ asset('coopfon') }}/css/coopfon.css?v=2.1.2" rel="stylesheet" />
+
 </head>
-    <body class="off-canvas-sidebar">
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        @include('layouts.page_templates.guest')
+<body class="{{ $class ?? '' }}">
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+
+                @include('layouts.navbars.navs.guest')
+                @yield('content')
+                @include('layouts.footers.guest')
 
         <!--   Core JS Files   -->
         <script src="{{ asset('coopfon') }}/js/core/jquery.min.js"></script>
@@ -57,18 +74,66 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
         <!-- Library for adding dinamically elements -->
         <script src="{{ asset('coopfon') }}/js/plugins/arrive.min.js"></script>
-        <!--  Google Maps Plugin    -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
         <!-- Chartist JS -->
         <script src="{{ asset('coopfon') }}/js/plugins/chartist.min.js"></script>
         <!--  Notifications Plugin    -->
         <script src="{{ asset('coopfon') }}/js/plugins/bootstrap-notify.js"></script>
         <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="{{ asset('coopfon') }}/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
-        <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-        <script src="{{ asset('coopfon') }}/demo/demo.js"></script>
+
         <script src="{{ asset('coopfon') }}/js/application.js"></script>
 
+        <script>
+          $(document).ready(function () {
+            @if (session('status'))
+              $.notify({
+                icon: "done",
+                message: "{{ session('status') }}"
+              }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                  from: 'top',
+                  align: 'right'
+                }
+              });
+            @endif
+
+            @if (session('error'))
+            $.notify({
+                icon: "done",
+                message: "{{ session('error') }}"
+            }, {
+                type: 'danger',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            @endif
+
+            @if (session('warning'))
+            $.notify({
+                icon: "done",
+                message: "{{ session('warning') }}"
+            }, {
+                type: 'warning',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            @endif
+
+          });
+
+          $(function () {
+              $('[data-toggle="tooltip"]').tooltip()
+          })
+
+        </script>
         @stack('js')
 </body>
 

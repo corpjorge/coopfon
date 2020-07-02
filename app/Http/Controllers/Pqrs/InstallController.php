@@ -41,7 +41,7 @@ class InstallController extends Controller
      */
     public function update(Module $module)
     {
-        $version = '2.0.1';
+        $version = '2.0.2';
 
         if ($version == $module->version){
             return redirect()->route('module.index')->withStatus(__('No hay actualización disponible.'));

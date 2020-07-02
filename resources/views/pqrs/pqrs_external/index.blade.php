@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'pqrs-filings', 'menuParent' => 'pqrs', 'titlePage' => __('Solicitudes PQRS')])
+@extends('layouts.app', ['activePage' => 'pqrs-external', 'menuParent' => 'pqrs', 'titlePage' => __('Solicitudes PQRS externas')])
 
 @section('content')
     <div class="content">
@@ -10,14 +10,14 @@
                             <div class="card-icon">
                                 <i class="material-icons">support_agent</i>
                             </div>
-                            <h4 class="card-title">{{ __('PQRS') }}</h4>
+                            <h4 class="card-title">{{ __('PQRS Externos') }}</h4>
                         </div>
                         <div class="card-body">
-                                <div class="row">
-                                    <div class="col-12 text-right">
-                                        <a href="{{ route('pqrs.create') }}" class="btn btn-sm btn-rose">{{ __('Radicar PQRS') }}</a>
-                                    </div>
+                            <div class="row">
+                                <div class="col-12 text-right">
+                                    <a href="{{ route('pqrs_external.close') }}" class="btn btn-sm btn-success">{{ __('PQRS Cerrados') }}</a>
                                 </div>
+                            </div>
                             <div class="table-responsive">
                                 <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
                                     <thead class="text-primary">
@@ -25,7 +25,16 @@
                                         {{ __('ID') }}
                                     </th>
                                     <th>
+                                        {{ __('Documento') }}
+                                    </th>
+                                    <th>
+                                        {{ __('Nombre') }}
+                                    </th>
+                                    <th>
                                         {{ __('Fecha de creación') }}
+                                    </th>
+                                    <th>
+                                        {{ __('Gestor') }}
                                     </th>
                                     <th>
                                         {{ __('Estado') }}
@@ -41,24 +50,44 @@
                                                 {{ $pqr->id }}
                                             </td>
                                             <td>
-                                                {{ $pqr->created_at->format('Y-m-d') }}
+                                                {{ $pqr->name }}
                                             </td>
                                             <td>
-                                                <span class="badge badge-{{ $pqr->state == "Cerrado" ? 'success' : 'warning' }}">
+                                                {{ $pqr->document }}
+                                            </td>
+                                            <td>
+                                                {{ $pqr->created_at->format('Y-m-d') }} / {{ $pqr->created_at->diffForHumans(Carbon\Carbon::now()) }}
+                                            </td>
+                                            <td>
+                                                {{$pqr->admin->name ?? ''}}
+                                            </td>
+                                            <td>
+                                                @if($pqr->state == "En curso")
+                                                    @if($pqr->created_at->diffInDays(Carbon\Carbon::now()) <= $limit_date)
+                                                        <span class="badge badge-{{ $pqr->state == "Cerrado" ? 'danger' : 'warning' }}">
+                                                            {{ $pqr->state }}
+                                                        </span>
+                                                    @else
+                                                        <span class="badge badge-{{ $pqr->state == "Cerrado" ? 'warning' : 'danger' }}">
+                                                        {{ $pqr->state }}
+                                                        </span>
+                                                    @endif
+                                                @else
+                                                    <span class="badge badge-success">
                                                     {{ $pqr->state }}
                                                 </span>
+                                                @endif
                                             </td>
                                             <td class="td-actions text-right">
                                                 <button class="btn btn-primary" data-toggle="modal" data-target="#pqrsModal-{{$pqr->id}}">
                                                     <i class="material-icons">description</i>
                                                     <div class="ripple-container"></div>
                                                 </button>
-                                                @if($pqr->reply)
-                                                <button class="btn btn-success" data-toggle="modal" data-target="#pqrsModalReply-{{$pqr->id}}">
-                                                    <i class="material-icons">flag</i>
-                                                    <div class="ripple-container"></div>
-                                                </button>
-                                                @endif
+                                                @can('update', $pqr)
+                                                    <button type="button" rel="tooltip" class="btn btn-success" onclick="confirm('{{ "¿Desea entender la solicitud de ".$pqr->name."?" }}') ? location.href='{{ route("pqrs_external.edit", $pqr)}}' : ''">
+                                                        <i class="material-icons">reply</i>
+                                                    </button>
+                                                @endcan
                                             </td>
 
                                             <div class="modal fade bd-example-modal-lg" id="pqrsModal-{{$pqr->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -79,27 +108,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            @if($pqr->reply)
-                                            <div class="modal fade bd-example-modal-lg" id="pqrsModalReply-{{$pqr->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Descripción</h4>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                <i class="material-icons">clear</i>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>{{ $pqr->reply }}</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Cerrar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @endif
 
                                         </tr>
                                     @endforeach
@@ -140,9 +148,7 @@
                     emptyTable: "Ningún dato disponible en esta tabla",
                 },
                 "order": [[ 0, "desc" ]],
-                "columnDefs": [
-                    { "orderable": true, "targets": 1 },
-                ],
+
             });
         });
     </script>

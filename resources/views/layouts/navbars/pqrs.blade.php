@@ -21,6 +21,22 @@
                 </a>
             </li>
             @endcan
+            @can('reply', 'App\Model\Pqrs\PqPqr')
+                <li class="nav-item{{ $activePage == 'pqrs-external' ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ route('pqrs_external.index') }}">
+                        <span class="sidebar-mini"> SE </span>
+                        <span class="sidebar-normal">{{ __('Solicitudes externas') }} </span>
+                    </a>
+                </li>
+            @endcan
+            @can('config', 'App\Model\Pqrs\PqPqr')
+                <li class="nav-item{{ $activePage == 'pqrs-config' ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ route('pqrs_config.index') }}">
+                        <span class="sidebar-mini"> C </span>
+                        <span class="sidebar-normal">{{ __('Configuración') }} </span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>

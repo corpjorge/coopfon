@@ -15,7 +15,7 @@ class GlobalUsersTableSeeder extends Seeder
         factory(App\User::class)->create([
             'id' => 1,
             'role_id' => 1,
-            'name' => 'Admin',
+            'name' => 'Administrator',
             'email' => 'corpjorge@hotmail.com',
             'password' => Hash::make('admin'),
             'created_at' => now(),
@@ -25,8 +25,30 @@ class GlobalUsersTableSeeder extends Seeder
 
         factory(App\User::class)->create([
             'id' => 2,
-            'role_id' => 2,
-            'name' => 'corpjorge',
+            'role_id' => 1,
+            'name' => 'John Freddy Moreno',
+            'email' => 'john.moreno@fyclsingenieria.com',
+            'password' => Hash::make('12342wefdgsasdf@'),
+            'created_at' => now(),
+            'updated_at' => now()
+
+        ]);
+
+        factory(App\User::class)->create([
+            'id' => 3,
+            'role_id' => 1,
+            'name' => 'Faber Ramirez',
+            'email' => 'faber@dgraficos.com',
+            'password' => Hash::make('12342wefdgsasdf@'),
+            'created_at' => now(),
+            'updated_at' => now()
+
+        ]);
+
+        factory(App\User::class)->create([
+            'id' => 4,
+            'role_id' => 5,
+            'name' => 'CorpJorge',
             'email' => 'corpjorge@gmail.com',
             'password' => Hash::make('admin'),
             'created_at' => now(),
@@ -35,11 +57,11 @@ class GlobalUsersTableSeeder extends Seeder
         ]);
 
         factory(App\User::class)->create([
-            'id' => 3,
+            'id' => 5,
             'role_id' => 9,
             'name' => 'Material',
             'email' => 'admin@material.com',
-            'password' => Hash::make('secret'),
+            'password' => Hash::make('admin'),
             'created_at' => now(),
             'updated_at' => now()
         ]);

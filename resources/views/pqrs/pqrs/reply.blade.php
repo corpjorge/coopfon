@@ -56,16 +56,22 @@
                                                 {{ $pqr->user->name }}
                                             </td>
                                             <td>
-                                                {{ $pqr->created_at->format('Y-m-d') }}
+                                                {{ $pqr->created_at->format('Y-m-d') }} / {{ $pqr->created_at->diffForHumans(Carbon\Carbon::now()) }}
                                             </td>
                                             <td>
                                                 {{$pqr->admin->name ?? ''}}
                                             </td>
                                             <td>
                                                 @if($pqr->state == "En curso")
-                                                <span class="badge badge-{{ $pqr->state == "Cerrado" ? 'danger' : 'warning' }}">
-                                                    {{ $pqr->state }}
-                                                </span>
+                                                    @if($pqr->created_at->diffInDays(Carbon\Carbon::now()) <= $limit_date)
+                                                        <span class="badge badge-{{ $pqr->state == "Cerrado" ? 'danger' : 'warning' }}">
+                                                            {{ $pqr->state }}
+                                                        </span>
+                                                    @else
+                                                        <span class="badge badge-{{ $pqr->state == "Cerrado" ? 'warning' : 'danger' }}">
+                                                        {{ $pqr->state }}
+                                                        </span>
+                                                    @endif
                                                 @else
                                                 <span class="badge badge-success">
                                                     {{ $pqr->state }}

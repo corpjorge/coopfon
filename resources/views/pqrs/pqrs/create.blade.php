@@ -17,9 +17,9 @@
                                 <h4 class="card-title">{{ __('Radicar PQRS') }}</h4>
                             </div>
                             <div class="card-body ">
-                                <h5 class="card-category">
-                                    Describa petición, queja, reclamo, etc. Puede adjuntar un archivo con los siguientes formatos imagen
-                                    (jpg,jpeg,gif,png), Texto (xls,xlsx,doc,docx,pdf), compresión de archivos (zip, rar).
+                                <h5 class="card-category col-md-12 text-center" style="color: #6f6f6f;">
+                                    Describa petición, queja, reclamo, etc. Puede adjuntar un archivo con los siguientes formatos: <br>
+                                    Imagen (jpg,jpeg,gif,png), Texto (xls,xlsx,doc,docx,pdf), Compresión de archivos (zip, rar).
                                 </h5>
                                 <div class="row">
                                     <div class="col-md-12 text-right">
