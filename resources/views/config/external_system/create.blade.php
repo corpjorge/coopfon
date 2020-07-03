@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'auths-management', 'menuParent' => 'config', 'titlePage' => __('Administrador de Autenticaciones')])
+@extends('layouts.app', ['activePage' => 'external-system-management', 'menuParent' => 'config', 'titlePage' => __('Administrador de Sistemas externos')])
 
 
 @section('content')
@@ -6,21 +6,21 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <form method="post" action="{{ route('auths.store') }}" autocomplete="off" class="form-horizontal">
+                    <form method="post" action="{{ route('external-system.store') }}" autocomplete="off" class="form-horizontal">
                         @csrf
                         @method('post')
 
                         <div class="card ">
                             <div class="card-header card-header-rose card-header-icon">
                                 <div class="card-icon">
-                                    <i class="material-icons">admin_panel_settings</i>
+                                    <i class="material-icons">mediation</i>
                                 </div>
                                 <h4 class="card-title">{{ __('Añadir Autenticación') }}</h4>
                             </div>
                             <div class="card-body ">
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        <a href="{{ route('auths.index') }}" class="btn btn-sm btn-rose">{{ __('Volver a la lista') }}</a>
+                                        <a href="{{ route('external-system.index') }}" class="btn btn-sm btn-rose">{{ __('Volver a la lista') }}</a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -47,15 +47,6 @@
                                         <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
                                             <input class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" id="input-description" type="text" placeholder="{{ __('Descripción') }}" value="{{ old('description') }}" required="true" aria-required="true"/>
                                             @include('alerts.feedback', ['field' => 'description'])
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-2 col-form-label">{{ __('Icono') }}</label>
-                                    <div class="col-sm-7">
-                                        <div class="form-group{{ $errors->has('icon') ? ' has-danger' : '' }}">
-                                            <input class="form-control{{ $errors->has('icon') ? ' is-invalid' : '' }}" name="icon" id="input-icon" type="text" placeholder="{{ __('Icono') }}" value="{{ old('icon') }}" required="true" aria-required="true"/>
-                                            @include('alerts.feedback', ['field' => 'icon'])
                                         </div>
                                     </div>
                                 </div>

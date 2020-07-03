@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'auths-management', 'menuParent' => 'config', 'titlePage' => __('Administrador de Autenticaciones')])
+@extends('layouts.app', ['activePage' => 'external-system-management', 'menuParent' => 'config', 'titlePage' => __('Administrador de Sistemas externos')])
 
 @section('content')
     <div class="content">
@@ -8,15 +8,15 @@
                     <div class="card">
                         <div class="card-header card-header-rose card-header-icon">
                             <div class="card-icon">
-                                <i class="material-icons">admin_panel_settings</i>
+                                <i class="material-icons">mediation</i>
                             </div>
-                            <h4 class="card-title">{{ __('Autenticaciones') }}</h4>
+                            <h4 class="card-title">{{ __('Sistemas externos') }}</h4>
                         </div>
                         <div class="card-body">
                             @can('manageModules', App\Model\Config\Module::class)
                                 <div class="row">
                                     <div class="col-12 text-right">
-                                        <a href="{{ route('auths.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar Autenticación') }}</a>
+                                        <a href="{{ route('external-system.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar Autenticación') }}</a>
                                     </div>
                                 </div>
                             @endcan
@@ -46,38 +46,38 @@
                                         </th>
                                     </thead>
                                     <tbody>
-                                    @foreach($auths as $auth)
+                                    @foreach($systems as $systems)
                                         <tr>
                                             <td>
-                                                {{ $auth->id }}
+                                                {{ $systems->id }}
                                             </td>
                                             <td>
-                                                {{ $auth->name }}
+                                                {{ $systems->name }}
                                             </td>
                                             <td>
-                                                {{ $auth->path }}
+                                                {{ $systems->path }}
                                             </td>
                                             <td>
-                                                {{ $auth->description }}
+                                                {{ $systems->description }}
                                             </td>
                                             <td>
-                                                {{ $auth->icon }}
+                                                {{ $systems->icon }}
                                             </td>
                                             <td class="td-actions text-right">
                                                 @can('manageModules', App\Model\Config\Module::class)
-                                                    <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('auths.edit', $auth) }}" data-original-title="" title="">
+                                                    <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('external-system.edit', $systems) }}" data-original-title="" title="">
                                                         <i class="material-icons">edit</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
                                                 @endcan
                                             </td>
-                                            <form action="{{ route('auths.status', $auth) }}" method="post" >
+                                            <form action="{{ route('external-system.status', $systems) }}" method="post" >
                                                 @csrf
                                                 @method('put')
                                                 <td class="td-actions text-right">
                                                     <div class="togglebutton">
                                                         <label>
-                                                            <input class="status" type="checkbox" name="state_id" value="1" {{ old('show_on_homepage', $auth->state_id) == 1 ? ' checked' : '' }}>
+                                                            <input class="status" type="checkbox" name="state_id" value="1" {{ old('show_on_homepage', $systems->state_id) == 1 ? ' checked' : '' }}>
                                                             <span class="toggle"></span>
                                                         </label>
                                                     </div>

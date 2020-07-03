@@ -68,6 +68,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('auths', 'Config\AuthController', ['except' => ['show']]);
     Route::put('auths/status/{auth}', ['as' => 'auths.status', 'uses' => 'Config\AuthController@status']);
 
+    //Manage External Systems
+    Route::resource('external-system', 'Config\ExternalSystemController', ['except' => ['show']]);
+    Route::put('ExternalSystem/status/{externalSystem}', ['as' => 'external-system.status', 'uses' => 'Config\ExternalSystemController@status']);
+
     //Manage Modules
     Route::resource('module', 'Config\ModuleController', ['except' => ['show']]);
     Route::delete('module/{admin}/restore', ['as' => 'module.restore', 'uses' => 'Config\ModuleController@restore']);

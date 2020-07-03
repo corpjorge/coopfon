@@ -4,14 +4,14 @@ composer dump-autoload
 
 
 
-php artisan make:policy Pqrs\PqrsExternalPolicy --model=Model\Pqrs\PqPqrExternal
+php artisan make:policy Config\PqrsExternalPolicy --model=Model\Pqrs\PqPqrExternal
 
 php artisan make:request Config\UsersRequest
 
 php artisan make:controller Pqrs\PqrConfigController --model=Model\Pqrs\PqConfig
-php artisan make:controller Pqrs\PqrExternalController --resource --model=Model\Pqrs\Pq_pqrs_external
+php artisan make:controller Config\ExternalSystemController --resource --model=Model\Config\ExternalSystem
 
-php artisan make:migration global_create_members_table --create=members
+php artisan make:migration global_create_external_systems_table --create=external_systems
 php artisan make:seeder GlobalAuthTableSeeder
 
 php artisan make:model Model\Pqrs\Pq_pqrs_external

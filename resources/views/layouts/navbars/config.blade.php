@@ -46,8 +46,8 @@
 
             @can('manageModules', App\Model\Config\Module::class)
                 @can('viewAny', App\Model\Config\Module::class)
-                    <li class="nav-item{{ $activePage == 'integrator' ? ' active' : '' }}">
-                        <a class="nav-link" href="{{ route('module.index') }}">
+                    <li class="nav-item{{ $activePage == 'external-system-management' ? ' active' : '' }}">
+                        <a class="nav-link" href="{{ route('external-system.index') }}">
                             <span class="sidebar-mini"> S </span>
                             <span class="sidebar-normal"> {{ __('Sistema externo') }} </span>
                         </a>

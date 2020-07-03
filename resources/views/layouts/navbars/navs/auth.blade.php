@@ -19,6 +19,12 @@
       <div class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
 
+              <li class="nav-item">
+                  <a href="#pablo" class="btn btn-rose btn-raised btn-fab btn-round" data-toggle="dropdown">
+                      <i class="material-icons">cake</i>
+                      <div class="ripple-container"></div></a>
+              </li>
+
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/') }}">
                 <i class="material-icons">home</i>
@@ -27,6 +33,8 @@
                 </p>
               </a>
             </li>
+
+
 
             <li class="nav-item dropdown">
               <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
