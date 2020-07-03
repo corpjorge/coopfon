@@ -52,6 +52,11 @@ class ExternalSystemController extends Controller
             'description' => 'required|',
         ]);
 
+        if(!\Route::has('system-external.'.$request->path))
+        {
+            return back()->with('statusError', 'La ruta no existe');
+        }
+
         $externalSystem->create($request->merge(['state_id' => 2])->all());
 
         return redirect()->route('external-system.index')->withStatus(__('Sistema creada con éxito.'));
@@ -91,6 +96,11 @@ class ExternalSystemController extends Controller
             ],
             'description' => 'required|'
         ]);
+
+        if(!\Route::has('system-external.'.$request->path))
+        {
+            return back()->with('error', 'La ruta no existe');
+        }
 
         $externalSystem->update($request->merge(['parameters' => json_decode($request->parameters)])->all());
 

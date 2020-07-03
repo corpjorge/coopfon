@@ -89,9 +89,6 @@ class AuthController extends Controller
             'name' => [
                 'required', Rule::unique('auths', 'name')->ignore($auth->id)
             ],
-            'path' => [
-                'required', Rule::unique('auths', 'path')->ignore($auth->id)
-            ],
             'description' => 'required|',
             'icon' => 'required|',
         ]);

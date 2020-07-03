@@ -29,16 +29,6 @@ class ModuleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
-    public function create()
-    {
-        return view('config.modules.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
@@ -55,7 +45,7 @@ class ModuleController extends Controller
 
         if(!Route::has($request->path.'.install'))
         {
-           return back()->with('statusError', 'La ruta no existe');
+           return back()->with('error', 'La ruta no existe');
         }
 
         $path = resource_path('views/layouts/navbars/'.$request->path.'.blade.php');

@@ -39,6 +39,9 @@ Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallba
 
 Route::group(['middleware' => 'auth'], function () {
 
+    //System external
+//    Route::get('system-external/financial', 'Auth\LoginFinancialController@showLoginForm')->name('system-external.financial');
+
     //Manage asociados
     Route::resource('user', 'UserController', ['except' => ['show']]);
     Route::put('users/{user}', ['as' => 'users.data', 'uses' => 'UserController@data']);
@@ -65,15 +68,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('role', 'RoleController', ['except' => ['show', 'destroy']]);
 
     //Manage Auths
-    Route::resource('auths', 'Config\AuthController', ['except' => ['show']]);
+    Route::resource('auths', 'Config\AuthController', ['except' => ['show', 'create']]);
     Route::put('auths/status/{auth}', ['as' => 'auths.status', 'uses' => 'Config\AuthController@status']);
 
     //Manage External Systems
-    Route::resource('external-system', 'Config\ExternalSystemController', ['except' => ['show']]);
+    Route::resource('external-system', 'Config\ExternalSystemController', ['except' => ['show', 'create']]);
     Route::put('ExternalSystem/status/{externalSystem}', ['as' => 'external-system.status', 'uses' => 'Config\ExternalSystemController@status']);
 
     //Manage Modules
-    Route::resource('module', 'Config\ModuleController', ['except' => ['show']]);
+    Route::resource('module', 'Config\ModuleController', ['except' => ['show', 'create']]);
     Route::delete('module/{admin}/restore', ['as' => 'module.restore', 'uses' => 'Config\ModuleController@restore']);
 
 });

@@ -13,13 +13,6 @@
                             <h4 class="card-title">{{ __('Sistemas externos') }}</h4>
                         </div>
                         <div class="card-body">
-                            @can('manageModules', App\Model\Config\Module::class)
-                                <div class="row">
-                                    <div class="col-12 text-right">
-                                        <a href="{{ route('external-system.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar Autenticación') }}</a>
-                                    </div>
-                                </div>
-                            @endcan
                             <div class="table-responsive">
                                 <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
                                     <thead class="text-primary">
@@ -34,9 +27,6 @@
                                         </th>
                                         <th>
                                             {{ __('Descripción') }}
-                                        </th>
-                                        <th>
-                                            {{ __('Icono') }}
                                         </th>
                                         <th class="text-right">
                                             {{ __('Editar') }}
@@ -59,9 +49,6 @@
                                             </td>
                                             <td>
                                                 {{ $systems->description }}
-                                            </td>
-                                            <td>
-                                                {{ $systems->icon }}
                                             </td>
                                             <td class="td-actions text-right">
                                                 @can('manageModules', App\Model\Config\Module::class)
@@ -110,7 +97,7 @@
                 responsive: true,
                 language: {
                     search: "_INPUT_",
-                    searchPlaceholder: "Buscar roles",
+
                     paginate: {
                         first:      "Primero",
                         last:       "Último",

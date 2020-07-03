@@ -13,13 +13,6 @@
                 <h4 class="card-title">{{ __('Modulos') }}</h4>
               </div>
               <div class="card-body">
-                @can('create', App\Model\Config\Module::class)
-                  <div class="row">
-                    <div class="col-12 text-right">
-                      <a href="{{ route('module.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar Modulo') }}</a>
-                    </div>
-                  </div>
-                @endcan
                 <div class="table-responsive">
 
                     <table class="table">

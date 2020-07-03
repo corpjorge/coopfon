@@ -13,13 +13,6 @@
                             <h4 class="card-title">{{ __('Autenticaciones') }}</h4>
                         </div>
                         <div class="card-body">
-                            @can('manageModules', App\Model\Config\Module::class)
-                                <div class="row">
-                                    <div class="col-12 text-right">
-                                        <a href="{{ route('auths.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar Autenticación') }}</a>
-                                    </div>
-                                </div>
-                            @endcan
                             <div class="table-responsive">
                                 <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
                                     <thead class="text-primary">
