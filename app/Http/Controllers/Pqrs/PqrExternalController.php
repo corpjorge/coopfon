@@ -78,7 +78,7 @@ class PqrExternalController extends Controller
     {
         $users = \App\Model\Config\Module::where('path','pqrs')->first()->users;
 
-        $pqr->admin_id = \Auth::id();
+        $pqr->admin_id = auth()->user()->id;
         $pqr->save();
 
         return view('pqrs.pqrs_external.edit', compact('pqr'), [ 'users' => $users]);

@@ -30,4 +30,15 @@ class Module extends Model
         return $this->where('state_id',1)->get(['id', 'name']);
     }
 
+    /**
+     * Scope a query to only include module exists
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     *
+     */
+    public function scopeModuleExist($query, $path)
+    {
+        return $query->where('path',$path)->where('state_id',1)->exists();
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Config;
 
 use App\Http\Controllers\Controller;
+use App\Model\Config\ExternalSystem;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard');
+        $externalSystems = ExternalSystem::SystemActive();
+        return view('pages.dashboard', ['externalSystems' => $externalSystems]);
     }
 }

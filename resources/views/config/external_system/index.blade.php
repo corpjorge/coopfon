@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'auths-management', 'menuParent' => 'config', 'titlePage' => __('Administrador de Autenticaciones')])
+@extends('layouts.app', ['activePage' => 'external-system-management', 'menuParent' => 'config', 'titlePage' => __('Administrador de Sistemas externos')])
 
 @section('content')
     <div class="content">
@@ -8,9 +8,9 @@
                     <div class="card">
                         <div class="card-header card-header-rose card-header-icon">
                             <div class="card-icon">
-                                <i class="material-icons">admin_panel_settings</i>
+                                <i class="material-icons">mediation</i>
                             </div>
-                            <h4 class="card-title">{{ __('Autenticaciones') }}</h4>
+                            <h4 class="card-title">{{ __('Sistemas externos') }}</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -28,9 +28,6 @@
                                         <th>
                                             {{ __('Descripción') }}
                                         </th>
-                                        <th>
-                                            {{ __('Versión') }}
-                                        </th>
                                         <th class="text-right">
                                             {{ __('Editar') }}
                                         </th>
@@ -39,43 +36,41 @@
                                         </th>
                                     </thead>
                                     <tbody>
-                                    @foreach($auths as $auth)
+                                    @foreach($systems as $systems)
                                         <tr>
                                             <td>
-                                                {{ $auth->id }}
+                                                {{ $systems->id }}
                                             </td>
                                             <td>
-                                                {{ $auth->name }}
+                                                {{ $systems->name }}
                                             </td>
                                             <td>
-                                                {{ $auth->path }}
+                                                {{ $systems->path }}
                                             </td>
                                             <td>
-                                                {{ $auth->description }}
-                                            </td>
-                                            <td>
-                                                {{ $auth->version }}
+                                                {{ $systems->description }}
                                             </td>
                                             <td class="td-actions text-right">
                                                 @can('manageModules', App\Model\Config\Module::class)
-                                                    <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('auths.edit', $auth) }}" data-original-title="" title="">
+                                                    <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('external-system.edit', $systems) }}" data-original-title="" title="">
                                                         <i class="material-icons">edit</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
                                                 @endcan
                                             </td>
-                                            <form action="{{ route('auths.status', $auth) }}" method="post" >
+                                            <form action="{{ route('external-system.status', $systems) }}" method="post" >
                                                 @csrf
                                                 @method('put')
                                                 <td class="td-actions text-right">
                                                     <div class="togglebutton">
                                                         <label>
-                                                            <input class="status" type="checkbox" name="state_id" value="1" {{ old('show_on_homepage', $auth->state_id) == 1 ? ' checked' : '' }}>
+                                                            <input class="status" type="checkbox" name="state_id" value="1" {{ old('show_on_homepage', $systems->state_id) == 1 ? ' checked' : '' }}>
                                                             <span class="toggle"></span>
                                                         </label>
                                                     </div>
                                                 </td>
                                             </form>
+
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -118,49 +113,47 @@
                                     </thead>
                                     <tbody>
                                     @foreach($available as $provide)
-                                        @foreach($authenticators as $authenticator)
-                                            @if($authenticator['path'] == $provide)
-                                            <tr>
-                                                <td>
-                                                   {{$authenticator['name']}}
-                                                </td>
-                                                <td>
-                                                    {{$authenticator['path']}}
-                                                </td>
-                                                <td>
-                                                    {{$authenticator['version']}}
-                                                </td>
-                                                <td>
-                                                    {{$authenticator['description']}}
-                                                </td>
-                                                <td>
-                                                    {{$authenticator['parameters']}}
-                                                </td>
-                                                <td class="td-actions text-right">
-                                                    @if($authenticator['action'] == 1)
-                                                        <form action="{{ route('auths.store') }}" method="post" >
-                                                        @csrf
-                                                            <input type="hidden" name="name" value="{{$authenticator['name']}}" >
-                                                            <input type="hidden" name="path" value="{{$authenticator['path']}}" >
-                                                            <input type="hidden" name="description" value="{{$authenticator['description']}}" >
-                                                            <input type="hidden" name="parameters" value="{{$authenticator['parameters']}}" >
-                                                            <input type="hidden" name="version" value="{{$authenticator['version']}}" >
-                                                            <input type="hidden" name="icon" value="{{$authenticator['icon']}}" >
-                                                            <button type="submit" class="btn btn-warning btn-sm">
-                                                                <i class="material-icons">upgrade</i> Cargar
+                                        @foreach($externalsystems as $externalsystem)
+                                            @if($externalsystem['path'] == $provide)
+                                                <tr>
+                                                    <td>
+                                                        {{$externalsystem['name']}}
+                                                    </td>
+                                                    <td>
+                                                        {{$externalsystem['path']}}
+                                                    </td>
+                                                    <td>
+                                                        {{$externalsystem['version']}}
+                                                    </td>
+                                                    <td>
+                                                        {{$externalsystem['description']}}
+                                                    </td>
+                                                    <td>
+                                                        {{$externalsystem['parameters']}}
+                                                    </td>
+                                                    <td class="td-actions text-right">
+                                                        @if($externalsystem['action'] == 1)
+                                                            <form action="{{ route('external-system.store') }}" method="post" >
+                                                                @csrf
+                                                                <input type="hidden" name="name" value="{{$externalsystem['name']}}" >
+                                                                <input type="hidden" name="path" value="{{$externalsystem['path']}}" >
+                                                                <input type="hidden" name="description" value="{{$externalsystem['description']}}" >
+                                                                <input type="hidden" name="parameters" value="{{$externalsystem['parameters']}}" >
+                                                                <input type="hidden" name="version" value="{{$externalsystem['version']}}" >
+                                                                <button type="submit" class="btn btn-warning btn-sm">
+                                                                    <i class="material-icons">upgrade</i> Cargar
+                                                                    <div class="ripple-container"></div>
+                                                                </button>
+                                                            </form>
+                                                        @else
+                                                            <button class="btn btn-info btn-sm" disabled>
+                                                                <i class="material-icons">upgrade</i> No disponible
                                                                 <div class="ripple-container"></div>
                                                             </button>
-                                                        </form>
-                                                    @else
-                                                        <button class="btn btn-info btn-sm" disabled>
-                                                            <i class="material-icons">upgrade</i> No disponible
-                                                            <div class="ripple-container"></div>
-                                                        </button>
-                                                    @endif
-                                                </td>
-
-                                            </tr>
-                                            @break
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                @break
                                             @endif
                                         @endforeach
                                     @endforeach
@@ -170,6 +163,7 @@
                         </div>
                     </div>
                 </div>
+
 
             </div>
         </div>
@@ -189,7 +183,7 @@
                 responsive: true,
                 language: {
                     search: "_INPUT_",
-                    searchPlaceholder: "Buscar roles",
+
                     paginate: {
                         first:      "Primero",
                         last:       "Último",
@@ -216,7 +210,7 @@
                 responsive: true,
                 language: {
                     search: "_INPUT_",
-                    searchPlaceholder: "Buscar roles",
+
                     paginate: {
                         first:      "Primero",
                         last:       "Último",
@@ -232,7 +226,6 @@
                     { "orderable": false, "targets": 4 },
                 ],
             });
-
         });
     </script>
 

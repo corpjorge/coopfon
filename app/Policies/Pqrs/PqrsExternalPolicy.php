@@ -19,7 +19,7 @@ class PqrsExternalPolicy
      */
     public function viewAny(User $user)
     {
-        $exists = Module::where('path','pqrs')->where('state_id',1)->exists();
+        $exists = Module::moduleExist('pqrs');
 
         if (!$exists){
             return false;
@@ -45,7 +45,7 @@ class PqrsExternalPolicy
      */
     public function create(?User $user)
     {
-        return Module::where('path','pqrs')->where('state_id',1)->exists();
+        return Module::moduleExist('pqrs');
     }
 
     /**
@@ -57,7 +57,7 @@ class PqrsExternalPolicy
      */
     public function update(User $user, PqPqrsExternal $pqPqrsExternal)
     {
-        $exists = Module::where('path','pqrs')->where('state_id',1)->exists();
+        $exists = Module::moduleExist('pqrs');
 
         if (!$exists){
             return false;

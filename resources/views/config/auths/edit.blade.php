@@ -32,15 +32,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-sm-2 col-form-label">{{ __('Path') }}</label>
-                                    <div class="col-sm-7">
-                                        <div class="form-group{{ $errors->has('path') ? ' has-danger' : '' }}">
-                                            <input class="form-control{{ $errors->has('path') ? ' is-invalid' : '' }}" name="path" id="input-path" type="text" placeholder="{{ __('Path') }}" value="{{ old('path', $auth->path) }}" required="true" aria-required="true"/>
-                                            @include('alerts.feedback', ['field' => 'path'])
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <label class="col-sm-2 col-form-label">{{ __('Descripción') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">

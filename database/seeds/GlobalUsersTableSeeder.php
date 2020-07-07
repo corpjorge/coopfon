@@ -62,6 +62,7 @@ class GlobalUsersTableSeeder extends Seeder
             'name' => 'Material',
             'email' => 'admin@material.com',
             'password' => Hash::make('admin'),
+            'document' => '1014205146',
             'created_at' => now(),
             'updated_at' => now()
         ]);

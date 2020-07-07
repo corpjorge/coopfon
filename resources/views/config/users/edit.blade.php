@@ -40,7 +40,7 @@
                           <span class="fileinput-exists">{{ __('Cambiar') }}</span>
                           <input type="file" name="photo" id = "input-picture" />
                         </span>
-                          <a href="#pablo" class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> {{ __('Quitar') }}</a>
+                          <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> {{ __('Quitar') }}</a>
                       </div>
                       @include('alerts.feedback', ['field' => 'photo'])
                     </div>

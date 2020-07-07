@@ -8,7 +8,7 @@
             <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
           </button>
         </div>
-        <a class="navbar-brand" href="#pablo">{{ $titlePage }}</a>
+        <a class="navbar-brand" href="#">{{ $titlePage }}</a>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
         <span class="sr-only">Toggle navigation</span>
@@ -19,6 +19,12 @@
       <div class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
 
+              <li class="nav-item">
+                  <a href="#" class="btn btn-rose btn-raised btn-fab btn-round" data-toggle="dropdown">
+                      <i class="material-icons">cake</i>
+                      <div class="ripple-container"></div></a>
+              </li>
+
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/') }}">
                 <i class="material-icons">home</i>
@@ -27,6 +33,8 @@
                 </p>
               </a>
             </li>
+
+
 
             <li class="nav-item dropdown">
               <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,12 +45,12 @@
                 </p>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">{{ __('Prueba 1') }}</a>
-                <a class="dropdown-item" href="#">{{ __('Prueba 2') }}</a>
+                <a class="dropdown-item" href="#">{{ __('Nuevo PQR') }}</a>
+                <a class="dropdown-item" href="#">{{ __('PQR Atrasado') }}</a>
               </div>
             </li>
           <li class="nav-item dropdown">
-            <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link" href="#" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="material-icons">person</i>
               <p class="d-lg-none d-md-block">
                   {{ __('Account') }}
