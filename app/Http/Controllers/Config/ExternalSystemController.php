@@ -19,7 +19,13 @@ class ExternalSystemController extends Controller
     {
         $this->authorize('manageModules', Module::class);
 
-        return view('config.external_system.index', ['systems' => $model->all()]);
+        $systems = $model->all();
+
+        $externalsystems = (new \App\Coopfon)->externalSystems();
+
+        $available = (new \App\Coopfon)->available($systems, 'externalSystems');
+
+        return view('config.external_system.index', ['systems' => $systems, 'externalsystems' => $externalsystems, 'available' => $available]);
     }
 
     /**
@@ -47,19 +53,19 @@ class ExternalSystemController extends Controller
         $this->authorize('manageModules', Module::class);
 
         $request->validate([
-            'name' => 'required|unique:auths,name',
-            'path' => 'required|unique:auths,path',
+            'name' => 'required|unique:external_systems,name',
+            'path' => 'required|unique:external_systems,path',
             'description' => 'required|',
         ]);
 
         if(!\Route::has('system-external.'.$request->path))
         {
-            return back()->with('statusError', 'La ruta no existe');
+            return back()->with('error', 'La ruta no existe');
         }
 
-        $externalSystem->create($request->merge(['state_id' => 2])->all());
+        $externalSystem->create($request->merge(['state_id' => 2, 'parameters' => json_decode($request->parameters)])->all());
 
-        return redirect()->route('external-system.index')->withStatus(__('Sistema creada con éxito.'));
+        return redirect()->route('external-system.index')->withStatus(__('Sistema externo con éxito.'));
     }
 
     /**
@@ -104,7 +110,7 @@ class ExternalSystemController extends Controller
 
         $externalSystem->update($request->merge(['parameters' => json_decode($request->parameters)])->all());
 
-        return redirect()->route('external-system.index')->withStatus(__('Sistema actualizada con éxito.'));
+        return redirect()->route('external-system.index')->withStatus(__('Sistema externo actualizada con éxito.'));
     }
 
     /**

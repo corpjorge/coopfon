@@ -8,7 +8,7 @@
             <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
           </button>
         </div>
-        <a class="navbar-brand" href="#pablo">{{ $titlePage }}</a>
+        <a class="navbar-brand" href="#">{{ $titlePage }}</a>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
         <span class="sr-only">Toggle navigation</span>
@@ -20,7 +20,7 @@
           <ul class="navbar-nav">
 
               <li class="nav-item">
-                  <a href="#pablo" class="btn btn-rose btn-raised btn-fab btn-round" data-toggle="dropdown">
+                  <a href="#" class="btn btn-rose btn-raised btn-fab btn-round" data-toggle="dropdown">
                       <i class="material-icons">cake</i>
                       <div class="ripple-container"></div></a>
               </li>
@@ -50,7 +50,7 @@
               </div>
             </li>
           <li class="nav-item dropdown">
-            <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link" href="#" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="material-icons">person</i>
               <p class="d-lg-none d-md-block">
                   {{ __('Account') }}

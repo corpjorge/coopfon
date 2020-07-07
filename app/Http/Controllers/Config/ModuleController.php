@@ -25,7 +25,13 @@ class ModuleController extends Controller
      */
     public function index(Module $model)
     {
-        return view('config.modules.index', ['modules' => $model->withTrashed()->get()]);
+        $modules = $model->withTrashed()->get();
+
+        $modulesAvailable = (new \App\Coopfon)->modules();
+
+        $available = (new \App\Coopfon)->available($modules, 'modules');
+
+        return view('config.modules.index', ['modules' => $modules, 'modulesAvailable' => $modulesAvailable, 'available' => $available ]);
     }
 
     /**

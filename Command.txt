@@ -9,7 +9,7 @@ php artisan make:policy Config\PqrsExternalPolicy --model=Model\Pqrs\PqPqrExtern
 php artisan make:request Config\UsersRequest
 
 php artisan make:controller Pqrs\PqrConfigController --model=Model\Pqrs\PqConfig
-php artisan make:controller Config\ExternalSystemController --resource --model=Model\Config\ExternalSystem
+php artisan make:controller External_system\FinancialController --invokable
 
 php artisan make:migration global_create_external_systems_table --create=external_systems
 php artisan make:seeder GlobalAuthTableSeeder

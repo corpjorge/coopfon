@@ -22,7 +22,13 @@ class AuthController extends Controller
     {
         $this->authorize('manageAdmins', User::class);
 
-        return view('config.auths.index', ['auths' => $model->all()]);
+        $auths = $model->all();
+
+        $authenticators = (new \App\Coopfon)->authenticators();
+
+        $available = (new \App\Coopfon)->available($auths, 'authenticators');
+
+        return view('config.auths.index', ['auths' => $auths, 'authenticators'  => $authenticators, 'available' => $available ]);
     }
 
     /**
@@ -55,7 +61,7 @@ class AuthController extends Controller
             'icon' => 'required|',
         ]);
 
-        $model->create($request->merge(['state_id' => 2])->all());
+        $model->create($request->merge(['state_id' => 2, 'parameters' => json_decode($request->parameters)])->all());
 
         return redirect()->route('auths.index')->withStatus(__('Autenticación creada con éxito.'));
     }

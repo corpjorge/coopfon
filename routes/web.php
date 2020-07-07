@@ -40,7 +40,7 @@ Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallba
 Route::group(['middleware' => 'auth'], function () {
 
     //System external
-//    Route::get('system-external/financial', 'Auth\LoginFinancialController@showLoginForm')->name('system-external.financial');
+    Route::get('system-external/financial', 'External_system\FinancialController')->name('system-external.financial');
 
     //Manage asociados
     Route::resource('user', 'UserController', ['except' => ['show']]);

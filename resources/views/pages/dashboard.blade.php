@@ -5,6 +5,7 @@
   <div class="content">
     <div class="container-fluid">
 
+        @foreach($externalSystems as $externalSystem)
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
@@ -12,18 +13,19 @@
                         <div class="card-icon">
                             <i class="material-icons">equalizer</i>
                         </div>
-                        <p class="card-category">Bookings</p>
-                        <h3 class="card-title">Financsial sistem ARP</h3>
+                        <p class="card-category">{{$externalSystem->description}}</p>
+                        <h4 class="card-title">{{$externalSystem->name}}</h4>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons text-success">link</i>
-                            <a href="#pablo">Clic aquí para ingresar</a>
+                            <a href="{{ route('system-external.'.$externalSystem->path) }}">Clic aquí para ingresar</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        @endforeach
 
 
       <h3>Como vamos</h3>
@@ -123,7 +125,7 @@
         <div class="col-md-4">
           <div class="card card-product">
             <div class="card-header card-header-image" data-header-animation="true">
-              <a href="#pablo">
+              <a href="#">
                 <img class="img" src="{{ asset('coopfon')}}/img/card-2.jpg">
               </a>
             </div>
@@ -143,7 +145,7 @@
                 </button>
               </div>
               <h4 class="card-title">
-                <a href="#pablo">Aparta estudio</a>
+                <a href="#">Aparta estudio</a>
               </h4>
               <div class="card-description">
                 The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona.
@@ -162,7 +164,7 @@
         <div class="col-md-4">
           <div class="card card-product">
             <div class="card-header card-header-image" data-header-animation="true">
-              <a href="#pablo">
+              <a href="#">
                 <img class="img" src="{{ asset('coopfon')}}/img/card-3.jpg">
               </a>
             </div>
@@ -182,7 +184,7 @@
                 </button>
               </div>
               <h4 class="card-title">
-                <a href="#pablo">Oficina estudio</a>
+                <a href="#">Oficina estudio</a>
               </h4>
               <div class="card-description">
                 The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the night life in London, UK.
@@ -201,7 +203,7 @@
         <div class="col-md-4">
           <div class="card card-product">
             <div class="card-header card-header-image" data-header-animation="true">
-              <a href="#pablo">
+              <a href="#">
                 <img class="img" src="{{ asset('coopfon')}}/img/card-1.jpg">
               </a>
             </div>
@@ -221,7 +223,7 @@
                 </button>
               </div>
               <h4 class="card-title">
-                <a href="#pablo">Castillo a la venta</a>
+                <a href="#">Castillo a la venta</a>
               </h4>
               <div class="card-description">
                 The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.
@@ -258,16 +260,16 @@
                 <div class="card card-background" style="background-image: url('coopfon/img/eventos/escultura.jpg')">
                     <div class="card-body">
                         <h6 class="card-category text-info">Hoy</h6>
-                        <a href="#pablo">
+                        <a href="#">
                             <h3 class="card-title">Taller de escultura</h3>
                         </a>
                         <p class="card-description">
                             Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
                         </p>
-                        <a href="#pablo" class="btn btn-white btn-link">
+                        <a href="#" class="btn btn-white btn-link">
                             <i class="material-icons">subject</i> Inscribirse
                         </a>
-                        <a href="#pablo" class="btn btn-white btn-link">
+                        <a href="#" class="btn btn-white btn-link">
                             <i class="material-icons">watch_later</i> 9:30
                         </a>
                     </div>
@@ -277,16 +279,16 @@
                 <div class="card card-background" style="background-image: url('coopfon/img/eventos/moto.jpg')">
                     <div class="card-body">
                         <h6 class="card-category text-info">Mañana</h6>
-                        <a href="#pablo">
+                        <a href="#">
                             <h3 class="card-title">Tour Olaya</h3>
                         </a>
                         <p class="card-description">
                             Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
                         </p>
-                        <a href="#pablo" class="btn btn-white btn-link">
+                        <a href="#" class="btn btn-white btn-link">
                             <i class="material-icons">subject</i> Inscribirse
                         </a>
-                        <a href="#pablo" class="btn btn-white btn-link">
+                        <a href="#" class="btn btn-white btn-link">
                             <i class="material-icons">watch_later</i> 5:30 PM
                         </a>
                     </div>
@@ -296,14 +298,14 @@
                 <div class="card card-background" style="background-image: url('coopfon/img/eventos/park.jpg')">
                     <div class="card-body">
                         <h6 class="card-category text-info">Próximamente</h6>
-                        <a href="#pablo">
+                        <a href="#">
                             <h3 class="card-title">Tayrona</h3>
                         </a>
                         <p class="card-description">
                             Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
                         </p>
 
-                        <a href="#pablo" class="btn btn-white btn-link">
+                        <a href="#" class="btn btn-white btn-link">
                             <i class="material-icons">watch_later</i> Ya casi
                         </a>
                     </div>

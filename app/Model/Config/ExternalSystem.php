@@ -16,4 +16,16 @@ class ExternalSystem extends Model
     protected $casts = [
         'parameters' => 'json',
     ];
+
+    /**
+     * Scope a query to only include module exists
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return bool
+     */
+    public function scopeSystemActive($query)
+    {
+        return $query->where('state_id',1)->get();
+    }
 }
