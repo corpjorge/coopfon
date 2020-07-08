@@ -12,14 +12,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="title">Disfrutar de todos los beneficios y servicios.</h2>
-                     <br>
+
                     <a href="{{ route('login') }}" target="_blank" class="btn btn-rose btn-raised btn-lg">
                         <i class="fa fa-fingerprint"></i> Ingresar
                     </a>
                 </div>
                 <div class="col-md-3 ml-auto ">
                     <div class="card" style="width: 200px;">
-                        <img class="card-img-top" src='{{ asset('coopfon/img/logo_empresa.png') }}' alt="Card image cap">
+                        <img class="card-img-top" src='{{ asset('coopfon/img/logo_empresa1.png') }}' alt="Card image cap">
 
                     </div>
                 </div>
@@ -31,7 +31,7 @@
             <div class="section text-center">
                 <div class="row">
                     <div class="col-md-8 ml-auto mr-auto">
-                        <h2 class="title">Let&apos;s talk product</h2>
+                        <h2 class="title">Eventos</h2>
                         <h5 class="description">This is the paragraph where you can write more details about your product. Keep you user engaged by providing meaningful information. Remember that by this time, the user is curious, otherwise he wouldn&apos;t scroll to get here. Add a button if you want the user to see more.</h5>
                     </div>
                 </div>
