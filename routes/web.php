@@ -42,6 +42,9 @@ Route::group(['middleware' => 'auth'], function () {
     //System external
     Route::get('system-external/financial', 'External_system\FinancialController')->name('system-external.financial');
 
+    //Manage birth Day
+    Route::get('felicitaciones/{user}', 'Config\BirthDateController@show')->name('felicitaciones.show');
+
     //Manage asociados
     Route::resource('user', 'UserController', ['except' => ['show']]);
     Route::put('users/{user}', ['as' => 'users.data', 'uses' => 'UserController@data']);

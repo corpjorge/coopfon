@@ -12,4 +12,5 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/coopfon/js')
-    .sass('resources/sass/coopfon.scss', 'public/coopfon/css');
+    .sass('resources/sass/coopfon.scss', 'public/coopfon/css')
+    .sass('resources/sass/coopfon-kit.scss', 'public/coopfon/css');

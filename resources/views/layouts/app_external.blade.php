@@ -6,15 +6,15 @@
 
 *
 Página del producto: https://www.coopfon.com/
-* Copyright 2020 Fycls Ingenieria (fyclsingenieria.com) & UPDIVISION (https://www.corpjorge.com)
+* Copyright 2020 CoopFon
 
-* Codificado por www.corpjorge.com & www.fyclsingenieria.com
+* Codificado por www.corpjorge.com
 
 =========================================================
 
 --}}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />
@@ -25,11 +25,33 @@ Página del producto: https://www.coopfon.com/
     CoopFon
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
+  <meta name="keywords" content="coofon, boletacoop, Cooperativas, fondos, boletería, boletas, pqrs, superfluo, fycls ingeniería, inventario, eventos, fondo de empleados, asociados, asociadas, delegados, delegadas, votaciones">
+  <meta name="description" content="Para fondos y cooperativas, asociados felices">
+  <!-- Schema.org markup for Google+ -->
+  <meta itemprop="name" content="CoopFon">
+  <meta itemprop="description" content="Para fondos y cooperativas, asociados felices">
+  <meta itemprop="image" content="{{ asset('coopfon') }}/img">
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="product">
+  <meta name="twitter:site" content="@coopfon">
+  <meta name="twitter:title" content="CoopFon">
+  <meta name="twitter:description" content="Para fondos y cooperativas, asociados felices">
+  <meta name="twitter:creator" content="@corpjorge">
+  <meta name="twitter:image" content="{{ asset('coopfon') }}/img/PENDIENTE">
+  <!-- Open Graph data -->
+  <meta property="fb:app_id" content="PENDIENTE">
+  <meta property="og:title" content="CoopFon" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://coopfon.com" />
+  <meta property="og:image" content="{{ asset('coopfon') }}/img/PENDIENTE" />
+  <meta property="og:description" content="Para fondos y cooperativas, asociados felices" />
+  <meta property="og:site_name" content="CoopFon" />
+
+    <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="{{ asset('coopfon') }}/css/coopfon.css?v=2.1.2" rel="stylesheet" />
+  <link href="{{ asset('coopfon') }}/css/coopfon-kit.css?v=2.1.2" rel="stylesheet" />
 
 </head>
 <body class="{{ $class ?? '' }}">
@@ -79,7 +101,7 @@ Página del producto: https://www.coopfon.com/
         <!--  Notifications Plugin    -->
         <script src="{{ asset('coopfon') }}/js/plugins/bootstrap-notify.js"></script>
         <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="{{ asset('coopfon') }}/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
+        <script src="{{ asset('coopfon') }}/js/material-kit.min.js?v=2.1.0" type="text/javascript"></script>
 
         <script src="{{ asset('coopfon') }}/js/application.js"></script>
 
@@ -132,6 +154,16 @@ Página del producto: https://www.coopfon.com/
           $(function () {
               $('[data-toggle="tooltip"]').tooltip()
           })
+
+          $(window).scroll(function() {
+              var scroll = $(window).scrollTop();
+
+              if (scroll >= 100) {
+                  $("#logo").attr("src", "{{ asset('coopfon') }}/img/logo_.png");
+              } else {
+                  $("#logo").attr("src", "{{ asset('coopfon') }}/img/logo_b.png");
+              }
+          });
 
         </script>
         @stack('js')
