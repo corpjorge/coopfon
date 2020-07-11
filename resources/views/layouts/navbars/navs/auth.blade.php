@@ -26,7 +26,7 @@
 
             @if($birthday)
             <li class="nav-item">
-              <a href="{{ route('felicitaciones.show', auth()->user()) }}" class="btn btn-rose btn-raised btn-fab btn-round">
+              <a href="{{ route('felicitaciones.show', [auth()->user(), auth()->user()->name]) }}" class="btn btn-rose btn-raised btn-fab btn-round">
                   <i class="material-icons">cake</i>
                   <div class="ripple-container"></div></a>
             </li>

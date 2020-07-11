@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Config;
 use App\Http\Controllers\Controller;
 use App\Model\Config\BirthDate;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BirthDateController extends Controller
@@ -16,17 +17,7 @@ class BirthDateController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $birthDate = BirthDate::where('birthday_user',1)->get();
     }
 
     /**
@@ -37,7 +28,19 @@ class BirthDateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $birthDate = new BirthDate;
+
+        $request->validate([
+//            'birthday_user' => 'required|',
+//            'user_id' => 'required|',
+            'congratulations' => 'required|',
+        ]);
+
+        $birthDate->create($request->merge([
+            'user_id' => auth()->user()->id,
+            'birthday_user' => 1
+        ])->all());
+
     }
 
     /**
@@ -48,18 +51,13 @@ class BirthDateController extends Controller
      */
     public function show(User $user)
     {
+        $birthday  = isset($user->birth_date) ?
+            Carbon::createFromFormat('Y-m-d', $user->birth_date )->isBirthday(Carbon::now()) : NULL;
+
+        if (!$birthday){
+            abort(404);
+        }
        return view('config.birth_day.index', compact('user'));
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\Config\BirthDate  $birthDate
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(BirthDate $birthDate)
-    {
-        //
-    }
 }

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class BirthDate extends Model
 {
+
+    protected $fillable = ['birthday_user', 'user_id', 'congratulations'];
+
     /**
      * Get the user
      *
