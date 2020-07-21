@@ -11,13 +11,16 @@
 
 <script>
     export default {
+        props: [
+            'birthday',
+        ],
         data() {
             return {
                 msnx: [],
             }
         },
         created(){
-            let url = '/felicitaciones'
+            let url = '/felicitaciones/coment/'+birthday
             axios.get(url).then(function (response) {
                 this.msn = response.data;
                 console.log(this.msn);

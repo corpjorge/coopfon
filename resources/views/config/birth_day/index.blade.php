@@ -40,8 +40,6 @@
             </div>
         </div>
 
-
-
         <div id="comments">
             <div class="row">
                 <div class="col-md-8 ml-auto mr-auto">
@@ -60,10 +58,10 @@
                             </div>
                         </div>
                         <div id="comments" >
-                            <comments-component></comments-component>
+                            <comments-component birthday="{{$user->id}}"></comments-component>
                             <br><br>
                             @auth
-                                <comment-component></comment-component>
+                                <comment-component birthday="{{$user->id}}" user="{{auth()->user()->name}}"></comment-component>
                             @endauth
 
                             @guest
@@ -73,18 +71,9 @@
 
                         </div>
                     </div>
-
-
-
-
-
-
                 </div>
             </div>
         </div>
-
-
-
 
     </div>
 

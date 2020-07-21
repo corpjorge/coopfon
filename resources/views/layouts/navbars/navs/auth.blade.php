@@ -22,11 +22,13 @@
              @php
               $birthday  = isset(auth()->user()->birth_date) ?
               \Carbon\Carbon::createFromFormat('Y-m-d', auth()->user()->birth_date )->isBirthday(Carbon\Carbon::now()) : NULL;
-              @endphp
+
+              $name = str_replace(" ", "_", auth()->user()->name);
+             @endphp
 
             @if($birthday)
             <li class="nav-item">
-              <a href="{{ route('felicitaciones.show', [auth()->user(), auth()->user()->name]) }}" class="btn btn-rose btn-raised btn-fab btn-round">
+              <a href="{{ route('felicitaciones.show', [auth()->user(), $name]) }}" class="btn btn-rose btn-raised btn-fab btn-round">
                   <i class="material-icons">cake</i>
                   <div class="ripple-container"></div></a>
             </li>

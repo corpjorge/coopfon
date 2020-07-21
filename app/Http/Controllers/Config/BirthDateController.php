@@ -31,14 +31,13 @@ class BirthDateController extends Controller
         $birthDate = new BirthDate;
 
         $request->validate([
-//            'birthday_user' => 'required|',
-//            'user_id' => 'required|',
+            'birthday_user' => 'required|',
             'congratulations' => 'required|',
         ]);
 
         $birthDate->create($request->merge([
             'user_id' => auth()->user()->id,
-            'birthday_user' => 1
+            'birthday_user' => $request->birthday_user,
         ])->all());
 
     }
