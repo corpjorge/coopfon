@@ -1944,8 +1944,8 @@ __webpack_require__.r(__webpack_exports__);
       var params = this.msn;
       this.msn = {
         congratulations: ''
-      }; // comments.created();
-
+      };
+      _CommentsComponent__WEBPACK_IMPORTED_MODULE_0__["default"].methods.commentsGet();
       axios.post('/felicitaciones', {
         'congratulations': params.congratulations,
         'birthday_user': this.birthday
@@ -2009,7 +2009,6 @@ __webpack_require__.r(__webpack_exports__);
       var url = '/felicitaciones/coment/' + this.user;
       axios.get(url).then(function (response) {
         _this.comments = response.data;
-        console.log(_this.comments);
       });
     }
   }
@@ -37680,7 +37679,6 @@ var render = function() {
           {
             on: {
               submit: function($event) {
-                $event.preventDefault()
                 return _vm.send()
               }
             }

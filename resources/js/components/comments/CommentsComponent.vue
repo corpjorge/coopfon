@@ -29,7 +29,6 @@
                     axios.get(url)
                     .then((response) => {
                         this.comments = response.data;
-                        console.log(this.comments);
                     });
             }
         }
