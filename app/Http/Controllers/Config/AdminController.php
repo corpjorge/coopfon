@@ -71,11 +71,18 @@ class AdminController extends Controller
     {
         $this->authorize('manageAdmins', User::class);
 
-        $user = $model->create($request->merge([
+        $user = $model->fill($request->merge([
             'picture' => $request->photo ? '/storage/'.$request->photo->store('profile', 'public') : null,
             'password' => $request->password ? Hash::make($request->get('password')): Hash::make(rand()),
             'birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null
         ])->all());
+
+        $user->role_id = $request->role_id;
+        $user->code = $request->code;
+        $user->document = $request->document;
+        $user->member_id = $request->member_id;
+        $user->save();
+
         $user->modules()->sync($request->get('module_id'));
 
         return redirect()->route('admin.index')->withStatus(__('administrador creado con éxito.'));
@@ -130,6 +137,10 @@ class AdminController extends Controller
             ])
         );
 
+        $admin->role_id = $request->role_id;
+        $admin->document = $request->document;
+        $admin->save();
+
         $admin->modules()->sync($request->get('module_id'));
 
         return redirect()->route('admin.index')->withStatus(__('administrador actualizado con éxito.'));
@@ -152,6 +163,11 @@ class AdminController extends Controller
                 ['birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null]
             )->all()
         );
+
+        $user->code = $request->code;
+        $user->member_id = $request->member_id;
+        $user->save();
+
         return back()->withStatus(__('Datos actualizados con éxito.'));
 
     }
@@ -201,7 +217,8 @@ class AdminController extends Controller
             return back()->withStatus(__('Datos actualizados con exito.'));
         }
 
-        $admin->update($request->all());
+        $admin->role_id = $request->role_id;
+        $admin->save();
 
         return redirect()->route('admin.index')->withStatus(__('Datos actualizados con éxito.'));
 

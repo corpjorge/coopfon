@@ -36,7 +36,7 @@
                         <span class="fileinput-exists">{{ __('Cambiar') }}</span>
                         <input type="file" name="photo" id = "input-picture" />
                       </span>
-                        <a href="#pablo" class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> {{ __('Remover') }}</a>
+                        <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> {{ __('Remover') }}</a>
                     </div>
                     @include('alerts.feedback', ['field' => 'photo'])
                   </div>
@@ -147,7 +147,7 @@
                       @method('put')
 
                       <div class="row">
-                          <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Celular') }}</label>
+                          <label class="col-sm-2 col-form-label" for="input-current-phone">{{ __('Celular') }}</label>
                           <div class="col-sm-7">
                               <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                                   <input class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}"  type="tel" name="phone" id="input-current-phone" placeholder="{{ __('Celular') }}" value="{{ old('phone', auth()->user()->phone) }}" required />
@@ -157,7 +157,7 @@
                       </div>
 
                       <div class="row">
-                          <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Fecha Nacimiento') }}</label>
+                          <label class="col-sm-2 col-form-label" for="input-current-birth_date">{{ __('Fecha Nacimiento') }}</label>
                           <div class="col-sm-7">
                               <div class="form-group{{ $errors->has('birth_date') ? ' has-danger' : '' }}">
                                   <input type="text"  name="birth_date" id="input-current-birth_date" placeholder="{{ __('Fecha nacimiento') }}" class="form-control{{ $errors->has('birth_date') ? ' is-invalid' : '' }} datepicker"
@@ -168,7 +168,7 @@
                       </div>
 
                       <div class="row">
-                          <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Area/Zona') }}</label>
+                          <label class="col-sm-2 col-form-label" for="input-current-area">{{ __('Area/Zona') }}</label>
                           <div class="col-sm-7">
                               <div class="form-group{{ $errors->has('area') ? ' has-danger' : '' }}">
                                   <input class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}"  type="text" name="area" id="input-current-area" placeholder="{{ __('Area') }}" value="{{ old('area', auth()->user()->area) }}"  />
@@ -178,7 +178,7 @@
                       </div>
 
                       <div class="row">
-                          <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Dirección') }}</label>
+                          <label class="col-sm-2 col-form-label" for="input-current-address">{{ __('Dirección') }}</label>
                           <div class="col-sm-7">
                               <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
                                   <input class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}"  type="text" name="address" id="input-current-address" placeholder="{{ __('Dirección') }}" value="{{ old('address', auth()->user()->address) }}" required/>
@@ -188,7 +188,7 @@
                       </div>
 
                       <div class="row">
-                          <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Ciudad') }}</label>
+                          <label class="col-sm-2 col-form-label" for="input-current-city_id">{{ __('Ciudad') }}</label>
                           <div class="col-lg-5 col-md-6 col-sm-3">
                               <select class="selectpicker form-control{{ $errors->has('city_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-city_id" title="Ciudad" name="city_id" required>
                                   <option selected value="{{ old('city_id', isset(auth()->user()->city->code) ?  auth()->user()->city->code : '' ) }}">{{ old('city_id', isset(auth()->user()->city->name) ?  auth()->user()->city->name.' / '.auth()->user()->city->department->name : '' ) }}</option>
@@ -201,7 +201,7 @@
                       </div><br>
 
                       <div class="row">
-                          <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Genero') }}</label>
+                          <label class="col-sm-2 col-form-label" for="input-current-gender_id">{{ __('Genero') }}</label>
                           <div class="col-lg-5 col-md-6 col-sm-3">
                               <select class="selectpicker form-control{{ $errors->has('gender_id') ? ' is-invalid' : '' }}" data-size="7" data-style="btn btn-primary btn-round" id="input-current-gender_id" title="Genero" name="gender_id" required>
                                   <option selected value="{{ old('gender_id', isset(auth()->user()->gender->id) ?  auth()->user()->gender->id : '' ) }}">{{ old('gender_id', auth()->user()->gender->type ?? '' )  }}</option>

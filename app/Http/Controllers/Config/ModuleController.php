@@ -25,17 +25,13 @@ class ModuleController extends Controller
      */
     public function index(Module $model)
     {
-        return view('config.modules.index', ['modules' => $model->withTrashed()->get()]);
-    }
+        $modules = $model->withTrashed()->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
-    public function create()
-    {
-        return view('config.modules.create');
+        $modulesAvailable = (new \App\Coopfon)->modules();
+
+        $available = (new \App\Coopfon)->available($modules, 'modules');
+
+        return view('config.modules.index', ['modules' => $modules, 'modulesAvailable' => $modulesAvailable, 'available' => $available ]);
     }
 
     /**
@@ -55,7 +51,7 @@ class ModuleController extends Controller
 
         if(!Route::has($request->path.'.install'))
         {
-           return back()->with('statusError', 'La ruta no existe');
+           return back()->with('error', 'La ruta no existe');
         }
 
         $path = resource_path('views/layouts/navbars/'.$request->path.'.blade.php');

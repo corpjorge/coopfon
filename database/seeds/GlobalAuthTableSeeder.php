@@ -46,12 +46,11 @@ class GlobalAuthTableSeeder extends Seeder
 
         DB::table('auths')->insert([
             'id' => 4,
-            'state_id' => 1,
-            'name' => 'Financial',
-            'path' => 'financial',
-            'description' => 'Ingresar con Financial',
-            'icon' => 'fa fa-key',
-            'parameters' => '{ "ip": "190.145.4.62", "protocolo" : "http", "puerto" : "80", "entidad": "FONSODI"}',
+            'state_id' => 2,
+            'name' => 'Azure',
+            'path' => 'azure',
+            'description' => 'Ingresar con SSO',
+            'icon' => 'fa fa-windows',
             'created_at' => now(),
             'updated_at' => now()
         ]);

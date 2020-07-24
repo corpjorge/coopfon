@@ -12,7 +12,7 @@
                         <div class="card ">
                             <div class="card-header card-header-rose card-header-icon">
                                 <div class="card-icon">
-                                    <i class="material-icons">recent_actors</i>
+                                    <i class="material-icons">admin_panel_settings</i>
                                 </div>
                                 <h4 class="card-title">{{ __('Editar Autenticación') }}</h4>
                             </div>
@@ -32,15 +32,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-sm-2 col-form-label">{{ __('Path') }}</label>
-                                    <div class="col-sm-7">
-                                        <div class="form-group{{ $errors->has('path') ? ' has-danger' : '' }}">
-                                            <input class="form-control{{ $errors->has('path') ? ' is-invalid' : '' }}" name="path" id="input-path" type="text" placeholder="{{ __('Path') }}" value="{{ old('path', $auth->path) }}" required="true" aria-required="true"/>
-                                            @include('alerts.feedback', ['field' => 'path'])
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <label class="col-sm-2 col-form-label">{{ __('Descripción') }}</label>
                                     <div class="col-sm-7">
                                         <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
@@ -55,6 +46,15 @@
                                         <div class="form-group{{ $errors->has('icon') ? ' has-danger' : '' }}">
                                             <input class="form-control{{ $errors->has('icon') ? ' is-invalid' : '' }}" name="icon" id="input-icon" type="text" placeholder="{{ __('Icono') }}" value="{{ old('icon', $auth->icon) }}" required="true" aria-required="true"/>
                                             @include('alerts.feedback', ['field' => 'icon'])
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">{{ __('Parámetros') }}</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group{{ $errors->has('parameters') ? ' has-danger' : '' }}">
+                                            <textarea cols="30" rows="10" class="form-control{{ $errors->has('parameters') ? ' is-invalid' : '' }}" name="parameters" id="input-parameters" type="text" placeholder="{{ __('{ "ip": "192.175.12.5", "protocolo" : "http", "puerto" : "80", "entidad": "LUNA"}') }}" required="true" aria-required="true">{{ old('parameters', json_encode($auth->parameters)) }}</textarea>
+                                            @include('alerts.feedback', ['field' => 'parameters'])
                                         </div>
                                     </div>
                                 </div>

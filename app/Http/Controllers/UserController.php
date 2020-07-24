@@ -61,13 +61,18 @@ class UserController extends Controller
      */
     public function store(UserRequest $request, User $model)
     {
-
-        $model->create($request->merge([
+        $model->fill($request->merge([
             'picture' => $request->photo ? '/storage/'.$request->photo->store('profile', 'public') : null,
             'password' => $request->password ? Hash::make($request->get('password')): Hash::make(rand()),
             'birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null,
             'role_id' => 9
         ])->all());
+
+        $model->role_id = 9;
+        $model->code = $request->code;
+        $model->document = $request->document;
+        $model->member_id = $request->member_id;
+        $model->save();
 
         return redirect()->route('user.index')->withStatus(__('Usuario creado con éxito.'));
     }
@@ -103,7 +108,7 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $hasPassword = $request->get('password');
-        $user->update(
+        $user->fill(
             $request->merge([
                 'picture' => $request->photo ? '/storage/'.$request->photo->store('profile', 'public') : $user->picture,
                 'password' => Hash::make($request->get('password'))
@@ -111,6 +116,8 @@ class UserController extends Controller
                 $hasPassword ? '' : 'password',
             ])
         );
+        $user->document = $request->document;
+        $user->save();
 
         return redirect()->route('user.index')->withStatus(__('Usuario actualizado con éxito.'));
     }
@@ -124,11 +131,15 @@ class UserController extends Controller
      */
     public function data(UsersRequest $request, User $user)
     {
-        $user->update(
+        $user->fill(
             $request->merge(
                 ['birth_date' => $request->birth_date ? Carbon::parse($request->birth_date)->format('Y-m-d') : null]
             )->all()
         );
+        $user->code = $request->code;
+        $user->member_id = $request->member_id;
+        $user->save();
+
         return back()->withStatus(__('Datos actualizados con éxito.'));
 
     }

@@ -22,12 +22,23 @@ class Module extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'user_module');
     }
 
     public function active()
     {
         return $this->where('state_id',1)->get(['id', 'name']);
+    }
+
+    /**
+     * Scope a query to only include module exists
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     *
+     */
+    public function scopeModuleExist($query, $path)
+    {
+        return $query->where('path',$path)->where('state_id',1)->exists();
     }
 
 }

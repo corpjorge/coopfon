@@ -4,114 +4,31 @@
 <div class="content">
   <div class="content">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card ">
-            <div class="card-header card-header-success card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons"></i>
-              </div>
-              <h4 class="card-title">Global Sales by Top Locations</h4>
-            </div>
-            <div class="card-body ">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="table-responsive table-sales">
-                    <table class="table">
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                            <img src="{{ asset('coopfon')}}/img/flags/US.png"> </div>
-                          </td>
-                          <td>USA</td>
-                          <td class="text-right">
-                            2.920
-                          </td>
-                          <td class="text-right">
-                            53.23%
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                              <img src="{{ asset('coopfon')}}/img/flags/DE.png"> </div>
-                          </td>
-                          <td>Germany</td>
-                          <td class="text-right">
-                            1.300
-                          </td>
-                          <td class="text-right">
-                            20.43%
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                              <img src="{{ asset('coopfon')}}/img/flags/AU.png"> </div>
-                          </td>
-                          <td>Australia</td>
-                          <td class="text-right">
-                            760
-                          </td>
-                          <td class="text-right">
-                            10.35%
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                              <img src="{{ asset('coopfon')}}/img/flags/GB.png"> </div>
-                          </td>
-                          <td>United Kingdom</td>
-                          <td class="text-right">
-                            690
-                          </td>
-                          <td class="text-right">
-                            7.87%
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                              <img src="{{ asset('coopfon')}}/img/flags/RO.png"> </div>
-                          </td>
-                          <td>Romania</td>
-                          <td class="text-right">
-                            600
-                          </td>
-                          <td class="text-right">
-                            5.94%
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="flag">
-                              <img src="{{ asset('coopfon')}}/img/flags/BR.png"> </div>
-                          </td>
-                          <td>Brasil</td>
-                          <td class="text-right">
-                            550
-                          </td>
-                          <td class="text-right">
-                            4.34%
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+
+        @foreach($externalSystems as $externalSystem)
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">equalizer</i>
+                        </div>
+                        <p class="card-category">{{$externalSystem->description}}</p>
+                        <h4 class="card-title">{{$externalSystem->name}}</h4>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-success">link</i>
+                            <a href="{{ route('system-external.'.$externalSystem->path) }}">Clic aquí para ingresar</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 ml-auto mr-auto">
-                  <div id="worldMap" style="height: 300px;"></div>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <!-- <button type="button" class="btn btn-round btn-default dropdown-toggle btn-link" data-toggle="dropdown">
-  7 days
-  </button> -->
+        @endforeach
+
+
+      <h3>Como vamos</h3>
       <div class="row">
         <div class="col-md-4">
           <div class="card card-chart">
@@ -196,80 +113,19 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-warning card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">weekend</i>
-              </div>
-              <p class="card-category">Bookings</p>
-              <h3 class="card-title">184</h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons text-danger">warning</i>
-                <a href="#pablo">Get More Space...</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-rose card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">equalizer</i>
-              </div>
-              <p class="card-category">Website Visits</p>
-              <h3 class="card-title">75.521</h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">local_offer</i> Tracked from Google Analytics
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-success card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">store</i>
-              </div>
-              <p class="card-category">Revenue</p>
-              <h3 class="card-title">$34,245</h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">date_range</i> Last 24 Hours
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-info card-header-icon">
-              <div class="card-icon">
-                <i class="fa fa-twitter"></i>
-              </div>
-              <p class="card-category">Followers</p>
-              <h3 class="card-title">+245</h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">update</i> Just Updated
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <h3>Manage Listings</h3>
+
+
+
+
+
+
+      <h3>Clasificados recientes</h3>
       <br>
       <div class="row">
         <div class="col-md-4">
           <div class="card card-product">
             <div class="card-header card-header-image" data-header-animation="true">
-              <a href="#pablo">
+              <a href="#">
                 <img class="img" src="{{ asset('coopfon')}}/img/card-2.jpg">
               </a>
             </div>
@@ -289,7 +145,7 @@
                 </button>
               </div>
               <h4 class="card-title">
-                <a href="#pablo">Cozy 5 Stars Apartment</a>
+                <a href="#">Aparta estudio</a>
               </h4>
               <div class="card-description">
                 The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona.
@@ -308,7 +164,7 @@
         <div class="col-md-4">
           <div class="card card-product">
             <div class="card-header card-header-image" data-header-animation="true">
-              <a href="#pablo">
+              <a href="#">
                 <img class="img" src="{{ asset('coopfon')}}/img/card-3.jpg">
               </a>
             </div>
@@ -328,7 +184,7 @@
                 </button>
               </div>
               <h4 class="card-title">
-                <a href="#pablo">Office Studio</a>
+                <a href="#">Oficina estudio</a>
               </h4>
               <div class="card-description">
                 The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the night life in London, UK.
@@ -347,7 +203,7 @@
         <div class="col-md-4">
           <div class="card card-product">
             <div class="card-header card-header-image" data-header-animation="true">
-              <a href="#pablo">
+              <a href="#">
                 <img class="img" src="{{ asset('coopfon')}}/img/card-1.jpg">
               </a>
             </div>
@@ -367,7 +223,7 @@
                 </button>
               </div>
               <h4 class="card-title">
-                <a href="#pablo">Beautiful Castle</a>
+                <a href="#">Castillo a la venta</a>
               </h4>
               <div class="card-description">
                 The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.
@@ -384,6 +240,82 @@
           </div>
         </div>
       </div>
+
+
+        <div class="row">
+        <div class="cards">
+            <div class="container">
+                <div class="title">
+                    <h3>Próximos eventos</h3>
+                </div>
+
+
+
+            </div>
+        </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-background" style="background-image: url('coopfon/img/eventos/escultura.jpg')">
+                    <div class="card-body">
+                        <h6 class="card-category text-info">Hoy</h6>
+                        <a href="#">
+                            <h3 class="card-title">Taller de escultura</h3>
+                        </a>
+                        <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p>
+                        <a href="#" class="btn btn-white btn-link">
+                            <i class="material-icons">subject</i> Inscribirse
+                        </a>
+                        <a href="#" class="btn btn-white btn-link">
+                            <i class="material-icons">watch_later</i> 9:30
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-background" style="background-image: url('coopfon/img/eventos/moto.jpg')">
+                    <div class="card-body">
+                        <h6 class="card-category text-info">Mañana</h6>
+                        <a href="#">
+                            <h3 class="card-title">Tour Olaya</h3>
+                        </a>
+                        <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p>
+                        <a href="#" class="btn btn-white btn-link">
+                            <i class="material-icons">subject</i> Inscribirse
+                        </a>
+                        <a href="#" class="btn btn-white btn-link">
+                            <i class="material-icons">watch_later</i> 5:30 PM
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-background" style="background-image: url('coopfon/img/eventos/park.jpg')">
+                    <div class="card-body">
+                        <h6 class="card-category text-info">Próximamente</h6>
+                        <a href="#">
+                            <h3 class="card-title">Tayrona</h3>
+                        </a>
+                        <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p>
+
+                        <a href="#" class="btn btn-white btn-link">
+                            <i class="material-icons">watch_later</i> Ya casi
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
   </div>
 </div>

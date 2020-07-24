@@ -6,18 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Auth extends Model
 {
-    protected $fillable = ['name', 'path', 'description', 'icon', 'state_id'];
+    protected $fillable = ['name', 'path', 'description', 'icon', 'state_id', 'parameters'];
+
 
 
     /**
-     * Get the parameters of the Auth
+     * The attributes that should be cast to native types.
      *
-     * @return mixed $member
+     * @var array
      */
-    public function parametersJSON()
-    {
-        $parametersJSON = isset($this->parameters) ? $this->parameters : NULL;
-        return $parametersJSON = json_decode($parametersJSON);
+    protected $casts = [
+        'parameters' => 'json',
+    ];
 
-    }
 }

@@ -38,7 +38,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-        $this->mapServiceRoutes();
+        $this->mapPqrsRoutes();
 
         //
     }
@@ -79,10 +79,10 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapServiceRoutes()
+    protected function mapPqrsRoutes()
     {
         Route::middleware('web')
             ->namespace($this->namespace)
-            ->group(base_path('routes/service.php'));
+            ->group(base_path('routes/pqrs.php'));
     }
 }
