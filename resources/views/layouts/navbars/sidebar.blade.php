@@ -9,7 +9,7 @@
       {{ __('CF') }}
     </a>
     <a href="#" class="simple-text logo-normal">
-      {{ env('APP_NAME') }}
+        <img src="{{ asset('coopfon') }}/img/logo_b.png" style="width: 108px;">
     </a>
   </div>
   <div class="sidebar-wrapper">

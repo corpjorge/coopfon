@@ -36,6 +36,11 @@ Route::post('login/financial', 'Auth\LoginFinancialController@login')->name('log
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
 
+//Manage birth Day
+Route::get('felicitaciones/coment/{id}', 'Config\BirthDateController@coment');
+Route::get('felicitaciones/{user}/{name}', 'Config\BirthDateController@show')->name('felicitaciones.show');
+Route::post('felicitaciones/', 'Config\BirthDateController@store')->name('felicitaciones.store');
+
 
 Route::group(['middleware' => 'auth'], function () {
 

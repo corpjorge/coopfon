@@ -3,7 +3,7 @@
   'classPage' => 'login-page',
   'activePage' => 'login',
   'title' => env('APP_NAME'),
-  'pageBackground' => asset("coopfon").'/img/login.jpg'
+  'pageBackground' => asset("coopfon").'/img/background/8.jpg'
 ])
 
 @section('content')

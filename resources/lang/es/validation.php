@@ -155,6 +155,7 @@ return [
         'birth_date'            => 'fecha de nacimiento',
         'city'                  => 'ciudad',
         'city_id'               => 'ciudad',
+        'congratulations'       => 'felicidades',
         'content'               => 'contenido',
         'country'               => 'país',
         'code'                  => 'código',

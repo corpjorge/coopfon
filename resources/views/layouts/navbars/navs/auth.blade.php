@@ -19,11 +19,20 @@
       <div class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
 
-              <li class="nav-item">
-                  <a href="#" class="btn btn-rose btn-raised btn-fab btn-round" data-toggle="dropdown">
-                      <i class="material-icons">cake</i>
-                      <div class="ripple-container"></div></a>
-              </li>
+             @php
+              $birthday  = isset(auth()->user()->birth_date) ?
+              \Carbon\Carbon::createFromFormat('Y-m-d', auth()->user()->birth_date )->isBirthday(Carbon\Carbon::now()) : NULL;
+
+              $name = str_replace(" ", "_", auth()->user()->name);
+             @endphp
+
+            @if($birthday)
+            <li class="nav-item">
+              <a href="{{ route('felicitaciones.show', [auth()->user(), $name]) }}" class="btn btn-rose btn-raised btn-fab btn-round">
+                  <i class="material-icons">cake</i>
+                  <div class="ripple-container"></div></a>
+            </li>
+            @endif
 
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/') }}">
@@ -33,8 +42,6 @@
                 </p>
               </a>
             </li>
-
-
 
             <li class="nav-item dropdown">
               <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

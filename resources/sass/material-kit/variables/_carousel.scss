@@ -1,0 +1,10 @@
+.carousel{
+  &.carousel-full-nagivation{
+    .left{
+      cursor: url("/coopfon/img/arrow-left.png"), url("/coopfon/img/arrow-left.cur"), default !important;
+    }
+    .right{
+      cursor: url("/coopfon/img/arrow-right.png"), url("/coopfon/img/arrow-right.cur"), default !important;
+    }
+  }
+}

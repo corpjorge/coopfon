@@ -6,15 +6,15 @@
 
 *
 Página del producto: https://www.coopfon.com/
-* Copyright 2020 Fycls Ingenieria (fyclsingenieria.com) & UPDIVISION (https://www.corpjorge.com)
+* Copyright 2020 CoopFon
 
-* Codificado por www.corpjorge.com & www.fyclsingenieria.com
+* Codificado por www.corpjorge.com
 
 =========================================================
 
 --}}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />
