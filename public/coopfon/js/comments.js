@@ -1908,6 +1908,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CommentsComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CommentsComponent */ "./resources/js/components/comments/CommentsComponent.vue");
 //
 //
 //
@@ -1925,6 +1926,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['birthday', 'user'],
   data: function data() {
@@ -1942,14 +1944,25 @@ __webpack_require__.r(__webpack_exports__);
       var params = this.msn;
       this.msn = {
         congratulations: ''
-      };
+      }; // comments.created();
+
       axios.post('/felicitaciones', {
-        // 'congratulations': params.congratulations,
+        'congratulations': params.congratulations,
         'birthday_user': this.birthday
-      }).then(function (response) {
-        console.log(response);
+      }).then(function (errors) {
+        _this.error = '';
+        $.notify({
+          icon: "done",
+          message: "Mensaje enviado con aprecio"
+        }, {
+          type: 'success',
+          timer: 3000,
+          placement: {
+            from: 'top',
+            align: 'right'
+          }
+        });
       })["catch"](function (errors) {
-        console.log(errors.response.data.errors.congratulations);
         _this.error = errors.response.data.errors.congratulations;
       });
     }
@@ -1978,21 +1991,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['birthday'],
+  props: ['user'],
   data: function data() {
     return {
-      msnx: []
+      comments: []
     };
   },
   created: function created() {
-    var url = '/felicitaciones/coment/' + birthday;
-    axios.get(url).then(function (response) {
-      this.msn = response.data;
-      console.log(this.msn);
-    })["catch"](function (error) {
-      console.log(error);
-    });
+    this.commentsGet();
+  },
+  methods: {
+    commentsGet: function commentsGet() {
+      var _this = this;
+
+      var url = '/felicitaciones/coment/' + this.user;
+      axios.get(url).then(function (response) {
+        _this.comments = response.data;
+        console.log(_this.comments);
+      });
+    }
   }
 });
 
@@ -37751,35 +37770,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "media" }, [
-      _c("div", { staticClass: "media-body" }, [
-        _c("h4", { staticClass: "media-heading" }, [
-          _vm._v("Tina Andrew "),
-          _c("small", [_vm._v("· 7 minutes ago")])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "Chance too good. God level bars. I'm so proud of @LifeOfDesiigner #1 song in the country. Panda! Don't be scared of the truth because we need to restart the human foundation in truth I stand with the most humility. We are so blessed!"
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "All praises and blessings to the families of people who never gave up on dreams. Don't forget, You're Awesome!"
-          )
+  return _c(
+    "div",
+    _vm._l(_vm.comments, function(comment) {
+      return _c("div", { staticClass: "media" }, [
+        _c("div", { staticClass: "media-body" }, [
+          _c("h4", { staticClass: "media-heading" }, [
+            _vm._v(_vm._s(comment.user.name) + " "),
+            _c("small", [_vm._v(" " + _vm._s(comment.created_at))])
+          ]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(comment.congratulations))])
         ])
       ])
-    ])
-  }
-]
+    }),
+    0
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

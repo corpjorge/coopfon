@@ -16,6 +16,8 @@
 </template>
 
 <script>
+    import comments from './CommentsComponent';
+
     export default {
         props: [
             'birthday',
@@ -31,14 +33,25 @@
             send(){
                 const params = this.msn;
                 this.msn = {congratulations: ''};
+                // comments.created();
 
                 axios.post('/felicitaciones',{
-                    // 'congratulations': params.congratulations,
+                    'congratulations': params.congratulations,
                     'birthday_user': this.birthday,
-                }).then(function (response) {
-                   console.log(response);
+                }).then((errors) => {
+                    this.error = '';
+                    $.notify({
+                        icon: "done",
+                        message: "Mensaje enviado con aprecio"
+                    }, {
+                        type: 'success',
+                        timer: 3000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        }
+                    });
                 }).catch((errors) => {
-                    console.log(errors.response.data.errors.congratulations)
                     this.error = errors.response.data.errors.congratulations;
                 });
             }

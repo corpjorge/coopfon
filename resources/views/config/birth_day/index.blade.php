@@ -45,41 +45,20 @@
                 <div class="col-md-8 ml-auto mr-auto">
                     <div class="media-area">
                         <h3 class="title text-center">Mensajes</h3>
-                        <div class="media">
-                            <div class="media-body">
-                                <h4 class="media-heading">Diana Aleja <small>&#xB7; 7 minutes ago</small></h4>
-                                <p>Felicidades en tu día, que la pases muy bien y recibas muchas sorpresas </p>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="media-body">
-                                <h4 class="media-heading">Fabian D <small>&#xB7; 7 minutes ago</small></h4>
-                                <p>Muchas felicidades en tu día</p>
-                            </div>
-                        </div>
-                        <div id="comments" >
-                            <comments-component birthday="{{$user->id}}"></comments-component>
-                            <br><br>
-                            @auth
-                                <comment-component birthday="{{$user->id}}" user="{{auth()->user()->name}}"></comment-component>
-                            @endauth
+                        <comments-component user="{{$user->id}}"></comments-component>
+                        <br><br>
+                        @auth
+                            <comment-component birthday="{{$user->id}}" user="{{auth()->user()->name}}"></comment-component>
+                        @endauth
 
-                            @guest
-                                <commentsLogin-component></commentsLogin-component>
-                            @endguest
-
-
-                        </div>
+                        @guest
+                            <commentsLogin-component></commentsLogin-component>
+                        @endguest
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
-
-
-
 @endsection
 
 

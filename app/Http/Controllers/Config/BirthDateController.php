@@ -13,11 +13,13 @@ class BirthDateController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function coment($id)
     {
-        return $birthDate = BirthDate::where('birthday_user',1)->get();
+         $birthDates = BirthDate::where('birthday_user',$id)->get();
+         return $birthDates->load('user');
     }
 
     /**

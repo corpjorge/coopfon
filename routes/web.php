@@ -37,8 +37,8 @@ Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
 
 //Manage birth Day
+Route::get('felicitaciones/coment/{id}', 'Config\BirthDateController@coment');
 Route::get('felicitaciones/{user}/{name}', 'Config\BirthDateController@show')->name('felicitaciones.show');
-Route::get('felicitaciones/coment/{user}', 'Config\BirthDateController@index')->name('felicitaciones.index');
 Route::post('felicitaciones/', 'Config\BirthDateController@store')->name('felicitaciones.store');
 
 

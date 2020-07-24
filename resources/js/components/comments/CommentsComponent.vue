@@ -1,9 +1,10 @@
 <template>
-    <div class="media"  >
-        <div class="media-body">
-            <h4 class="media-heading">Tina Andrew <small>&#xB7; 7 minutes ago</small></h4>
-            <p>Chance too good. God level bars. I&apos;m so proud of @LifeOfDesiigner #1 song in the country. Panda! Don&apos;t be scared of the truth because we need to restart the human foundation in truth I stand with the most humility. We are so blessed!</p>
-            <p>All praises and blessings to the families of people who never gave up on dreams. Don&apos;t forget, You&apos;re Awesome!</p>
+    <div>
+        <div class="media" v-for="comment in comments">
+            <div class="media-body">
+                <h4 class="media-heading">{{ comment.user.name }} <small> {{ comment.created_at }}</small></h4>
+                <p>{{ comment.congratulations }}</p>
+            </div>
         </div>
     </div>
 
@@ -12,22 +13,25 @@
 <script>
     export default {
         props: [
-            'birthday',
+            'user',
         ],
         data() {
             return {
-                msnx: [],
+                comments: [],
             }
         },
         created(){
-            let url = '/felicitaciones/coment/'+birthday
-            axios.get(url).then(function (response) {
-                this.msn = response.data;
-                console.log(this.msn);
-            }).catch(function (error) {
-                console.log(error);
-            });
+            this.commentsGet();
         },
-
+        methods:{
+            commentsGet(){
+                let url = '/felicitaciones/coment/'+this.user;
+                    axios.get(url)
+                    .then((response) => {
+                        this.comments = response.data;
+                        console.log(this.comments);
+                    });
+            }
+        }
     }
 </script>
