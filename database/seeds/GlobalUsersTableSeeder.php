@@ -66,5 +66,7 @@ class GlobalUsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        factory(App\User::class, 10000)->create();
     }
 }
