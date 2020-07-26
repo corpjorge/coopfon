@@ -39,31 +39,43 @@
                 </div>
             </div>
         </div>
-
-        <div id="comments">
             <div class="row">
                 <div class="col-md-8 ml-auto mr-auto">
                     <div class="media-area">
                         <h3 class="title text-center">Mensajes</h3>
-                        <comments-component user="{{$user->id}}"></comments-component>
-                        <br><br>
-                        @auth
-                            <comment-component birthday="{{$user->id}}" user="{{auth()->user()->name}}"></comment-component>
-                        @endauth
-
+                        <div id="comments">
+                            <comments-component user="{{$user->id}}"></comments-component>
+                            <br><br>
+                            @auth
+                                <comment-component birthday="{{$user->id}}" user="{{auth()->user()->name}}"></comment-component>
+                            @endauth
+                        </div>
                         @guest
-                            <commentsLogin-component></commentsLogin-component>
+                           <div class="container">
+                                <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                                    <button class="btn btn-block btn-round btn-rose" data-toggle="modal" data-target="#loginModal">
+                                        <i class="material-icons">account_circle</i>
+                                        Iniciar sesión para comentar
+                                    </button>
+                                </div>
+                           </div>
                         @endguest
+                        <div class="space-50"></div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
+    @guest
+        <div id="login">
+            <login-component></login-component>
+        </div>
+    @endguest
 @endsection
 
 
 @push('js')
     <script src="{{asset('coopfon/js/comments.js')}}"></script>
+    <script src="{{asset('coopfon/js/login.js')}}"></script>
     <script>
         var mp3Source = '<source src="/coopfon/img/cumple/{{$gender}}.mp3" type="audio/mpeg">';
         var embedSource = '<embed hidden="true" autostart="true" loop="false" src="/coopfon/img/cumple/M.mp3">';
