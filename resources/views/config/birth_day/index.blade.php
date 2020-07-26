@@ -53,10 +53,10 @@
                         @guest
                            <div class="container">
                                 <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                                    <button class="btn btn-block btn-round btn-rose" data-toggle="modal" data-target="#loginModal">
+                                    <a href="{{ url('login') }}" class="btn btn-block btn-round btn-rose"  >
                                         <i class="material-icons">account_circle</i>
                                         Iniciar sesión para comentar
-                                    </button>
+                                    </a>
                                 </div>
                            </div>
                         @endguest
