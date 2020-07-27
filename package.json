@@ -23,5 +23,8 @@
         "sass-loader": "^9.0.2",
         "vue": "^2.6.11",
         "vue-template-compiler": "^2.6.11"
+    },
+    "dependencies": {
+        "moment": "^2.27.0"
     }
 }

@@ -229,126 +229,36 @@
             <div class="row">
                 <div class="col-md-8 ml-auto mr-auto text-center">
                     <h2 class="title">Feliz cumpleaños</h2>
-                    <h5 class="description">Felicidades a todos aquellos que están en este día especial.</h5>
+                    <h5 class="description">Felicidades a todos aquellos que están en este día especial.
+                        <br>Felicítalo seleccionado <i class="fa fa-edit"></i>
+                    </h5>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card card-profile card-plain">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="card-body">
-                                    <a href="#">
-                                        <h4 class="card-title">Virginia Woolf
-                                        <button  class="btn btn-just-icon btn-link btn-white" target="_blank" ><i class="fa fa-edit"></i></button>
-                                        </h4>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+        </div>
+        <div class="container col-11">
+            <div class="scrollbar scrollbar-primary">
+                <div class="row">
+                    @foreach($birthUsers as $user)
+                    <div class="col-4">
+                        <h4 class="card-title text-white text-center">
+                            {{$user->fullname}}
+                            <a class="btn btn-just-icon btn-link btn-white" href="{{ route('felicitaciones.show', [ $user, $user->name ]) }}" target="_blank" title="Felicítalo" ><i class="fa fa-edit"></i></a>
+                        </h4>
                     </div>
+                    @endforeach
                 </div>
-                <div class="col-md-4">
-                    <div class="card card-profile card-plain">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="card-body">
-                                    <a href="#">
-                                        <h4 class="card-title">Antoni Nevado
-                                            <button  class="btn btn-just-icon btn-link btn-white" target="_blank" ><i class="fa fa-edit"></i></button>
-                                        </h4>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-profile card-plain">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="card-body">
-                                    <a href="#">
-                                        <h4 class="card-title">Laura Reyes
-                                            <button  class="btn btn-just-icon btn-link btn-white" target="_blank" ><i class="fa fa-edit"></i></button>
-                                        </h4>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-profile card-plain">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="card-body">
-                                    <a href="#">
-                                        <h4 class="card-title">Africa Rueda
-                                            <button  class="btn btn-just-icon btn-link btn-white" target="_blank" ><i class="fa fa-edit"></i></button>
-                                        </h4>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-profile card-plain">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="card-body">
-                                    <a href="#">
-                                        <h4 class="card-title">Otra Persona
-                                            <button  class="btn btn-just-icon btn-link btn-white" target="_blank" ><i class="fa fa-edit"></i></button>
-                                        </h4>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-profile card-plain">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="card-body">
-                                    <a href="#">
-                                        <h4 class="card-title">Daniela Rey
-                                            <button  class="btn btn-just-icon btn-link btn-white" target="_blank" ><i class="fa fa-edit"></i></button>
-                                        </h4>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
             </div>
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <style>
+        .scrollbar {
+            position: relative;
+            width: 100%;
+            height: 800px;
+            overflow: auto;
+        }
+    </style>
 
     <div class="section section-contacts">
         <div class="row">
@@ -365,28 +275,5 @@
         </div>
     </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @endsection

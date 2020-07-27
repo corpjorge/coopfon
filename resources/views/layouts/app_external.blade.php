@@ -52,7 +52,6 @@ Página del producto: https://www.coopfon.com/
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="{{ asset('coopfon') }}/css/coopfon-kit.css?v=2.1.2" rel="stylesheet" />
-
 </head>
 <body class="{{ $class ?? '' }}">
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -67,7 +66,7 @@ Página del producto: https://www.coopfon.com/
         <script src="{{ asset('coopfon') }}/js/core/jquery.min.js"></script>
         <script src="{{ asset('coopfon') }}/js/core/popper.min.js"></script>
         <script src="{{ asset('coopfon') }}/js/core/bootstrap-material-design.min.js"></script>
-        <script src="{{ asset('coopfon') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <script src="{{ asset('coopfon') }}/js/plugins/perfect-scrollbar.min.js"></script>
         <!-- Plugin for the momentJs  -->
         <script src="{{ asset('coopfon') }}/js/plugins/moment.min.js"></script>
         <!--  Plugin for Sweet Alert -->
@@ -164,6 +163,9 @@ Página del producto: https://www.coopfon.com/
                   $("#logo").attr("src", "{{ asset('coopfon') }}/img/logo_b.png");
               }
           });
+
+          const ps = new PerfectScrollbar('.scrollbar');
+
 
         </script>
         @stack('js')

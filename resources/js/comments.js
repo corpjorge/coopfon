@@ -19,7 +19,6 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('comments-component', require('./components/comments/CommentsComponent.vue').default);
-Vue.component('commentsLogin-component', require('./components/comments/CommentsLoginComponent.vue').default);
 Vue.component('comment-component', require('./components/comments/CommentComponent.vue').default);
 
 /**

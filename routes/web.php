@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-  return view('pages.welcome');
-})->name('welcome');
+Route::get('/', 'page\WelcomeController@welcome')->name('welcome');
 
 //Autentication Laravel
 Auth::routes();

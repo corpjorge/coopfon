@@ -20,6 +20,8 @@ class GlobalCreateAuthsTable extends Migration
             $table->string('path');
             $table->string('description');
             $table->string('icon');
+            $table->string('fields')->nullable();
+            $table->string('main')->nullable();
             $table->string('parameters')->nullable();
             $table->string('version')->nullable();
             $table->softDeletes();
