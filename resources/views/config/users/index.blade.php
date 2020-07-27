@@ -23,71 +23,153 @@
                   </div>
                 @endcan
                 <div class="table-responsive">
-                  <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
-                    <thead class="text-primary">
-                      <th>
-                          {{ __('Nombre') }}
-                      </th>
-                      <th>
-                        {{ __('Email') }}
-                      </th>
-                      <th>
-                        {{ __('Documento') }}
-                      </th>
-                      @can('manage-users', App\User::class)
-                        <th class="text-right">
-                          {{ __('Acción') }}
-                        </th>
-                      @endcan
-                    </thead>
-                    <tbody>
-                      @foreach($users as $user)
-                        <tr>
-                          <td>
-                            {{ $user->name }}
-                          </td>
-                          <td>
-                            {{ $user->email }}
-                          </td>
-                          <td>
-                            {{ $user->document }}
-                          </td>
-                          @can('manage-users', App\User::class)
-                            @if (auth()->user()->can('update', $user) || auth()->user()->can('delete', $user))
-                              <td class="td-actions text-right">
-                                @if ($user->id != auth()->id())
-                                    <form action="{{ route('user.destroy', $user) }}" method="post">
-                                        @csrf
-                                        @method('delete')
+                    {{--  <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
+                           <thead class="text-primary">
+                             <th>
+                                 {{ __('Nombre') }}
+                             </th>
+                             <th>
+                               {{ __('Email') }}
+                             </th>
+                             <th>
+                               {{ __('Documento') }}
+                             </th>
+                             @can('manage-users', App\User::class)
+                               <th class="text-right">
+                                 {{ __('Acción') }}
+                               </th>
+                             @endcan
+                           </thead>
+                           <tbody>
+                             @foreach($users as $user)
+                               <tr>
+                                 <td>
+                                   {{ $user->name }}
+                                 </td>
+                                 <td>
+                                   {{ $user->email }}
+                                 </td>
+                                 <td>
+                                   {{ $user->document }}
+                                 </td>
+                                 @can('manage-users', App\User::class)
+                                   @if (auth()->user()->can('update', $user) || auth()->user()->can('delete', $user))
+                                     <td class="td-actions text-right">
+                                       @if ($user->id != auth()->id())
+                                           <form action="{{ route('user.destroy', $user) }}" method="post">
+                                               @csrf
+                                               @method('delete')
 
-                                        @can('update', $user)
-                                          <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="">
-                                            <i class="material-icons">edit</i>
-                                            <div class="ripple-container"></div>
-                                          </a>
-                                        @endcan
-                                        @can('delete', $user)
-                                          <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas eliminar a este asociado?") }}') ? this.parentElement.submit() : ''">
-                                              <i class="material-icons">close</i>
-                                              <div class="ripple-container"></div>
-                                          </button>
-                                        @endcan
-                                    </form>
-                                @else
-                                  @can('update', $user)
-                                    <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('profile.edit') }}" data-original-title="" title="">
-                                      <i class="material-icons">edit</i>
-                                      <div class="ripple-container"></div>
-                                    </a>
-                                  @endcan
-                                @endif
-                              </td>
-                            @endif
-                          @endcan
+                                               @can('update', $user)
+                                                 <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="">
+                                                   <i class="material-icons">edit</i>
+                                                   <div class="ripple-container"></div>
+                                                 </a>
+                                               @endcan
+                                               @can('delete', $user)
+                                                 <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas eliminar a este asociado?") }}') ? this.parentElement.submit() : ''">
+                                                     <i class="material-icons">close</i>
+                                                     <div class="ripple-container"></div>
+                                                 </button>
+                                               @endcan
+                                           </form>
+                                       @else
+                                         @can('update', $user)
+                                           <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('profile.edit') }}" data-original-title="" title="">
+                                             <i class="material-icons">edit</i>
+                                             <div class="ripple-container"></div>
+                                           </a>
+                                         @endcan
+                                       @endif
+                                     </td>
+                                   @endif
+                                 @endcan
+                               </tr>
+                             @endforeach
+                           </tbody>
+                         </table>--}}
+
+
+
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>{{ __('Nombre') }}</th>
+                            <th>{{ __('Email') }}</th>
+                            <th class="text-right">{{ __('Documento') }}</th>
+                            @can('manage-users', App\User::class)
+                                <th class="text-right">{{ __('Acción') }}</th>
+                            @endcan
                         </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
+                        </thead>
+                        <tbody>
+                        @foreach($users as $user)
+                            <tr>
+                                <td class="text-center">{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td class="text-right">{{ $user->document }}</td>
+                                @can('manage-users', App\User::class)
+                                    @if (auth()->user()->can('update', $user) || auth()->user()->can('delete', $user))
+                                        <td class="td-actions text-right">
+                                            @if ($user->id != auth()->id())
+                                                <form action="{{ route('user.destroy', $user) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+
+                                                    @can('update', $user)
+                                                        <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="">
+                                                            <i class="material-icons">edit</i>
+                                                            <div class="ripple-container"></div>
+                                                        </a>
+                                                    @endcan
+                                                    @can('delete', $user)
+                                                        <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("¿Estás seguro de que deseas eliminar a este asociado?") }}') ? this.parentElement.submit() : ''">
+                                                            <i class="material-icons">close</i>
+                                                            <div class="ripple-container"></div>
+                                                        </button>
+                                                    @endcan
+                                                </form>
+                                            @else
+                                                @can('update', $user)
+                                                    <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('profile.edit') }}" data-original-title="" title="">
+                                                        <i class="material-icons">edit</i>
+                                                        <div class="ripple-container"></div>
+                                                    </a>
+                                                @endcan
+                                            @endif
+                                        </td>
+                                    @endif
+                                @endcan
+                            </tr>
+                        @endforeach
+
+
+
+
+                        </tbody>
+                    </table>
+
+                    {{ $users->links() }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
               </div>
             </div>
