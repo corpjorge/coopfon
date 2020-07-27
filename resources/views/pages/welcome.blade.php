@@ -242,7 +242,7 @@
                     <div class="col-4">
                         <h4 class="card-title text-white text-center">
                             {{$user->fullname}}
-                            <a class="btn btn-just-icon btn-link btn-white" href="{{ route('felicitaciones.show', [ $user, $user->name ]) }}" target="_blank" title="Felicítalo" ><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-just-icon btn-link btn-white" href="{{ route('felicitaciones.show', [ $user, str_replace(" ", "_",$user->name) ]) }}" target="_blank" title="Felicítalo" ><i class="fa fa-edit"></i></a>
                         </h4>
                     </div>
                     @endforeach
