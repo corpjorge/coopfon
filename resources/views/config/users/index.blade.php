@@ -76,10 +76,6 @@
                                 @endcan
                             </tr>
                         @endforeach
-
-
-
-
                         </tbody>
                     </table>
                     {{ $users->links() }}
