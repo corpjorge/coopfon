@@ -30,17 +30,20 @@ class BirthDateController extends Controller
      */
     public function store(Request $request)
     {
-        $birthDate = new BirthDate;
+        if (\Auth::check()) {
 
-        $request->validate([
-            'birthday_user' => 'required|',
-            'congratulations' => 'required|',
-        ]);
+            $birthDate = new BirthDate;
 
-        $birthDate->create($request->merge([
-            'user_id' => auth()->user()->id,
-            'birthday_user' => $request->birthday_user,
-        ])->all());
+            $request->validate([
+                'birthday_user' => 'required|',
+                'congratulations' => 'required|',
+            ]);
+
+            $birthDate->create($request->merge([
+                'user_id' => auth()->user()->id,
+                'birthday_user' => $request->birthday_user,
+            ])->all());
+        }
 
     }
 
