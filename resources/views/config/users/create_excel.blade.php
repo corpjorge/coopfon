@@ -5,13 +5,10 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-
             @include('alerts.errors')
-
           <form id="formExcel" method="post" enctype="multipart/form-data" action="{{ route('users.store') }}" autocomplete="off" class="form-horizontal">
             @csrf
             @method('post')
-
             <div class="card ">
               <div class="card-header card-header-rose card-header-icon">
                 <div class="card-icon">
