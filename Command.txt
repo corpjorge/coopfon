@@ -8,7 +8,7 @@ php artisan make:policy Config\PqrsExternalPolicy --model=Model\Pqrs\PqPqrExtern
 
 php artisan make:request Config\UsersRequest
 
-php artisan make:controller Page\WelcomeController
+php artisan make:controller Config\SearchController
 php artisan make:controller Config\BirthDateController --model=Model\Config\BirthDate
 php artisan make:controller External_system\FinancialController --invokable
 

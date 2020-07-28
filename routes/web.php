@@ -82,4 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('module', 'Config\ModuleController', ['except' => ['show', 'create']]);
     Route::delete('module/{admin}/restore', ['as' => 'module.restore', 'uses' => 'Config\ModuleController@restore']);
 
+    //Search
+    Route::get('search/users/{users?}', 'Config\SearchController@users');
+
 });

@@ -15,11 +15,14 @@
               <div class="card-body">
                 @can('create', App\User::class)
                   <div class="row">
-                    <div class="col-12 text-right">
-                        <a href="{{ route('user.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar asociado') }}</a>
-                        <a href="{{ route('users.create') }}" class="btn btn-sm btn-success">{{ __('Cargar Excel') }}</a>
-                        <a href="{{ route('users.index') }}" class="btn btn-sm btn-danger">{{ __('Restaurar asociado') }}</a>
-                    </div>
+                        <div id="search" class="col-4 text-left">
+                            <search-component></search-component>
+                        </div>
+                        <div class="col-8 text-right">
+                            <a href="{{ route('user.create') }}" class="btn btn-sm btn-rose">{{ __('Agregar asociado') }}</a>
+                            <a href="{{ route('users.create') }}" class="btn btn-sm btn-success">{{ __('Cargar Excel') }}</a>
+                            <a href="{{ route('users.index') }}" class="btn btn-sm btn-danger">{{ __('Restaurar asociado') }}</a>
+                        </div>
                   </div>
                 @endcan
                 <div class="table-responsive">
@@ -89,5 +92,6 @@
 @endsection
 
 @push('js')
-
+    <script src="{{asset('coopfon/js/search.js')}}"></script>
 @endpush
+
