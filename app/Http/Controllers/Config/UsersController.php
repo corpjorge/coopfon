@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Config;
 use App\User;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
@@ -52,7 +51,7 @@ class UsersController extends Controller
 
         $this->Validate($request, [ 'file' => 'required|mimes:xlsx' ]);
 
-        Excel::import(new UsersImport, request()->file('file'), null, \Maatwebsite\Excel\Excel::XLSX);
+        (new UsersImport)->import(request()->file('file'), NULL, \Maatwebsite\Excel\Excel::XLSX);
 
         return redirect()->route('user.index')->withStatus(__('Carga realizada con éxito.'));
     }
