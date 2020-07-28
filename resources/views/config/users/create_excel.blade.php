@@ -8,7 +8,7 @@
 
             @include('alerts.errors')
 
-          <form method="post" enctype="multipart/form-data" action="{{ route('users.store') }}" autocomplete="off" class="form-horizontal">
+          <form id="formExcel" method="post" enctype="multipart/form-data" action="{{ route('users.store') }}" autocomplete="off" class="form-horizontal">
             @csrf
             @method('post')
 
@@ -26,19 +26,34 @@
                       <a href="{{ route('user.index') }}" class="btn btn-sm btn-rose">{{ __('Volver a la lista') }}</a>
                   </div>
                 </div>
-
                 <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Archivo XLSX') }}</label>
                   <div class="col-sm-7">
                       <input class="form-control{{ $errors->has('file') ? ' is-invalid' : '' }}" name="file" id="input-file" type="file" placeholder="{{ __('XLSX') }}" value="{{ old('file') }}" required="true" aria-required="true" accept=".xlsx"/>
                       @include('alerts.feedback', ['field' => 'file'])
+                      <span id="file-error" class="error text-danger" for="input-file" style="display: none;">Falta archivo</span>
                   </div>
                 </div>
-
               </div>
               <div class="card-footer ml-auto mr-auto">
-                <button type="submit" class="btn btn-rose">{{ __('Cargar asociados') }}</button>
+                <button type="button" class="btn btn-rose" onclick="exportExel()">
+                    <div id="loadSpinner" style="display:none;">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    {{ __('Cargar asociados') }}
+                </button>
               </div>
+                <div id="mensageExcelOne" style="display: none" class="card-footer ml-auto mr-auto">
+                    <h5>Por favor espere, puede tardar demasiado</h5>
+                </div>
+                <div class="progress" id="progress-bar" style="display: none">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div id="mensageExcelTwo" style="display: none"  class="card-footer ml-auto mr-auto">
+                    <h6>*No recargue ni cierre esta ventana</h6>
+                </div>
+               </div>
             </div>
           </form>
         </div>
@@ -50,22 +65,27 @@
 
 @push('js')
     <script>
-        $(document).ready(function() {
-            $('.datepicker').datetimepicker({
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-chevron-up",
-                    down: "fa fa-chevron-down",
-                    previous: 'fa fa-chevron-left',
-                    next: 'fa fa-chevron-right',
-                    today: 'fa fa-screenshot',
-                    clear: 'fa fa-trash',
-                    close: 'fa fa-remove'
-                },
-                format: 'DD-MM-YYYY'
-            });
-        });
+        function exportExel() {
+            var inputFile = document.getElementById("input-file");
+            var fileError = document.getElementById("file-error");
+            var formExcel = document.getElementById("formExcel");
+            var loadSpinner = document.getElementById("loadSpinner");
+            var progressBar = document.getElementById("progress-bar");
+            var mensageExcelOne = document.getElementById("mensageExcelOne");
+            var mensageExcelTwo = document.getElementById("mensageExcelTwo");
+
+            if (inputFile.value == ''){
+                fileError.style.display = "block";
+                return false;
+            }
+
+            mensageExcelOne.style.display = "";
+            mensageExcelTwo.style.display = "";
+            progressBar.style.display = "";
+            loadSpinner.style.display = "inline";
+            fileError.style.display = "none";
+            formExcel.submit();
+        }
     </script>
 
     <script>
