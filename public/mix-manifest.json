@@ -1,6 +1,7 @@
 {
     "/coopfon/js/comments.js": "/coopfon/js/comments.js",
-    "/coopfon/css/coopfon.css": "/coopfon/css/coopfon.css",
     "/coopfon/css/coopfon-kit.css": "/coopfon/css/coopfon-kit.css",
-    "/coopfon/js/login.js": "/coopfon/js/login.js"
+    "/coopfon/js/login.js": "/coopfon/js/login.js",
+    "/coopfon/js/search.js": "/coopfon/js/search.js",
+    "/coopfon/css/coopfon.css": "/coopfon/css/coopfon.css"
 }
