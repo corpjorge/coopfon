@@ -49,8 +49,8 @@ Página del producto: https://www.coopfon.com/
   <meta property="og:site_name" content="CoopFon" />
 
     <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <link rel="stylesheet" SameSite=None type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" SameSite=None href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="{{ asset('coopfon') }}/css/coopfon-kit.css?v=2.1.2" rel="stylesheet" />
 </head>
@@ -100,9 +100,17 @@ Página del producto: https://www.coopfon.com/
         <script src="{{ asset('coopfon') }}/js/plugins/chartist.min.js"></script>
         <!--  Notifications Plugin    -->
         <script src="{{ asset('coopfon') }}/js/plugins/bootstrap-notify.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173974091-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-173974091-1');
+        </script>
         <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="{{ asset('coopfon') }}/js/material-kit.min.js?v=2.1.0" type="text/javascript"></script>
-
         <script src="{{ asset('coopfon') }}/js/application.js"></script>
 
         <script>

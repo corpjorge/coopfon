@@ -81,9 +81,17 @@ Página del producto: https://www.coopfon.com/
         <script src="{{ asset('coopfon') }}/js/plugins/chartist.min.js"></script>
         <!--  Notifications Plugin    -->
         <script src="{{ asset('coopfon') }}/js/plugins/bootstrap-notify.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173974091-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-173974091-1');
+        </script>
         <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="{{ asset('coopfon') }}/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
-
         <script src="{{ asset('coopfon') }}/js/application.js"></script>
 
         <script>

@@ -15,8 +15,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="{{ asset('coopfon') }}/css/coopfon.css?v=2.1.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="{{ asset('coopfon') }}/demo/demo.css" rel="stylesheet" />
 </head>
     <body class="off-canvas-sidebar">
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -65,8 +63,6 @@
         <script src="{{ asset('coopfon') }}/js/plugins/bootstrap-notify.js"></script>
         <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="{{ asset('coopfon') }}/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
-        <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-        <script src="{{ asset('coopfon') }}/demo/demo.js"></script>
         <script src="{{ asset('coopfon') }}/js/application.js"></script>
 
         @stack('js')
