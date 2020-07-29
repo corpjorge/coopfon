@@ -4,7 +4,7 @@
 
 *Plataforma versión*: CoopFon v1.0.0. Más información en https://www.coopfon.com/
 
-![Product Image](https://github.com/creativetimofficial/public-assets/raw/master/material-dashboard-pro-laravel/material-dashboard-pro-laravel.gif?raw=true)
+![Product Image](https://raw.githubusercontent.com/corpjorge/coopfon/master/public/coopfon/img/opt_mb_coopfon_thumbnail.jpg?token=AEXII7HXCL5OD74KBB4C6X27FIMZA)
 
 CoopFon.
 
