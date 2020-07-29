@@ -7,7 +7,7 @@ use App\Model\Config\Module;
 use App\Http\Controllers\Controller;
 use App\Model\Config\Auth;
 use Illuminate\Http\Request;
-use  Illuminate\Validation\Rule;
+use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {

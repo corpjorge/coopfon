@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Page;
 use App\Http\Controllers\Controller;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {

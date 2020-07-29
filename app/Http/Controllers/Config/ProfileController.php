@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Config;
 
-use Gate;
 use Carbon\Carbon;
 use App\Model\Config\City;
 use App\Model\Config\Gender;
