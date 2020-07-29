@@ -18,6 +18,7 @@ class GlobalAuthTableSeeder extends Seeder
             'path' => 'document',
             'description' => 'Ingresar con documento',
             'icon' => 'fa fa-credit-card',
+            'fields' => '{ "document", "password"}',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -50,6 +51,7 @@ class GlobalAuthTableSeeder extends Seeder
             'name' => 'Azure',
             'path' => 'azure',
             'description' => 'Ingresar con SSO',
+            'fields' => '{ "email", "password"}',
             'icon' => 'fa fa-windows',
             'created_at' => now(),
             'updated_at' => now()

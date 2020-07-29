@@ -27,23 +27,24 @@ Página del producto: https://www.coopfon.com/
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <meta name="keywords" content="coofon, boletacoop, Cooperativas, fondos, boletería, boletas, pqrs, superfluo, fycls ingeniería, inventario, eventos, fondo de empleados, asociados, asociadas, delegados, delegadas, votaciones">
   <meta name="description" content="Para fondos y cooperativas, asociados felices">
+    <link rel="canonical" href="https://www.coopfon.com/" />
   <!-- Schema.org markup for Google+ -->
   <meta itemprop="name" content="CoopFon">
   <meta itemprop="description" content="Para fondos y cooperativas, asociados felices">
-  <meta itemprop="image" content="{{ asset('coopfon') }}/img">
+  <meta itemprop="image" content="{{ asset('coopfon') }}/img/opt_mb_coopfon_thumbnail.jpg">
   <!-- Twitter Card data -->
   <meta name="twitter:card" content="product">
   <meta name="twitter:site" content="@coopfon">
   <meta name="twitter:title" content="CoopFon">
   <meta name="twitter:description" content="Para fondos y cooperativas, asociados felices">
   <meta name="twitter:creator" content="@corpjorge">
-  <meta name="twitter:image" content="{{ asset('coopfon') }}/img/PENDIENTE">
+  <meta name="twitter:image" content="{{ asset('coopfon') }}/img/opt_mb_coopfon_thumbnail.jpg">
   <!-- Open Graph data -->
   <meta property="fb:app_id" content="PENDIENTE">
   <meta property="og:title" content="CoopFon" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://coopfon.com" />
-  <meta property="og:image" content="{{ asset('coopfon') }}/img/PENDIENTE" />
+  <meta property="og:image" content="{{ asset('coopfon') }}/img/opt_mb_coopfon_thumbnail.jpg" />
   <meta property="og:description" content="Para fondos y cooperativas, asociados felices" />
   <meta property="og:site_name" content="CoopFon" />
 
@@ -52,7 +53,6 @@ Página del producto: https://www.coopfon.com/
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="{{ asset('coopfon') }}/css/coopfon-kit.css?v=2.1.2" rel="stylesheet" />
-
 </head>
 <body class="{{ $class ?? '' }}">
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -67,7 +67,7 @@ Página del producto: https://www.coopfon.com/
         <script src="{{ asset('coopfon') }}/js/core/jquery.min.js"></script>
         <script src="{{ asset('coopfon') }}/js/core/popper.min.js"></script>
         <script src="{{ asset('coopfon') }}/js/core/bootstrap-material-design.min.js"></script>
-        <script src="{{ asset('coopfon') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <script src="{{ asset('coopfon') }}/js/plugins/perfect-scrollbar.min.js"></script>
         <!-- Plugin for the momentJs  -->
         <script src="{{ asset('coopfon') }}/js/plugins/moment.min.js"></script>
         <!--  Plugin for Sweet Alert -->
@@ -164,6 +164,9 @@ Página del producto: https://www.coopfon.com/
                   $("#logo").attr("src", "{{ asset('coopfon') }}/img/logo_b.png");
               }
           });
+
+          const ps = new PerfectScrollbar('.scrollbar');
+
 
         </script>
         @stack('js')

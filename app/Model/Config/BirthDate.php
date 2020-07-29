@@ -11,15 +11,6 @@ class BirthDate extends Model
     protected $fillable = ['birthday_user', 'user_id', 'congratulations'];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'created_at' => 'datetime:Y-m-d',
-    ];
-
-    /**
      * Get the user
      *
      * @return \App\User

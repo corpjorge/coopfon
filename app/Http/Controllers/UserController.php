@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $this->authorize('manage-users', User::class);
 
-        return view('config.users.index', ['users' => $model->where('role_id',9)->get()]);
+        return view('config.users.index', ['users' => $model->where('role_id',9)->paginate(20)]);
     }
 
     /**

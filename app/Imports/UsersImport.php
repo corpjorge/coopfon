@@ -5,14 +5,13 @@ namespace App\Imports;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithValidation
+class UsersImport implements ToModel, WithHeadingRow, WithValidation
 {
 
     use Importable;
@@ -71,8 +70,8 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithVali
         ];
     }
 
-    public function chunkSize(): int
-    {
-        return 1000;
-    }
+//    public function chunkSize(): int
+//    {
+//        return 1000;
+//    }
 }

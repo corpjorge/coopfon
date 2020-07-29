@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-  return view('pages.welcome');
-})->name('welcome');
+Route::get('/', 'page\WelcomeController@welcome')->name('welcome');
 
 //Autentication Laravel
 Auth::routes();
@@ -83,5 +81,8 @@ Route::group(['middleware' => 'auth'], function () {
     //Manage Modules
     Route::resource('module', 'Config\ModuleController', ['except' => ['show', 'create']]);
     Route::delete('module/{admin}/restore', ['as' => 'module.restore', 'uses' => 'Config\ModuleController@restore']);
+
+    //Search
+    Route::get('search/users/{users?}', 'Config\SearchController@users');
 
 });

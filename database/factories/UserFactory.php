@@ -23,7 +23,15 @@ $factory->define(App\User::class, function (Faker $faker) {
         'password' => Hash::make('secret'), // secret
         'remember_token' => Str::random(10),
         'role_id' => 3,
+        'document' => $faker->unique()->randomNumber,
+        'phone' => rand(),
+        'code' => rand(),
+        'member_id' => 1,
+        'gender_id' => 1,
+        'area' => rand(),
+        'city_id' => 5107,
         'created_at' => now(),
-        'updated_at' => now()
+        'updated_at' => now(),
+
     ];
 });

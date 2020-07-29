@@ -12,7 +12,7 @@ class GlobalUsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class)->create([
+        DB::table('users')->insert([
             'id' => 1,
             'role_id' => 1,
             'name' => 'Administrator',
@@ -20,10 +20,9 @@ class GlobalUsersTableSeeder extends Seeder
             'password' => Hash::make('admin'),
             'created_at' => now(),
             'updated_at' => now()
-
         ]);
 
-        factory(App\User::class)->create([
+        DB::table('users')->insert([
             'id' => 2,
             'role_id' => 1,
             'name' => 'John Freddy Moreno',
@@ -31,10 +30,9 @@ class GlobalUsersTableSeeder extends Seeder
             'password' => Hash::make('12342wefdgsasdf@'),
             'created_at' => now(),
             'updated_at' => now()
-
         ]);
 
-        factory(App\User::class)->create([
+        DB::table('users')->insert([
             'id' => 3,
             'role_id' => 1,
             'name' => 'Faber Ramirez',
@@ -42,10 +40,9 @@ class GlobalUsersTableSeeder extends Seeder
             'password' => Hash::make('12342wefdgsasdf@'),
             'created_at' => now(),
             'updated_at' => now()
-
         ]);
 
-        factory(App\User::class)->create([
+        DB::table('users')->insert([
             'id' => 4,
             'role_id' => 5,
             'name' => 'CorpJorge',
@@ -53,10 +50,9 @@ class GlobalUsersTableSeeder extends Seeder
             'password' => Hash::make('admin'),
             'created_at' => now(),
             'updated_at' => now()
-
         ]);
 
-        factory(App\User::class)->create([
+        DB::table('users')->insert([
             'id' => 5,
             'role_id' => 9,
             'name' => 'Material',
@@ -66,5 +62,7 @@ class GlobalUsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        //factory(App\User::class, 10000)->create();
     }
 }

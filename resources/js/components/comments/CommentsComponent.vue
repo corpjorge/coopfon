@@ -2,7 +2,7 @@
     <div>
         <div class="media" v-for="comment in comments">
             <div class="media-body">
-                <h4 class="media-heading">{{ comment.user.name }} <small> {{ comment.created_at }}</small></h4>
+                <h4 class="media-heading">{{ comment.user.name }} <small> {{ date(comment.created_at).fromNow() }} </small></h4>
                 <p>{{ comment.congratulations }}</p>
             </div>
         </div>
@@ -11,6 +11,11 @@
 </template>
 
 <script>
+
+    import moment from 'moment';
+
+    moment.locale('es');
+
     export default {
         props: [
             'user',
@@ -18,6 +23,7 @@
         data() {
             return {
                 comments: [],
+                date: moment
             }
         },
         created(){
