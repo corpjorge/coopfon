@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-3 ml-auto ">
                     <div class="card" style="width: 200px;">
-                        <img class="card-img-top" src='{{ asset('coopfon/img/logo_empresa1.png') }}' alt="Card image cap">
+                        <img class="card-img-top" src='{{ asset('coopfon/img/logo_empresa.png') }}' alt="Card image cap">
 
                     </div>
                 </div>
