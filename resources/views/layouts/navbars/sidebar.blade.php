@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="rose" data-background-color="black" data-image="{{ asset('coopfon') }}/img/sidebar-1.jpg">
+<div class="sidebar" data-color="{{ env('APP_COLOR') }}" data-background-color="{{ env('APP_COLOR_SECOND') }}" data-image="{{ asset('coopfon') }}/img/{{ env('APP_IMG') }}">
   <!--
     Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -9,7 +9,7 @@
       {{ __('CF') }}
     </a>
     <a href="#" class="simple-text logo-normal">
-        <img src="{{ asset('coopfon') }}/img/logo_b.png" style="width: 108px;">
+        <img src="{{ asset('coopfon') }}/img/{{ env('APP_LOGO') }}" style="width: 108px;">
     </a>
   </div>
   <div class="sidebar-wrapper">
