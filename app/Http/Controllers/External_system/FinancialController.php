@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\External_system;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Model\Config\ExternalSystem;
 use Illuminate\Support\Facades\Http;
 
