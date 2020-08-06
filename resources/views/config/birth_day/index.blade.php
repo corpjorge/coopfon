@@ -47,9 +47,7 @@
                             <comments-component user="{{$user->id}}"></comments-component>
                             <br><br>
                             @auth
-                                @if(auth()->user()->id != $user->id)
-                                    <comment-component birthday="{{$user->id}}" user="{{auth()->user()->name}}"></comment-component>
-                                @endif
+                                <comment-component birthday="{{$user->id}}" user="{{auth()->user()->name}}"></comment-component>
                             @endauth
                         </div>
                         @guest
