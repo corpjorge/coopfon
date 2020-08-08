@@ -19,7 +19,23 @@ Una maquina con php y node instalada.
 3. npm install
 4. php artisan key:generate
 3. Configurar base de datos en el archivo .env y ejecutar php artisan migrate --seed 
- 
+
+### FORGE
+
+```
+ $FORGE_PHP artisan migrate:fresh --seed --force
+ $FORGE_PHP artisan storage:link
+ $FORGE_PHP artisan clear-compiled
+ $FORGE_PHP artisan optimize
+ $FORGE_PHP artisan config:cache
+ $FORGE_PHP artisan route:cache
+ $FORGE_PHP artisan view:cache
+ $FORGE_PHP artisan config:clear
+ $FORGE_PHP artisan cache:clear
+ composer dump-autoload
+ $FORGE_PHP artisan view:clear
+ $FORGE_PHP artisan route:clear
+ ```
 ## Versions
 
 Laravel 7
