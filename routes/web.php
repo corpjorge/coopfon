@@ -17,7 +17,7 @@ Route::get('/', 'Page\WelcomeController@welcome')->name('welcome');
 Auth::routes();
 Route::get('register', 'Config\HomeController@index')->name('register');
 Route::get('home', 'Config\HomeController@index')->name('home');
-Route::get('dashboard', 'Config\HomeController@index')->name('home');
+Route::get('dashboard', 'Config\HomeController@index')->name('dashboard');
 
 //Login AUTH
 Route::get('login/email', 'Auth\LoginDocumentController@showLoginForm');
