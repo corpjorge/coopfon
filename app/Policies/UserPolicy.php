@@ -50,7 +50,8 @@ class UserPolicy
      * @param  \App\User  $model
      * @return boolean
      */
-    public function delete(User $user, User $model)    {
+    public function delete(User $user, User $model)
+    {
         return $user->isAdmin() && $user->id != $model->id;
     }
 

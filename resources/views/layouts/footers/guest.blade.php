@@ -29,7 +29,7 @@
     <script>
       document.write(new Date().getFullYear())
     </script>, hecho con <i class="material-icons">favorite</i> por
-    <a href="https://www.coopfon.com" target="_blank">CoopFon</a> para un mejor Fondo o cooperativa
+    <a href="https://www.coopfon.com" target="_blank" rel="noopener noreferrer">CoopFon</a> para un mejor Fondo o cooperativa
     </div>
   </div>
 </footer>

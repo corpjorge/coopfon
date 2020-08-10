@@ -21,7 +21,7 @@ class PqrsExternalPolicy
     {
         $exists = Module::moduleExist('pqrs');
 
-        if (!$exists){
+        if (!$exists) {
             return false;
         }
 
@@ -31,7 +31,7 @@ class PqrsExternalPolicy
 
         $permissions = $user->modules->where('path','pqrs')->first();
 
-        if (isset($permissions->path) AND $user->isAssistant()){
+        if (isset($permissions->path) and $user->isAssistant()) {
             return true;
         }
     }
@@ -59,17 +59,17 @@ class PqrsExternalPolicy
     {
         $exists = Module::moduleExist('pqrs');
 
-        if (!$exists){
+        if (!$exists) {
             return false;
         }
 
-        if ($user->isAdmin()){
+        if ($user->isAdmin()) {
             return true;
         }
 
         $permissions = $user->modules->where('path','pqrs')->first();
 
-        if (!isset($permissions->path) AND $user->isAssistant()) {
+        if (!isset($permissions->path) and $user->isAssistant()) {
             return false;
         }
 

@@ -12,7 +12,7 @@
                         <div class="card ">
                             <div class="card-header card-header-rose card-header-icon">
                                 <div class="card-icon">
-                                    <i class="material-icons">supervisor_account</i>
+                                    <i class="material-icons" aria-hidden="true">supervisor_account</i>
                                 </div>
                                 <h4 class="card-title">{{ __('Editar administrador') }}</h4>
                             </div>
