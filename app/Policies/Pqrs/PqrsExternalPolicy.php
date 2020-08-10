@@ -69,19 +69,19 @@ class PqrsExternalPolicy
 
         $permissions = $user->modules->where('path','pqrs')->first();
 
-        if (!isset($permissions->path) AND $user->isAssistant()){
+        if (!isset($permissions->path) AND $user->isAssistant()) {
             return false;
         }
 
-        if($pqPqrsExternal->document == $user->document){
+        if($pqPqrsExternal->document == $user->document) {
             return false;
         }
 
-        if($pqPqrsExternal->admin_id == NULL){
+        if($pqPqrsExternal->admin_id == NULL) {
             return true;
         }
 
-        if($pqPqrsExternal->admin_id == $user->id){
+        if($pqPqrsExternal->admin_id == $user->id) {
             return true;
         }
 

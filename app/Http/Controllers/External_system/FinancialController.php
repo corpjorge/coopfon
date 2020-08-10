@@ -16,9 +16,9 @@ class FinancialController extends Controller
      */
     public function __invoke(ExternalSystem $externalSystem)
     {
-        $externalSystem = $externalSystem->Where('path','financial')->Where('state_id',1)->first();
+        $externalSystem = $externalSystem->Where('path', 'financial')->Where('state_id', 1)->first();
 
-        if(!$externalSystem){
+        if(!$externalSystem) {
             abort(404);
         }
 
@@ -29,7 +29,7 @@ class FinancialController extends Controller
         $response = Http::get($url.$urlWsEstadoCuenta);
         $dataUser = simplexml_load_string($response);
 
-        if($dataUser->email == '' OR $dataUser->email == '0' OR $dataUser->email == 'false'){
+        if($dataUser->email == '' OR $dataUser->email == '0' OR $dataUser->email == 'false') {
             session()->flash('error', 'Error al ingresar');
             return back();
         }

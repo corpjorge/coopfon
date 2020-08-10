@@ -183,9 +183,9 @@ class AdminController extends Controller
     public function find($idInput, $value = 'x')
     {
         $this->authorize('manageAdmins', User::class);
-        $user = User::where($idInput,$value)->where('role_id',9)->first();
+        $user = User::where($idInput, $value)->where('role_id',9)->first();
 
-        if($user){
+        if($user) {
             return response()->json([
                 'status' => 'success',
                 'idUser' => $user->id,
@@ -213,7 +213,7 @@ class AdminController extends Controller
 
         $role = isset($admin->role_id) ? $admin->role_id : 1;
 
-        if($role == 1){
+        if($role == 1) {
             return back()->withStatus(__('Datos actualizados con exito.'));
         }
 

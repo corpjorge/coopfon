@@ -45,7 +45,7 @@ class LoginDocumentController extends Controller
      */
     public function showLoginForm()
     {
-        $AuthCustoms = AuthCustom::Where('state_id',1)->get();
+        $AuthCustoms = AuthCustom::Where('state_id', 1)->get();
         return view('auth.login_document', ['AuthCustoms' => $AuthCustoms]);
     }
 

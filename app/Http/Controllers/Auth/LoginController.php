@@ -48,7 +48,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        $AuthCustoms = AuthCustom::Where('state_id',1)->get();
+        $AuthCustoms = AuthCustom::Where('state_id', 1)->get();
         return view('auth.login', ['AuthCustoms' => $AuthCustoms]);
     }
 
@@ -60,7 +60,7 @@ class LoginController extends Controller
      */
     public function redirectToProvider($driver)
     {
-        $AuthCustom = AuthCustom::Where('path',$driver)->where('state_id',1)->first();
+        $AuthCustom = AuthCustom::Where('path', $driver)->where('state_id', 1)->first();
 
         if ($AuthCustom){
             return Socialite::driver($driver)->redirect();
@@ -78,7 +78,7 @@ class LoginController extends Controller
     public function handleProviderCallback($driver)
     {
          $userSocial = Socialite::driver($driver)->user();
-         $user = User::where('email',$userSocial->email)->first();
+         $user = User::where('email', $userSocial->email)->first();
 
          if ($user) {
              Auth::login($user);

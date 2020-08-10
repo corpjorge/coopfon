@@ -44,29 +44,29 @@ class PqrsPolicy
     {
         $exists = Module::moduleExist('pqrs');
 
-        if (!$exists){
+        if (!$exists) {
             return false;
         }
 
-        if ($user->isAdmin()){
+        if ($user->isAdmin()) {
             return true;
         }
 
         $permissions = $user->modules->where('path','pqrs')->first();
 
-        if (!isset($permissions->path) AND $user->isAssistant()){
+        if (!isset($permissions->path) AND $user->isAssistant()) {
             return false;
         }
 
-        if($pqPqr->user_id == $user->id){
+        if($pqPqr->user_id == $user->id) {
             return false;
         }
 
-        if($pqPqr->admin_id == NULL){
+        if($pqPqr->admin_id == NULL) {
             return true;
         }
 
-        if($pqPqr->admin_id == $user->id){
+        if($pqPqr->admin_id == $user->id) {
             return true;
         }
 
@@ -84,17 +84,17 @@ class PqrsPolicy
     {
         $exists = Module::moduleExist('pqrs');
 
-        if (!$exists){
+        if (!$exists) {
             return false;
         }
 
-        if ($user->isAdmin()){
+        if ($user->isAdmin()) {
             return true;
         }
 
         $permissions = $user->modules->where('path','pqrs')->first();
 
-        if (isset($permissions->path) AND $user->isAssistant()){
+        if (isset($permissions->path) AND $user->isAssistant()) {
             return true;
         }
     }
@@ -109,15 +109,15 @@ class PqrsPolicy
     {
         $exists = Module::moduleExist('pqrs');
 
-        if (!$exists){
+        if (!$exists) {
             return false;
         }
 
-        if ($user->isAdmin()){
+        if ($user->isAdmin()) {
             return true;
         }
 
-        if (isset($permissions->path) AND $user->isDirector()){
+        if (isset($permissions->path) AND $user->isDirector()) {
             return true;
         }
 
