@@ -51,10 +51,11 @@ class LoginFinancialController extends Controller
      */
     public function showLoginForm()
     {
-        $AuthCustoms = AuthCustom::Where('state_id',1)->get();
-        $AuthFinancial = AuthCustom::Where('path','financial')->Where('state_id',1)->first();
+        $AuthCustoms = AuthCustom::Where('state_id', 1)->get();
+        $AuthFinancial = AuthCustom::Where('path', 'financial')->Where('state_id', 1)->first();
 
-        if($AuthFinancial){
+        if($AuthFinancial)
+        {
             return view('auth.login_financial', ['AuthCustoms' => $AuthCustoms]);
         }
 
@@ -72,9 +73,10 @@ class LoginFinancialController extends Controller
      */
     public function login(Request $request)
     {
-        $AuthFinancial = AuthCustom::Where('path','financial')->Where('state_id',1)->first();
+        $AuthFinancial = AuthCustom::Where('path', 'financial')->Where('state_id', 1)->first();
 
-        if(!$AuthFinancial){
+        if(!$AuthFinancial)
+        {
             abort(404);
         }
 
@@ -87,7 +89,8 @@ class LoginFinancialController extends Controller
         $response = Http::get($url);
         $dataLogin = simplexml_load_string($response);
 
-        if ($dataLogin == 'false'){
+        if ($dataLogin == 'false')
+        {
             session()->flash('message', 'Error de credenciales');
             return back();
         }
@@ -99,20 +102,23 @@ class LoginFinancialController extends Controller
         $response = Http::get($url);
         $dataUser = simplexml_load_string($response);
 
-        if($dataUser->email == '' OR $dataUser->email == '0' OR $dataUser->email == 'false'){
+        if($dataUser->email == '' OR $dataUser->email == '0' OR $dataUser->email == 'false')
+        {
             session()->flash('message', 'Actualiza tu correo en tu sede más cercana');
             return back();
         };
 
-        if ($dataUser->result == 'true'){
-            $existUser = User::Where('document',$dataUser->identificacion)->first();
+        if ($dataUser->result == 'true')
+        {
+            $existUser = User::Where('document', $dataUser->identificacion)->first();
 
-            if ($existUser){
+            if ($existUser)
+            {
                 $existUser->email = $dataUser->email;
                 $existUser->password = Hash::make($request->password);
                 $existUser->save();
             }
-            else{
+            else {
                 $this->newUser($dataUser, $request);
             }
 
@@ -179,7 +185,10 @@ class LoginFinancialController extends Controller
      */
     public function urlWsLogin($entidad, $document, $password)
     {
-        return "/WebServices/WSlogin.asmx/Logeo?pEntidad=".$entidad."&pIdentificacion=".$document."&pClave=".$password."&pTipoUsuario=2";
+        return "/WebServices/WSlogin.asmx/Logeo?pEntidad="
+                .$entidad."&pIdentificacion="
+                .$document."&pClave="
+                .$password."&pTipoUsuario=2";
     }
 
     /**
@@ -189,7 +198,9 @@ class LoginFinancialController extends Controller
      */
     public function urlWsEstadoCuenta($entidad, $document)
     {
-        return "/WebServices/WSEstadoCuenta.asmx/ConsultarDatoBasicosPersona?pEntidad=".$entidad."&pIdentificador=".$document."&pTipo=Identificacion";
+        return "/WebServices/WSEstadoCuenta.asmx/ConsultarDatoBasicosPersona?pEntidad="
+                .$entidad."&pIdentificador="
+                .$document."&pTipo=Identificacion";
     }
 
     /**
@@ -201,7 +212,10 @@ class LoginFinancialController extends Controller
      */
     public function newUser($dataUser, $request)
     {
-        $nameFull = $dataUser->primer_nombre.' '.$dataUser->segundo_nombre.' '.$dataUser->primer_apellido.' '.$dataUser->segundo_apellido;
+        $nameFull = $dataUser->primer_nombre
+                    .' '.$dataUser->segundo_nombre
+                    .' '.$dataUser->primer_apellido
+                    .' '.$dataUser->segundo_apellido;
 
         $gender = Gender::where('abbreviation', $dataUser->genero)->first('id');
 

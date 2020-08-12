@@ -56,7 +56,7 @@ class ModuleController extends Controller
 
         $path = resource_path('views/layouts/navbars/'.$request->path.'.blade.php');
 
-        if(!File::exists($path)){
+        if(!File::exists($path)) {
             return back()->with('statusError', 'Navbars no existe');
         }
 

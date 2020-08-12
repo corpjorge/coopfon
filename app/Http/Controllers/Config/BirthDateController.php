@@ -18,7 +18,7 @@ class BirthDateController extends Controller
      */
     public function coment($id)
     {
-         $birthDates = BirthDate::where('birthday_user',$id)->get();
+         $birthDates = BirthDate::where('birthday_user', $id)->get();
          return $birthDates->load('user');
     }
 

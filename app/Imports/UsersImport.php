@@ -19,7 +19,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithValidation
     /**
      * @param array $row
      *
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @return User
      */
     public function model(array $row)
     {
