@@ -18,7 +18,7 @@ class InstallController extends Controller
      */
     public function install(Module $module)
     {
-        Artisan::call('migrate', array('--path' => './database/migrations/pqrs'));
+        Artisan::call('migrate', array('--force' => true, '--path' => './database/migrations/pqrs'));
 
         DB::table('pq_config')->insert([
             'id' => 1,
