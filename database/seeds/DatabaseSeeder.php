@@ -11,10 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        /*
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
-
         DB::table('roles')->truncate();
         DB::table('users')->truncate();
+        */
 
         $this->call([GlobalRolesTableSeeder::class, GlobalStatesTableSeeder::class, GlobalDepartmentsTableSeeder::class, GlobalCityTableSeeder::class]);
         $this->call([GlobalMemberSeeder::class, GlobalDocumentTypesTableSeeder::class, GlobalGendersTableSeeder::class, GlobalUsersTableSeeder::class]);
