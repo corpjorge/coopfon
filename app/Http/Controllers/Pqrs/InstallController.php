@@ -47,7 +47,7 @@ class InstallController extends Controller
             return redirect()->route('module.index')->withStatus(__('No hay actualización disponible.'));
         }
 
-        Artisan::call('migrate', array('--path' => 'database/migrations/pqrs',));
+        Artisan::call('migrate', array('--force' => true, '--path' => 'database/migrations/pqrs',));
 
         /*
          * Inserte nuevos datos y agréguelos en install
