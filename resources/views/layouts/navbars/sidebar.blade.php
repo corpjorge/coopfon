@@ -52,11 +52,11 @@
             </a>
         </li>
 
-        {{--Menu Modulos --}}
+        {{--Menu Modulos
         @foreach($menuModules as $module)
                 @include('layouts.navbars.'.$module->path)
         @endforeach
-        {{--Menu Modulos end--}}
+        Menu Modulos end--}}
 
         @include('layouts.navbars.config')
 
